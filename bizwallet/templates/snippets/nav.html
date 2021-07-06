@@ -1,0 +1,173 @@
+{% load static i18n %}
+
+<!-- Header
+============================================= -->
+<header id="header" class="full-header transparent-header" data-sticky-class="not-dark">
+    <div id="header-wrap">
+        <div class="container">
+            <div class="header-row">
+
+                <!-- Logo
+                ============================================= -->
+                <div id="logo">
+                    <a href="{% url 'home' %}" class="standard-logo" data-dark-logo="{% static 'images/logo-dark.png' %}"><img src="{% static 'images/logo.png' %}" alt="Bizwallet Logo"></a>
+                    <a href="{% url 'home' %}" class="retina-logo" data-dark-logo="{% static 'images/logo-dark@2x.png' %}"><img src="{% static 'images/logo@2x.png' %}" alt="Bizwallet Logo"></a>
+                </div><!-- #logo end -->
+
+                <div class="header-misc">
+
+                    <!-- Top Search
+                    ============================================= -->
+                    <div id="top-search" class="header-misc-icon">
+                        <a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
+                    </div><!-- #top-search end -->
+
+                    <!-- Top Cart
+                    ============================================= -->
+                    <div id="top-cart" class="header-misc-icon d-none d-sm-block">
+                        <a href="#" id="top-cart-trigger"><i class="icon-users"></i></a>
+                        <div class="top-cart-content">
+                            <div class="top-cart-title">
+                                <h4>Get Started</h4>
+                            </div>
+                            <div class="top-cart-items">
+                                {% if request.user.is_authenticated %}
+                                <div class="top-cart-item">
+                                    <div class="top-cart-item-image">
+                                        <a href="{{request.user.get_absolute_url}}"><img src="{{ request.user.image.url }}" alt="Blue Round-Neck Tshirt" /></a>
+                                    </div>
+                                    <div class="top-cart-item-desc">
+                                        <div class="top-cart-item-desc-title">
+                                            <a href="{{request.user.get_absolute_url}}">{{request.user.fullname}}</a>
+                                            <span class="top-cart-item-price d-block">{% if request.user.is_field_worker %}Field Worker{% else %}Investor{% endif %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="top-cart-item">
+                                    <!-- <div class="top-cart-item-image">
+                                        <a href="#"><img src="{% static 'images/shop/small/6.jpg' %}" alt="Light Blue Denim Dress" /></a>
+                                    </div> -->
+                                    <div class="top-cart-item-desc">
+                                        <div class="top-cart-item-desc-title">
+                                            <a href="{% url 'account_login' %}">LOGIN</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="top-cart-item">
+                                    <!-- <div class="top-cart-item-image">
+                                        <a href="#"><img src="{% static 'images/shop/small/6.jpg' %}" alt="Light Blue Denim Dress" /></a>
+                                    </div> -->
+                                    <div class="top-cart-item-desc">
+                                        <div class="top-cart-item-desc-title">
+                                            <a href="{% url 'account_signup' %}">INVESTOR SIGNUP</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="top-cart-item">
+                                    <!-- <div class="top-cart-item-image">
+                                        <a href="#"><img src="{% static 'images/shop/small/6.jpg' %}" alt="Light Blue Denim Dress" /></a>
+                                    </div> -->
+                                    <div class="top-cart-item-desc">
+                                        <div class="top-cart-item-desc-title">
+                                            <a href="{% url 'worker_signup' %}">FIELD WORKER SIGNUP</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- <div class="top-cart-action">
+                                <span class="top-checkout-price">$114.95</span>
+                                <a href="#" class="button button-3d button-small m-0">View Cart</a>
+                            </div> -->
+                        </div>
+                    </div><!-- #top-cart end -->
+
+                </div>
+
+                <div id="primary-menu-trigger">
+                    <svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+                </div>
+
+                <!-- Primary Navigation
+                ============================================= -->
+                <nav class="primary-menu">
+
+                    <ul class="menu-container">
+                        <li class="menu-item">
+                            <a class="menu-link" href="{% url 'home' %}"><div><i class="icon-home" style="font-size: 26px;"></i></div></a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#"><div><i class="icon-bones"></i> Bizwallet</div></a>
+                            <ul class="sub-menu-container">
+                                <li class="menu-item">
+                                    <a class="menu-link" href="#"><div><i class="icon-stack"></i>Who We Are</div></a>
+                                    <ul class="sub-menu-container">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'about' %}"><div>Our Story</div></a>
+                                            <li class="menu-item">
+                                                <a class="menu-link" href="rs-demos.html"><div>Our Team</div></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a class="menu-link" href="slider-revolution.html"><div>Our Services</div></a>
+                                            </li>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#"><div><i class="icon-servicestack"></i>Services</div></a>
+                            <ul class="sub-menu-container">
+                                <li class="menu-item">
+                                    <a class="menu-link" href="#"><div><i class="icon-banknote"></i>Co-Op Savings</div></a>
+                                    <ul class="sub-menu-container">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Bronze Savings</div></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Silver Savings</div></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Gold Savings</div></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Diamond Savings</div></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="#"><div><i class="icon-seedling"></i>Investment Options</div></a>
+                                    <ul class="sub-menu-container">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Agro Investment</div></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="#"><div>Property Investment</div></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#"><div><i class="icon-news"></i>Blog</div></a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#"><div><i class="icon-shopping-bag"></i>Shop</div></a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#"><div><i class="icon-envelope"></i>Contact</div></a>
+                        </li>
+                    </ul>
+
+                </nav><!-- #primary-menu end -->
+
+                <form class="top-search-form" action="search.html" method="get">
+                    <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="header-wrap-clone"></div>
+</header><!-- #header end -->

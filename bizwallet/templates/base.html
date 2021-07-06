@@ -1,0 +1,188 @@
+{% load static i18n compress cookielaw_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Bizwallet{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more. {% endblock %}">
+    <meta name="author" content="Jeremiah David">
+    <meta name="keywords" content="{% block kw %}{% endblock %}">
+    <meta name="format-detection" content="telephonr=no">
+    <meta name="HandheldFriendly" content="true">
+
+
+    <meta property="author" content="Jeremiah David">
+    <meta property="og:title" content="Bizwallet - Your trusted cooporative fintech">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{% block og_desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more. {% endblock %}">
+    <meta property="og:image" content="{% static 'images/logo.jpg' %}">
+    <meta property="og:url" content="http://bizwallet.com.ng">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Bizwallet - Your trusted cooporative fintech">
+    <meta name="twitter:image:alt" content="Bizwallet Logo Icon">
+
+    <!-- social analytics from fb and twitter -->
+    <meta property="fb:app_id" content="">
+    <meta name="twitter:site" content="@buzwallet_ng">
+
+    <link rel="canonical" href="{% url 'home' %}">
+
+    <!-- Preconnects to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- <link rel="preconnect" href="https://stackpath.bootstrapcdn.com/"> -->
+
+
+    <!-- Your Fonts: Third-party css libraries go here -->
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+    {# vue js 3 package for frontend ajaxing must be in the header section #}
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <link href="{% static 'css/iziToast.min.css' %}" rel="stylesheet">
+    {% include 'snippets/css.html' %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    {{form.media}}
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body {% block body_class %}{% endblock %}>
+
+    <div class="clearfix" id="wrapper">
+
+      {% include 'snippets/nav.html' %}
+
+      {% block header %}
+      {% endblock %}
+
+      <!-- <div class="mb-1">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">bizwallet</a>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+                </li>
+                <li class="nav-item">
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                </li>
+                <li class="nav-item">
+                  {# URL provided by django-allauth/account/urls.py #}
+                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+
+      </div> -->
+      <section id="content">
+        <div class="content-wrap">
+            <div class="container clearfix">
+
+            {% block content %}
+              <p>Use this document as a way to quick start any new project.</p>
+            {% endblock content %}
+
+            </div>
+        </div>
+      </section>
+
+      {% include 'snippets/footer.html' %}
+
+    </div> <!-- /container -->
+
+    {% block modal %}{% endblock modal %}
+
+    <!-- Go To Top
+    ============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+
+
+    {% cookielaw_banner %}
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Bootstrap JS and its dependencies-->
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+      <!-- Your stuff: Third-party javascript libraries go here -->
+      <script src="{% static 'js/iziToast.min.js' %}"></script>
+      {% include 'snippets/js.html' %}
+
+    {% endblock javascript %}
+
+
+    {# izi message signals for django #}
+    {% for message in messages %}
+      <script type=text/javascript>
+        iziToast.settings({
+          timeout: 9000,
+          position: 'topRight',
+          drag: true,
+          pauseOnHover: true,
+          transitionIn: 'flipInX',
+          transitionOut: 'flipOutX',
+          transitionInMobile: 'fadeInUp',
+          transitionOutMobile: 'fadeOutDown',
+          close: true,
+          balloon: true,
+          progressBar: true,
+          progressBarEasing: 'ease',
+          pauseOnHover: true,
+          icon: 'material-icons',
+          iconText: '{% if message.tags == "info" %}info{% elif message.tags == "success" %}check_circle{% elif message.tags == "warning" %}warning{% else %}priority_high{% endif %}',
+        });
+        iziToast.{{ message.tags }}({
+          id: '{{ message.tags }}',
+          title: '{{ message.tags|capfirst }}',
+          message: '{{ message }}',
+        });
+      </script>
+    {% endfor %}
+
+
+
+    {% block inline_javascript %}
+    {# Script tags with only code, no src (defer by default) #}
+    {% endblock inline_javascript %}
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% load static compress %}
+
+
+{% block css %}
+
+<!-- Your stuff: Third-party CSS libraries go here -->
+{% compress css %}
+<!-- This file stores project-specific CSS -->
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'css/project.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/dark.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/font-icons.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css" />
+
+<link rel="stylesheet" href="{% static 'css/components/datepicker.css' %}" type="text/css" />
+
+<link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css" />
+
+<!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
+<link rel="stylesheet" type="text/css" href="{% static 'include/rs-plugin/css/settings.css' %}" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'include/rs-plugin/css/layers.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'include/rs-plugin/css/navigation.css' %}">
+{% endcompress %}
+
+{% endblock %}
