@@ -155,6 +155,7 @@ ANYMAIL = {
     "SENDINBLUE_API_URL": env(
         "SENDINBLUE_API_URL", default="https://api.sendinblue.com/v3/"
     ),
+    "IGNORE_UNSUPPORTED_FEATURES": True,
 }
 
 # django-compressor
