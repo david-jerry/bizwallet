@@ -1,13 +1,15 @@
 {% load i18n static cookielaw_tags %}
 <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
-<div id="CookielawBanner">
-    <div class="cookie-content">
-        <div class="cookie-text">
-            {% trans 'This website uses cookies to make your experience better.' %}
-        </div>
-        <div class="cookie-buttons">
-            <a class="btn-blue" href="#">{% trans "What are the cookies?" %}</a>
-            <a class="btn-orange" href="javascript:Cookielaw.createCookielawCookie();">{% trans "Ok, I understood" %}</a>
+<div id="CookielawBanner gdpr-settings gdpr-settings-sm dark">
+    <div class="cookie-content container-fluid">
+        <div class="row align-items-center">
+            <div class="cookie-text col-12 mb-5 text-center">
+                <p class="lead">{% trans 'This website uses cookies to make your experience better.' %}</p>
+            </div>
+            <div class="cookie-buttons col-12 text-center">
+                <a class="btn btn-link text-light op-07 mt-2" href="#gdpr-preferences">{% trans "What are the cookies?" %}</a><br>
+                <a class="btn btn-lg btn-outline-warning gdpr-accept mt-2" href="javascript:Cookielaw.createCookielawCookie();">{% trans "Ok, I understood" %}</a>
+            </div>
         </div>
         <div class="close-cookies"></div>
     </div>
@@ -20,3 +22,210 @@ $(document).ready(function () {
    });
 });
 </script>
+
+<!-- <div class="gdpr-settings gdpr-settings-sm dark">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12 mb-5 text-center">
+                <p class="lead mb-0">We use cookies from third party services for marketing activities and to offer you a better experience. Read about how we use cookies and how you can control them by clicking "Privacy Preferences".</p>
+            </div>
+            <div class="col-12 text-center">
+                <button class="btn btn-lg btn-outline-warning gdpr-accept">Accept &amp; Close</button><br>
+                <a href="#gdpr-preferences" class="btn btn-link text-light op-07 mt-2" data-lightbox="inline">Privacy Preferences</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="mfp-hide" id="gdpr-preferences">
+    <div class="block mx-auto bg-white gdpr-cookie-settings" style="max-width: 800px;">
+        <div class="p-5" style="max-height: 400px; overflow-y: scroll; -webkit-overflow-scrolling: touch;">
+            <h4 class="mb-3">Cookie Consent Preferences</h4>
+            <p class="mb-5">When you visit any website, it may store or retrieve information through your browser, usually in the form of cookies. Since we respect your right to privacy, you can choose not to permit data collection from certain types of services. However, not allowing these services may impact your experience.</p>
+            <ul class="list-group list-group-flush">
+                {% for cookie_group in object_list  %}
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Privacy Policy
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <small><strong>REQUIRED</strong></small>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Content Delivery Network
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <small><strong>REQUIRED</strong></small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Youtube <small>(Hosting Video Platform by Google Inc.)</small>
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <div class="switch d-inline-block">
+                                <input id="switch-toggle-youtube" class="switch-toggle switch-toggle-flat switch-flat-mini" type="checkbox" checked data-cookie-name="canvas-gdpr-youtube">
+                                <label class="m-0" for="switch-toggle-youtube"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Vimeo <small>(Hosting Video Platform)</small>
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <div class="switch d-inline-block">
+                                <input id="switch-toggle-vimeo" class="switch-toggle switch-toggle-flat switch-flat-mini" type="checkbox" data-cookie-name="canvas-gdpr-vimeo">
+                                <label class="m-0" for="switch-toggle-vimeo"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Google Ads <small>(Advertisement Delivery Network)</small>
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <div class="switch d-inline-block">
+                                <input id="switch-toggle-googleads" class="switch-toggle switch-toggle-flat switch-flat-mini" type="checkbox" checked data-cookie-name="canvas-gdpr-googleads">
+                                <label class="m-0" for="switch-toggle-googleads"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Dailymotion <small>(Hosted Video Platform)</small>
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <div class="switch d-inline-block">
+                                <input id="switch-toggle-dailymotion" class="switch-toggle switch-toggle-flat switch-flat-mini" type="checkbox" data-cookie-name="canvas-gdpr-dailymotion">
+                                <label class="m-0" for="switch-toggle-dailymotion"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item px-0 py-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="toggle mb-0">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-line-plus"></i>
+                                        <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Facebook &amp; Instagram <small>(Social Media)</small>
+                                    </div>
+                                </div>
+                                <div class="toggle-content pl-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto text-right">
+                            <div class="switch d-inline-block">
+                                <input id="switch-toggle-facebook" class="switch-toggle switch-toggle-flat switch-flat-mini" type="checkbox" data-cookie-name="canvas-gdpr-facebook">
+                                <label class="m-0" for="switch-toggle-facebook"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="section text-center p-4 m-0 border-top">
+            <a href="#" class="btn btn-primary gdpr-save-cookies">Save Preferences</a><br>
+            <a href="#" class="btn btn-link text-muted"><small>Privacy Policy</small></a>
+        </div>
+    </div>
+</div>

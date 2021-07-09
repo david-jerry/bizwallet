@@ -1949,6 +1949,8 @@ only screen and (                min-resolution: 2dppx) {
 	&-open .top-cart-content {
 		@include media-breakpoint-down(md) {
 			right: 0 !important;
+			top: 102px;
+			height: calc(102px - 100%) !important;
 		}
 		@include media-breakpoint-up(lg) {
 			opacity: 1;

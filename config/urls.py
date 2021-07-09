@@ -57,6 +57,8 @@ urlpatterns += [
         name="robots",
     ),
     path("tinymce/", include("tinymce.urls")),
+    # Cookie consent
+    # path('cookies/', include('cookie_consent.urls')),
     # Language switcher support urls for django
     path("i18n/", include("django.conf.urls.i18n")),
 ]

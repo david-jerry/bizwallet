@@ -13638,7 +13638,9 @@ body  .header-misc > *:not(#top-search) {
 
 @media (max-width: 991.98px) {
   .top-cart-open .top-cart-content {
-    right: 0 !important; } }
+    right: 0 !important;
+    top: 102px;
+    height: calc(102px - 100%) !important; } }
 
 @media (min-width: 992px) {
   .top-cart-open .top-cart-content {

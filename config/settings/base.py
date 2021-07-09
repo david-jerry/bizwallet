@@ -121,6 +121,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     # Cookie consent
     "cookielaw",
+    # "cookie_consent",
     # WYSWIC TEXT EDITOR
     "tinymce",
     "filebrowser",
@@ -540,5 +541,6 @@ TINYMCE_COMPRESSOR = True
 
 # Whether to append trailing slashes to URLs.
 APPEND_SLASH = True
-# Whether to prepend the "www." subdomain to URLs that don't have it.
-PREPEND_WWW = False
+# COOKIE_CONSENT_NAME = "bizwallet_cookie_consent"
+# COOKIE_CONSENT_DECLINE = 0
+# COOKIE_CONSENT_ENABLED = lambda r: DEBUG or (r.user.is_authenticated() and r.user.is_field_worker and r.user.is_staff)
