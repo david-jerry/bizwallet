@@ -75,9 +75,7 @@ DEFAULT_CHARSET = "utf-8"
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-# Email address that error messages come from.
-# Todo: add server email to bizwallet domain
-SERVER_EMAIL = "server@bizwallet.ng"
+
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
@@ -343,7 +341,7 @@ ADMIN_DOC_URL = "dashboard/doc/"
 ADMIN_FILEBROWSER_URL = "dashboard/filebrowser/"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Jeremiah David""", "noreply@bizwallet.ng")]
+ADMINS = [("""Jeremiah David""", "jeremiahedavid@bizwallet.org")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
@@ -460,7 +458,7 @@ SWAGGER_SETTINGS = {
         "http://127.0.0.1:3000",
         "http://192.168.99.101",
         "http://0.0.0.0:3000",
-        "http://bizwallet.ng",
+        "http://bizwallet.org",
     ],
     "USE_SESSION_AUTH": True,
     "LOGIN_URL": LOGIN_URL,

@@ -14,7 +14,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["bizwallet.ng"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["bizwallet.org"])
 # Whether to prepend the "www." subdomain to URLs that don't have it.
 PREPEND_WWW = True
 
@@ -125,14 +125,16 @@ TEMPLATES[-1]["OPTIONS"]["loaders"] = [  # type: ignore[index] # noqa F405
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL", default="Bizwallet NG <noreply@bizwallet.ng>"
+    "DJANGO_DEFAULT_FROM_EMAIL", default="Bizwallet NG <noreply@bizwallet.org>"
 )
+# Email address that error messages come from.
+# Todo: add server email to bizwallet domain
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
-SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default='server@bizwallet.org')
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env(
     "DJANGO_EMAIL_SUBJECT_PREFIX",
-    default="[Bizwallet Mail]",
+    default="[Bizwallet LTD]",
 )
 
 # ADMIN
@@ -152,13 +154,19 @@ INSTALLED_APPS += ["anymail"]  # noqa F405
 # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
 # https://anymail.readthedocs.io/en/stable/esps/sendinblue/
 EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
-ANYMAIL = {
-    "SENDINBLUE_API_KEY": env("SENDINBLUE_API_KEY"),
-    "SENDINBLUE_API_URL": env(
-        "SENDINBLUE_API_URL", default="https://api.sendinblue.com/v3/"
-    ),
-    "IGNORE_UNSUPPORTED_FEATURES": True,
-}
+# ANYMAIL = {
+#     "SENDINBLUE_API_KEY": env("SENDINBLUE_API_KEY"),
+#     "SENDINBLUE_API_URL": env(
+#         "SENDINBLUE_API_URL", default="https://api.sendinblue.com/v3/"
+#     ),
+#     "IGNORE_UNSUPPORTED_FEATURES": True,
+# }
+EMAIL_TIMEOUT=518400
+EMAIL_HOST='mail.bizwallet.org'
+EMAIL_USE_TLS=False
+EMAIL_PORT=26
+EMAIL_HOST_USER=env("EMAIL_HOST_USER", default='noreply@bizwallet.org')
+EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD")
 
 # django-compressor
 # ------------------------------------------------------------------------------
