@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}About - All You Need To Know About {{block.super|upper}}{% endblock title %}
+{% block title %}{% trans 'About - All You Need To Know About' %} {{block.super|upper}}{% endblock title %}
 
-{% block desc %}Everything you need to know about Bizwallet LTD{% endblock %}
+{% block desc %}{% trans 'Everything you need to know about Bizwallet LTD' %}{% endblock %}
 
 {% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
 
@@ -17,11 +17,11 @@ class="stretched"
 <section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{% static "images/parallax.jpg" %}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
 
     <div class="container clearfix">
-        <h1>About Us</h1>
-        <span>Everything you need to know about Bizwallet LTD</span>
+        <h1>{% trans 'About Us' %}</h1>
+        <span>{% trans 'Everything you need to know about Bizwallet LTD' %}</span>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{% trans 'About Us' %}</li>
         </ol>
     </div>
 
@@ -29,7 +29,30 @@ class="stretched"
 {% endblock %}
 
 {% block content %}
+
+
 <div class="row col-mb-50 mb-0">
+    <div class="col-12">
+        {% blocktrans %}
+        <b>Bizwallet Co-Operative LTD</b> is a limited liability company/organization with mainstay in co-operative operations. It is duly registered under the relevant provisions of the <b>Nigerian Companies and Allied Matters Act (CAMA)</b>. The co-operative has a <b>Board of Directors</b> headed by a chairman <b>Also referred to as President</b>. It also has a <b>Managing Director (MD)</b>.
+        <br>
+        <br>
+        Apart from being registered under the said <b>CAMA</b>, our organization is also duly registered with the <b>Rivers State Ministry of Commerce and Industry</b>, <b>Small and Medium Enterprises Development Agency of Nigeria (SMEDAN)</b> and a few other commercial and business oriented Agencies within and outside Nigeria.
+        <br>
+        <br>
+        As a <b>Co-Operative Organization,</b> we seeks the advancement of its members' wellfare and overall well-being. The organization accomplishes this noble goal by financially assisting on agreed terms, 
+        its members and even non-members who are desirous of owning certain valued facilities of life, for example: <em>The purchase/lease of real estate properties like lands, houses, as well as vehicles 
+        <b>(including cars and trucks, marine transport vehicles and equipments)</b>.</em>
+        <br>
+        <br>
+        Our programmes also extend to assisting our members and other interested persons under a convenient & relatively stress-free setting, to set up their new private/group businesses as well as expand/enhance
+        the optimal performance of any existing businesses they own.
+        <br>
+        <br>
+        Futhermore, we also facilitate a cost-effective and convenient educational/vocational training of willing members, children/wards of members and other interested persons through different strata of Available
+        educational/vocational training.
+        {% endblocktrans %}
+    </div>
 
     <div class="col-lg-4">
 
@@ -38,9 +61,11 @@ class="stretched"
         </div>
 
         <p>
+        {% blocktrans %}
         We intend to be a leading co-operative organization in <b>Africa</b>,poised to primarily expose millions of <b>Nigerians (nay Africans)</b> to the opportunity
         of making them acquire with relative ease, some of their choice facilities or amenities, like plots of land, houses, vehicles, domestic and business technologies
         or equipments, viable business concerns, educations/vocational skill training facilities, <b>ETC.</b>
+        {% endblocktrans %}
         </p>
 
     </div>
@@ -52,9 +77,11 @@ class="stretched"
         </div>
 
         <p>
+            {% blocktrans %}
             Our mission is and will always be to ostensibly, engrain in our members and sundry clients, the thought-process of how to achieve their cherished key amenities of value
             and equally expose them to an easily-accessible and sustainable financial base for the acquisition and maintenance of the said amenities. We remain primarily inspired 
             to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large. 
+            {% endblocktrans %}
         </p>
 
     </div>
@@ -66,8 +93,10 @@ class="stretched"
         </div>
 
         <p>
+            {% blocktrans %}
             We have a vision to facilitate the creation of a largely middle classs community of Nigerians, who are opportuned to acquire their desired basic amenities or facilities 
-            of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.    
+            of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.
+            {% endblocktrans %}    
         </p>
 
     </div>

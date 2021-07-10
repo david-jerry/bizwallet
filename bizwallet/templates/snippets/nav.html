@@ -1,8 +1,9 @@
 {% load static i18n %}
-
+{% url 'home' as home_url %}
+{% url 'about' as about_url %}
 <!-- Header
 ============================================= -->
-<header id="header" class="full-header transparent-header" data-sticky-class="not-dark">
+<header id="header" {% if request.path == home_url or request.path == about_url %}class="full-header transparent-header"{% else %}class="full-header"{% endif %} data-sticky-class="not-dark">
     <div id="header-wrap">
         <div class="container">
             <div class="header-row">
@@ -106,10 +107,10 @@
                                         <li class="menu-item">
                                             <a class="menu-link" href="{% url 'about' %}"><div>Our Story</div></a>
                                             <li class="menu-item">
-                                                <a class="menu-link" href="rs-demos.html"><div>Our Team</div></a>
+                                                <a class="menu-link" href="{% url 'team' %}"><div>Our Team</div></a>
                                             </li>
                                             <li class="menu-item">
-                                                <a class="menu-link" href="slider-revolution.html"><div>Our CEOs</div></a>
+                                                <a class="menu-link" href="slider-revolution.html"><div>Our CEO</div></a>
                                             </li>
                                         </li>
                                     </ul>

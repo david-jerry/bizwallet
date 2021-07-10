@@ -12,6 +12,7 @@ $page_title-prefix: page-title;
 
 ##{$page_title-prefix} {
 	position: relative;
+	top: 40px;
 	padding: $page-title-padding 0;
 	background-color: $page-title-bg;
 	border-bottom: $page-title-border;

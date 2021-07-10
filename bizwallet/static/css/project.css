@@ -14862,6 +14862,7 @@ body:not(.stretched) .slider-parallax .slider-inner {
 -----------------------------------------------------------------*/
 #page-title {
   position: relative;
+  top: 40px;
   padding: 64px 0;
   padding: 4rem 0;
   background-color: whitesmoke;

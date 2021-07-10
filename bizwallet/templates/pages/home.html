@@ -46,7 +46,6 @@
 class="stretched"
 {% endblock %}
 
-
 {% block header %}
 {% include 'snippets/slider.html' %}
 {% endblock %}
@@ -55,9 +54,9 @@ class="stretched"
 <div class="mx-auto center clearfix" style="max-width: 900px;">
     <img class="bottommargin" src="{% static 'images/footer.png' %}" height="170px" alt="Image">
     <h1>Welcome! This is <span>BizWallet</span>.</h1>
-    <h2>Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.</h2>
-    <a href="#" class="button button-3d button-dark button-large ">Browse Offers</a>
-    <a href="{% url 'account_signup' %}" class="button button-3d button-large">Join Today</a>
+    <h2>Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilst earning little or enough. These members can acquire property, Auto Mobiles or Vehicles, Pay School fees, plan towards investing in agriculture and many more.</h2>
+    <a href="{% url 'about' %}" class="button button-3d button-dark button-large ">Get More Info</a>
+    <a href="{% url 'account_signup' %}" class="button button-3d button-large">Get Started Today</a>
 </div>
 
 <div class="line"></div>
@@ -86,8 +85,9 @@ class="stretched"
             <p style="line-height: 1.8;">
                 Our mission is and will always be to ostensibly, engrain in our members and sundry clients, the thought-process of how to achieve their cherished key amenities of value
                 and equally expose them to an easily-accessible and sustainable financial base for the acquisition and maintenance of the said amenities. We remain primarily inspired 
-                to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large.</p>
-            <a href="#" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
+                to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large.
+            </p>
+            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
             <i class="icon-cog bgicon"></i>
         </div>
     </div>
@@ -99,7 +99,7 @@ class="stretched"
                 We have a vision to facilitate the creation of a largely middle classs community of Nigerians, who are opportuned to acquire their desired basic amenities or facilities 
                 of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.
             </p>
-            <a href="#" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
+            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
             <i class="icon-thumbs-up bgicon"></i>
         </div>
     </div>

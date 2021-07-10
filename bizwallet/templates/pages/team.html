@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Team Members - The people who make up amazing team' %} {{block.super|upper}}{% endblock title %}
+
+{% block desc %}{% trans 'Our amazing team working to ensure we stay Bizwallet LTD' %}{% endblock %}
+
+{% block kw %}bizwallet, bizwallet group, bizwallet team, bizwallet experts, bizwallet limited, co-operative company{% endblock %}
+
+{% block body_class %}
+class="stretched"
+{% endblock %}
+
+{% block header %}
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title">
+
+			<div class="container clearfix">
+				<h1>Team</h1>
+				<span>List of People who matter in Our Company</span>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'about' %}">About Us</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Team</li>
+				</ol>
+			</div>
+
+		</section><!-- #page-title end -->
+{% endblock %}
