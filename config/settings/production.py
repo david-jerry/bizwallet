@@ -165,6 +165,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_TIMEOUT=518400
 EMAIL_HOST='mail.bizwallet.org'
 EMAIL_USE_TLS=False
+EMAIL_USE_SSL = True
 EMAIL_PORT=26
 EMAIL_HOST_USER=env("EMAIL_HOST_USER", default='noreply@bizwallet.org')
 EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD")
