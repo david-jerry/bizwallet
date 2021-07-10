@@ -32,9 +32,11 @@
 
 
 #header {
-	position: relative;
+	position: fixed;
 	background-color: $header-bg;
 	border-bottom: 1px solid set-border-color($header-bg);
+	z-index: 1000;
+	width: 100%;
 	&-wrap {
 		position: relative;
 		width: 100%;
@@ -1950,7 +1952,7 @@ only screen and (                min-resolution: 2dppx) {
 		@include media-breakpoint-down(md) {
 			right: 0 !important;
 			top: 102px;
-			height: calc(102px - 100%) !important;
+			height: calc( 100% - 102px );
 		}
 		@include media-breakpoint-up(lg) {
 			opacity: 1;

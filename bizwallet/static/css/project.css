@@ -9797,6 +9797,7 @@ a.text-dark:hover, a.text-dark:focus {
 .section {
   position: relative;
   width: 100%;
+  margin-top: 0 !important;
   margin: 64px 0;
   margin: 4rem 0;
   padding: 64px 0;
@@ -12064,9 +12065,11 @@ a.h-text-dark:hover {
 	Header
 -----------------------------------------------------------------*/
 #header {
-  position: relative;
+  position: fixed;
   background-color: #fff;
-  border-bottom: 1px solid #eeeeee; }
+  border-bottom: 1px solid #eeeeee;
+  z-index: 1000;
+  width: 100%; }
   #header-wrap {
     position: relative;
     width: 100%;
@@ -13640,7 +13643,7 @@ body  .header-misc > *:not(#top-search) {
   .top-cart-open .top-cart-content {
     right: 0 !important;
     top: 102px;
-    height: calc(102px - 100%) !important; } }
+    height: calc( 100% - 102px); } }
 
 @media (min-width: 992px) {
   .top-cart-open .top-cart-content {
@@ -15051,7 +15054,8 @@ body:not(.stretched) .slider-parallax .slider-inner {
     line-height: 1.8; }
   #content .content-wrap {
     position: relative;
-    padding: 80px 0;
+    padding-top: 80px;
+    padding-bottom: 0;
     overflow: hidden; }
   #content .container {
     position: relative; }

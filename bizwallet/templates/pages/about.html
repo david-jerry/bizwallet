@@ -3,10 +3,111 @@
 
 {% block title %}About - All You Need To Know About {{block.super|upper}}{% endblock title %}
 
+{% block desc %}Everything you need to know about Bizwallet LTD{% endblock %}
+
+{% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
+
 {% block body_class %}
 class="stretched"
 {% endblock %}
 
-{% block content %}
+{% block header %}
+<!-- Page Title
+============================================= -->
+<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{% static "images/parallax.jpg" %}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
 
+    <div class="container clearfix">
+        <h1>About Us</h1>
+        <span>Everything you need to know about Bizwallet LTD</span>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+{% endblock %}
+
+{% block content %}
+<div class="row col-mb-50 mb-0">
+
+    <div class="col-lg-4">
+
+        <div class="heading-block fancy-title border-bottom-0 title-bottom-border">
+            <h4>Why choose <span>Us</span>.</h4>
+        </div>
+
+        <p>
+        We intend to be a leading co-operative organization in <b>Africa</b>,poised to primarily expose millions of <b>Nigerians (nay Africans)</b> to the opportunity
+        of making them acquire with relative ease, some of their choice facilities or amenities, like plots of land, houses, vehicles, domestic and business technologies
+        or equipments, viable business concerns, educations/vocational skill training facilities, <b>ETC.</b>
+        </p>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="heading-block fancy-title border-bottom-0 title-bottom-border">
+            <h4>Our <span>Mission</span>.</h4>
+        </div>
+
+        <p>
+            Our mission is and will always be to ostensibly, engrain in our members and sundry clients, the thought-process of how to achieve their cherished key amenities of value
+            and equally expose them to an easily-accessible and sustainable financial base for the acquisition and maintenance of the said amenities. We remain primarily inspired 
+            to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large. 
+        </p>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="heading-block fancy-title border-bottom-0 title-bottom-border">
+            <h4>Our <span>Vision</span>.</h4>
+        </div>
+
+        <p>
+            We have a vision to facilitate the creation of a largely middle classs community of Nigerians, who are opportuned to acquire their desired basic amenities or facilities 
+            of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.    
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block content_wide %}
+<div class="section m-0">
+    <div class="container clearfix">
+
+        <div class="row col-mb-50">
+
+            <div class="col-sm-6 col-lg-3 text-center" data-animate="bounceIn">
+                <i class="i-plain i-xlarge mx-auto icon-line2-users"></i>
+                <div class="counter counter-lined"><span data-from="100" data-to="846" data-refresh-interval="50" data-speed="2000"></span>K+</div>
+                <h5>Registered Users</h5>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 text-center" data-animate="bounceIn" data-delay="200">
+                <i class="i-plain i-xlarge mx-auto mb-0 icon-line2-graph"></i>
+                <div class="counter counter-lined"><span data-from="3000" data-to="15360" data-refresh-interval="100" data-speed="2500"></span>+</div>
+                <h5>Quarterly Growth Margin</h5>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 text-center" data-animate="bounceIn" data-delay="400">
+                <i class="i-plain i-xlarge mx-auto mb-0 icon-line2-layers"></i>
+                <div class="counter counter-lined"><span data-from="10" data-to="408" data-refresh-interval="25" data-speed="3500"></span>*</div>
+                <h5>No. of Available Properties</h5>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 text-center" data-animate="bounceIn" data-delay="600">
+                <i class="i-plain i-xlarge mx-auto mb-0 icon-line2-clock"></i>
+                <div class="counter counter-lined"><span data-from="60" data-to="1200" data-refresh-interval="30" data-speed="2700"></span>+</div>
+                <h5>Hours of Community Services</h5>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 {% endblock %}

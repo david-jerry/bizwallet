@@ -69,6 +69,7 @@
 .section {
 	position: relative;
 	width: 100%;
+	margin-top: 0 !important;
 	margin: $section-margin 0;
 	padding: $section-padding 0;
 	background-color: $section-bg;

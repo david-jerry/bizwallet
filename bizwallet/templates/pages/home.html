@@ -3,6 +3,10 @@
 
 {% block title %}Welcome - Start Your Cooperative Saving & Investment with {{block.super|upper}}{% endblock title %}
 
+{% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.{% endblock %}
+
+{% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
+
 {% block extra_css %}
 <style>
 
@@ -49,7 +53,7 @@ class="stretched"
 
 {% block content %}
 <div class="mx-auto center clearfix" style="max-width: 900px;">
-    <img class="bottommargin" src="{% static 'images/logo@2x.png' %}" alt="Image">
+    <img class="bottommargin" src="{% static 'images/footer.png' %}" height="170px" alt="Image">
     <h1>Welcome! This is <span>BizWallet</span>.</h1>
     <h2>Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.</h2>
     <a href="#" class="button button-3d button-dark button-large ">Browse Offers</a>
@@ -57,6 +61,171 @@ class="stretched"
 </div>
 
 <div class="line"></div>
+{% endblock %}
+
+
+{% block content_wide %}
+<div class="row bottommargin-lg align-items-stretch">
+
+    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #1abc9c;">
+        <div>
+            <h3 class="text-uppercase" style="font-weight: 600;">Why choose Us</h3>
+            <p style="line-height: 1.8;">
+                We intend to be a leading co-operative organization in <b>Africa</b>,poised to primarily expose millions of <b>Nigerians (nay Africans)</b> to the opportunity
+                of making them acquire with relative ease, some of their choice facilities or amenities, like plots of land, houses, vehicles, domestic and business technologies
+                or equipments, viable business concerns, educations/vocational skill training facilities, <b>ETC.</b>
+            </p>
+            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
+            <i class="icon-bulb bgicon"></i>
+        </div>
+    </div>
+
+    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #34495e;">
+        <div>
+            <h3 class="text-uppercase" style="font-weight: 600;">Our Mission</h3>
+            <p style="line-height: 1.8;">
+                Our mission is and will always be to ostensibly, engrain in our members and sundry clients, the thought-process of how to achieve their cherished key amenities of value
+                and equally expose them to an easily-accessible and sustainable financial base for the acquisition and maintenance of the said amenities. We remain primarily inspired 
+                to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large.</p>
+            <a href="#" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
+            <i class="icon-cog bgicon"></i>
+        </div>
+    </div>
+
+    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #e74c3c;">
+        <div>
+            <h3 class="text-uppercase" style="font-weight: 600;">Our Vision</h3>
+            <p style="line-height: 1.8;">
+                We have a vision to facilitate the creation of a largely middle classs community of Nigerians, who are opportuned to acquire their desired basic amenities or facilities 
+                of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.
+            </p>
+            <a href="#" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
+            <i class="icon-thumbs-up bgicon"></i>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+</div>
+
+<div class="container clearfix">
+
+    <div class="row col-mb-50">
+        <div class="col-lg-8">
+            <div class="fancy-title title-border">
+                <h4>Recent Posts</h4>
+            </div>
+
+            <div class="row posts-md col-mb-30">
+                <div class="entry col-md-6">
+                    <div class="grid-inner">
+                        <div class="entry-image">
+                            <a href="#"><img src="{% static 'images/magazine/thumb/11.jpg' %}" alt="Image"></a>
+                        </div>
+                        <div class="entry-title title-sm nott">
+                            <h3><a href="blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
+                        </div>
+                        <div class="entry-meta">
+                            <ul>
+                                <li><i class="icon-calendar3"></i> 10th Feb 2021</li>
+                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
+                            </ul>
+                        </div>
+                        <div class="entry-content">
+                            <p>Medecins du Monde eradicate sustainability free expression contribution assessment expert humanitarian relief.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entry col-md-6">
+                    <div class="grid-inner">
+                        <div class="entry-image">
+                            <a href="#"><img src="{% static 'images/magazine/thumb/14.jpg' %}" alt="Image"></a>
+                        </div>
+                        <div class="entry-title title-sm nott">
+                            <h3><a href="blog-single.html">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h3>
+                        </div>
+                        <div class="entry-meta">
+                            <ul>
+                                <li><i class="icon-calendar3"></i> 10th Feb 2021</li>
+                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
+                            </ul>
+                        </div>
+                        <div class="entry-content">
+                            <p>Urban public institutions life-saving women and children Rockefeller combat malaria honesty. Sustainability foster immunize treatment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="fancy-title title-border">
+                <h4>Client Testimonials</h4>
+            </div>
+
+            <div class="fslider testimonial p-0 border-0 shadow-none" data-animation="slide" data-arrows="false">
+                <div class="flexslider">
+                    <div class="slider-wrap">
+                        <div class="slide">
+                            <div class="testi-image">
+                                <a href="#"><img src="{% static 'images/testimonials/3.jpg' %}" alt="Customer Testimonails"></a>
+                            </div>
+                            <div class="testi-content">
+                                <p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
+                                <div class="testi-meta">
+                                    Steve Jobs
+                                    <span>Apple Inc.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="testi-image">
+                                <a href="#"><img src="{% static 'images/testimonials/2.jpg' %}" alt="Customer Testimonails"></a>
+                            </div>
+                            <div class="testi-content">
+                                <p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
+                                <div class="testi-meta">
+                                    Collis Ta'eed
+                                    <span>Envato Inc.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="testi-image">
+                                <a href="#"><img src="{% static 'images/testimonials/1.jpg' %}" alt="Customer Testimonails"></a>
+                            </div>
+                            <div class="testi-content">
+                                <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
+                                <div class="testi-meta">
+                                    John Doe
+                                    <span>XYZ Inc.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card topmargin overflow-hidden">
+                <div class="card-body">
+                    <h4>Opening Hours</h4>
+
+                    <p>Our offices are open 6 days a week.</p>
+
+                    <ul class="iconlist mb-0">
+                        <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong> 9AM to 5PM</li>
+                        <li><i class="icon-time color"></i> <strong>Saturdays:</strong> 11AM to 3PM</li>
+                        <li><i class="icon-time text-danger"></i> <strong>Sundays:</strong> Closed</li>
+                    </ul>
+
+                    <i class="icon-time bgicon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
 
