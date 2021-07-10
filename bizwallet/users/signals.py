@@ -66,13 +66,13 @@ def user_signed_up_(request, user, **kwargs):
             (
                 "NEW REFERRAL REGISTRATION Bizwallet NG",
                 f"{user.fullname} just registered with this email \n Email: {user.email}",
-                "noreply@bizwallet.com.ng",
-                ["admin@bizwallet.com.ng"],
+                "noreply@bizwallet.org",
+                ["admin@bizwallet.org"],
             ),
             (
                 "NEW REFERAL LINK REGISTRATION Bizwallet NG",
                 f"{user.fullname} just registered with this email \n Email: {user.email}",
-                "noreply@bizwallet.com.ng",
+                "noreply@bizwallet.org",
                 [recommender_email],
             ),
         )
@@ -89,8 +89,8 @@ def user_signed_up_(request, user, **kwargs):
             send_mail(
                 "NEW FIELDWORKER REGISTRATION Bizwallet NG",
                 f"{recommender.user.fullname} just registered with this email \n Email: {user.email}",
-                "noreply@bizwallet.com.ng",
-                ["admin@bizwallet.com.ng"],
+                "noreply@bizwallet.org",
+                ["admin@bizwallet.org"],
                 fail_silently=False,
             )
         elif request.path == "/accounts/signup/" and not request.path == "/accounts/signup-fieldworker/":
@@ -104,7 +104,7 @@ def user_signed_up_(request, user, **kwargs):
             send_mail(
                 "NEW INVESTOR REGISTRATION Bizwallet NG",
                 f"{new_investor.user.fullname} just registered with this email \n Email: {user.email}",
-                "noreply@bizwallet.com.ng",
-                ["admin@bizwallet.com.ng"],
+                "noreply@bizwallet.org",
+                ["admin@bizwallet.org"],
                 fail_silently=False,
             )

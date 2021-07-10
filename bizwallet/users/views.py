@@ -111,8 +111,8 @@ fieldworker_signup = FieldWorkerSignupView.as_view()
 #         send_mail(
 #             "NEW INVESTOR REGISTRATION Bizwallet NG",
 #             f"{user.fullname} just registered with this email \n Email: {user.email}",
-#             "noreply@bizwallet.com.ng",
-#             ["admin@bizwallet.com.ng"],
+#             "noreply@bizwallet.org",
+#             ["admin@bizwallet.org"],
 #             fail_silently=False,
 #         )
 #     else:
@@ -153,8 +153,8 @@ fieldworker_signup = FieldWorkerSignupView.as_view()
 #         send_mail(
 #             "NEW FIELDWORKER REGISTRATION Bizwallet NG",
 #             f"{user.fullname} just registered with this email \n Email: {user.email}",
-#             "noreply@bizwallet.com.ng",
-#             ["admin@bizwallet.com.ng"],
+#             "noreply@bizwallet.org",
+#             ["admin@bizwallet.org"],
 #             fail_silently=False,
 #         )
 #     else:
