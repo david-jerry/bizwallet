@@ -34,7 +34,7 @@ class="stretched"
             <li><a href="#tab-investments"><i class="icon-cash"></i> Investments</a></li>
             <li><a href="#tab-activities"><i class="icon-pencil2"></i> Activities</a></li>
             {% if object.is_field_worker %}
-            <li><a href="#tab-connections"><i class="icon-users"></i> Connections</a></li>
+            <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
             {% endif %}
           </ul>
 
@@ -104,105 +104,20 @@ class="stretched"
             <div class="tab-content clearfix" id="tab-connections">
 
               <div class="row topmargin-sm">
-                <div class="col-lg-3 col-md-6 bottommargin">
+                {% for refs in my_recs %}
+                <div class="col-lg-3 col-md-6 {% if not forloop.last %}bottommargin{% endif %}">
 
                   <div class="team">
                     <div class="team-image">
-                      <img src="images/team/3.jpg" alt="John Doe">
+                      <img src="{% if refs.user.image %}{{refs.user.image.url}}{% else %}images/team/3.jpg{% endif %}" alt="John Doe">
                     </div>
                     <div class="team-desc">
-                      <div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                      </a>
+                      <div class="team-title"><h4>{{refs.user.fullname}}</h4><span>{{refs.user.gender}}</span></div>
                     </div>
                   </div>
 
                 </div>
-
-                <div class="col-lg-3 col-md-6 bottommargin">
-
-                  <div class="team">
-                    <div class="team-image">
-                      <img src="images/team/2.jpg" alt="Josh Clark">
-                    </div>
-                    <div class="team-desc">
-                      <div class="team-title"><h4>Josh Clark</h4><span>Co-Founder</span></div>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 bottommargin">
-
-                  <div class="team">
-                    <div class="team-image">
-                      <img src="images/team/8.jpg" alt="Mary Jane">
-                    </div>
-                    <div class="team-desc">
-                      <div class="team-title"><h4>Mary Jane</h4><span>Sales</span></div>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-
-                  <div class="team">
-                    <div class="team-image">
-                      <img src="images/team/4.jpg" alt="Nix Maxwell">
-                    </div>
-                    <div class="team-desc">
-                      <div class="team-title"><h4>Nix Maxwell</h4><span>Support</span></div>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                      </a>
-                      <a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                </div>
+                {% endfor %}
               </div>
 
             </div>

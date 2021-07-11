@@ -12,19 +12,96 @@ class="stretched"
 {% endblock %}
 
 {% block header %}
-		<!-- Page Title
-		============================================= -->
-		<section id="page-title">
+	<!-- Page Title
+	============================================= -->
+	<section id="page-title">
 
-			<div class="container clearfix">
-				<h1>Team</h1>
-				<span>List of People who matter in Our Company</span>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-					<li class="breadcrumb-item"><a href="{% url 'about' %}">About Us</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Team</li>
-				</ol>
+		<div class="container clearfix">
+			<h1>Team</h1>
+			<span>List of People who matter in Our Company</span>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'about' %}">About Us</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Team</li>
+			</ol>
+		</div>
+
+	</section><!-- #page-title end -->
+{% endblock %}
+
+{% block content %}
+<div class="fancy-title title-border">
+	<h3>Our CEOs</h3>
+</div>
+
+<div class="row justify-content-center col-mb-50 mb-0">
+	<div class="col-sm-6 col-lg-4">
+		<div class="team">
+			<div class="team-image">
+				<img src="{% static 'images/team/3.jpg' %}" alt="John Doe">
 			</div>
+			<div class="team-desc">
+				<div class="team-title"><h4>John Doe</h4><span>CEO</span></div>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+					<i class="icon-facebook"></i>
+					<i class="icon-facebook"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+					<i class="icon-twitter"></i>
+					<i class="icon-twitter"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+					<i class="icon-gplus"></i>
+					<i class="icon-gplus"></i>
+				</a>
+			</div>
+		</div>
+	</div>
 
-		</section><!-- #page-title end -->
+	<div class="col-sm-6 col-lg-4">
+		<div class="team">
+			<div class="team-image">
+				<img src="{% static 'images/team/2.jpg' %}" alt="Josh Thompson">
+			</div>
+			<div class="team-desc">
+				<div class="team-title"><h4>Josh Thompson</h4><span>Co-Founder</span></div>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+					<i class="icon-facebook"></i>
+					<i class="icon-facebook"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+					<i class="icon-twitter"></i>
+					<i class="icon-twitter"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+					<i class="icon-gplus"></i>
+					<i class="icon-gplus"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6 col-lg-4">
+		<div class="team">
+			<div class="team-image">
+				<img src="{% static 'images/team/8.jpg' %}" alt="Mary Jane">
+			</div>
+			<div class="team-desc">
+				<div class="team-title"><h4>Mary Jane</h4><span>Sales</span></div>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+					<i class="icon-facebook"></i>
+					<i class="icon-facebook"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+					<i class="icon-twitter"></i>
+					<i class="icon-twitter"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-gplus">
+					<i class="icon-gplus"></i>
+					<i class="icon-gplus"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

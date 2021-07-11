@@ -21,6 +21,13 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        recommended_users = user.fieldworkerprofile.get_recommended_users()
+        context['my_recs'] = recommended_users
+        return context
+
 
 user_detail_view = UserDetailView.as_view()
 
