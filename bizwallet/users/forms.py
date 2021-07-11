@@ -32,6 +32,7 @@ class UserCreationForm(admin_forms.UserCreationForm):
     class Meta(admin_forms.UserCreationForm.Meta):
         model = User
         fields = [
+            "image",
             "first_name",
             "last_name",
             "username",

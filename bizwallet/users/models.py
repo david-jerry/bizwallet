@@ -10,6 +10,7 @@ from decimal import Decimal
 
 # Third partie imports
 from countries_plus.models import Country
+from django_resized import ResizedImageField
 from dateutil import relativedelta
 # django imports
 from django.contrib.auth.models import AbstractUser
@@ -139,6 +140,7 @@ class User(AbstractUser):
     ip = GenericIPAddressField(
         _("User IP"), protocol="both", unpack_ipv4=False, blank=False, null=True
     )
+    image = ResizedImageField(size=[500, 300], quality=75, crop=['middle', 'center'], upload_to=profile_image, force_format='JPEG')
     gender = CharField(_("Gender"), max_length=7, blank=True, null=True, choices=SEX)
     dob = DateField(_("Date of Birth"), blank=True, null=True)
     marital = CharField(
