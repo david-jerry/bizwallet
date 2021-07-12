@@ -16,7 +16,7 @@ class="stretched"
 {% block header %}
 <!-- Page Title
 ============================================= -->
-<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{% static "images/parallax.jpg" %}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
+<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{{services.image.url}}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
 
     <div class="container clearfix">
         <h1>{{services.title}}</h1>
@@ -28,4 +28,12 @@ class="stretched"
     </div>
 
 </section><!-- #page-title end -->
+{% endblock %}
+
+{% block content_wide %}
+<div class="row col-mb-50 mb-0">
+    <div class="col-12">
+        {{services.description|safe}}
+    </div>
+</div>
 {% endblock %}
