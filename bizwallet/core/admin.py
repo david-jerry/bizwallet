@@ -4,7 +4,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
 from django.urls import reverse
 from tinymce.widgets import TinyMCE
-
+from .models import Services
 
 class CustomFlatPageAdmin(FlatPageAdmin):
     """
@@ -24,3 +24,4 @@ class CustomFlatPageAdmin(FlatPageAdmin):
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, CustomFlatPageAdmin)
+admin.site.register(Services)

@@ -3,9 +3,14 @@
 
 {% block title %}{{ user.username }}{% endblock %}
 
+{% block body_class %}
+class="stretched"
+{% endblock %}
+
 {% block content %}
+<div class="mt-5">
   <h1>{{ user.username }}</h1>
-  <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
+  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'users:update' %}">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="control-group">
@@ -14,4 +19,5 @@
       </div>
     </div>
   </form>
+</div>
 {% endblock %}

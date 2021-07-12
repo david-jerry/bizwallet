@@ -19,12 +19,15 @@ sitemaps = {
 
 urlpatterns = [
     path("", home, name="home"),
-    path("ref=<username>/", home, name="home"),
+    path("usersref=/<username>/", home, name="ref-home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
     path(
         "about/team/", TemplateView.as_view(template_name="pages/team.html"), name="team"
+    ),
+    path(
+        "services/", include("bizwallet.core.urls"), name="services"
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

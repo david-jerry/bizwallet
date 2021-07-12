@@ -15,6 +15,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from tinymce.views import render_to_image_list
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import DetailView, ListView
+from .models import Services
 
 User = get_user_model()
 
@@ -31,6 +35,7 @@ def home(request, *args, **kwargs):
     username = str(kwargs.get("username"))
 
     ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "")
+    services = Services.objects.all().filter(active=True)
 
     try:
         is_cached = "geodata" in request.session
@@ -73,5 +78,15 @@ def home(request, *args, **kwargs):
             # 'longitude': geodata['longitude'],
             # 'api_key': 'AIzaSyC1UpCQp9zHokhNOBK07AvZTiO09icwD8I',  # Don't do this! This is just an example. Secure your keys properly.
             "is_cached": is_cached,
+            'services': services,
         },
     )
+
+
+class ServiceListView(DetailView):
+    model = Services
+    template = 'pages/services.html'
+    context_object_name = 'services'
+    queryset = Services.objects.filter(active=True)
+
+service_detail = ServiceListView.as_view()

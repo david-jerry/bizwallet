@@ -70,6 +70,8 @@ class ProfileSignupView(SignupView):
         res = super(ProfileSignupView, self).form_valid(form)
         profile = self.profile_class(user=self.user, user_is_field_worker=self.fw_bool)
         print("------profile------", profile)
+        image = form.cleaned_data['image']
+        res.save()
         profile.save()
 
         return res

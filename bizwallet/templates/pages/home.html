@@ -46,6 +46,17 @@
 class="stretched"
 {% endblock %}
 
+{% block service_navs %}
+{% for service in services %}
+<li class="menu-item">
+    <a class="menu-link" href="{{service.get_absolute_url}}"><div>{{service.title}}</div></a>
+</li>
+{% empty %}
+NONE
+{% endfor %}
+{% endblock %}
+
+
 {% block header %}
 {% include 'snippets/slider.html' %}
 {% endblock %}

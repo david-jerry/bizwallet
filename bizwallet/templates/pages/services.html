@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Services - ' %}{{services.title}} {{block.super|upper}}{% endblock title %}
+
+{% block desc %}{{services.decription|safe|truncatewords:23}}{% endblock %}
+
+{% block kw %}{{services.title}} bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
+
+{% block body_class %}
+class="stretched"
+{% endblock %}
+
+
+
+{% block header %}
+<!-- Page Title
+============================================= -->
+<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{% static "images/parallax.jpg" %}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
+
+    <div class="container clearfix">
+        <h1>{{services.title}}</h1>
+        <span>{{services.description|safe|truncatewords:12}}</span>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{services.title}}</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+{% endblock %}
