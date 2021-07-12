@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{% if object.is_field_worker %}FieldWorker:{% elif object.is_superuser %}Admin:{% else %}User:{% endif %} {{ object.fullname }} - {{block.super|upper}}{% endblock title %}
+{% block title %}{% if object.is_field_worker and not object.is_superuser %}FieldWorker:{% elif object.is_superuser and object.is_field_worker %}Admin:{% else %}User:{% endif %} {{ object.fullname }} - {{block.super|upper}}{% endblock title %}
 
 {% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.{% endblock %}
 
@@ -33,7 +33,7 @@ class="stretched"
           <ul class="tab-nav clearfix">
             <li><a href="#tab-investments"><i class="icon-wallet"></i> Investments</a></li>
             <li><a href="#tab-activities"><i class="icon-pencil2"></i> Activities</a></li>
-            {% if object.is_field_worker %}
+            {% if object.is_field_worker or object.is_field_worker %}
             <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
             {% endif %}
           </ul>
@@ -100,7 +100,7 @@ class="stretched"
               </table>
 
             </div>
-            {% if object.is_field_worker %}
+            {% if object.is_field_worker or object.is_field_worker %}
             <div class="tab-content clearfix" id="tab-connections">
 
               <div class="row topmargin-sm">
