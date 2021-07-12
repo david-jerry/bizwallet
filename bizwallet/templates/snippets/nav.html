@@ -35,7 +35,7 @@
                                 {% if request.user.is_authenticated %}
                                 <div class="top-cart-item">
                                     <div class="top-cart-item-image">
-                                        <a href="{{request.user.get_absolute_url}}"><img src="{{ request.user.image.url }}" alt="Blue Round-Neck Tshirt" /></a>
+                                        <a href="{{request.user.get_absolute_url}}"><img src="{% if request.image %}{{ request.user.image.url }}{% else %}{% static 'images/team/7.jpg' %}{% endif %}" alt="Blue Round-Neck Tshirt" /></a>
                                     </div>
                                     <div class="top-cart-item-desc">
                                         <div class="top-cart-item-desc-title">

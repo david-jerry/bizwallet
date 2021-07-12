@@ -174,7 +174,11 @@ class User(AbstractUser):
 
     @property
     def fullname(self):
-        return f"{self.first_name} {self.last_name}"
+        if self.first_name and self.last_name:
+            fullname = f"{self.first_name} {self.last_name}"
+        else:
+            fullname = f"{self.username}"
+        return fullname
 
     def get_absolute_url(self):
         """Get url for user's detail view.
