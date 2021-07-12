@@ -63,7 +63,7 @@ def services_image(instance, filename):
     )
 
 
-class Services(TimeStampedModel):
+class Service(TimeStampedModel):
     """services in bizwallet."""
 
     image = ResizedImageField(size=[2000, 1222], default='images/team/7.jpg', quality=75, crop=['middle', 'center'], upload_to=services_image, force_format='JPEG')
@@ -81,3 +81,12 @@ class Services(TimeStampedModel):
 
         """
         return reverse("services:detail", kwargs={"title": self.title})
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        managed = True
+        verbose_name = "Service"
+        verbose_name_plural = "Services"
+        ordering = ["-created", "-modified"]
