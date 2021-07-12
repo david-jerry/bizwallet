@@ -63,7 +63,7 @@ def services_image(instance, filename):
     )
 
 
-class Service(TimeStampedModel):
+class Services(TimeStampedModel):
     """services in bizwallet."""
 
     image = ResizedImageField(size=[2000, 1222], default='images/team/7.jpg', quality=75, crop=['middle', 'center'], upload_to=services_image, force_format='JPEG')
