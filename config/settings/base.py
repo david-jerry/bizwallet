@@ -86,6 +86,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_ADMIN = [
+    "tinymce",
+    # 'grappelli',
+    'filebrowser',
     "jet.dashboard",
     "jet",
     "django.contrib.admin",
@@ -121,8 +124,7 @@ THIRD_PARTY_APPS = [
     "cookielaw",
     # "cookie_consent",
     # WYSWIC TEXT EDITOR
-    "tinymce",
-    "filebrowser",
+    # "filebrowser",
     # 'flatpages_tinymce',
     # requand are only installed when someone else desires to use our repository after we push to github only for local use and not production ired for serving swagger api documentation
     "drf_yasg",

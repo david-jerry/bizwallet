@@ -49,6 +49,7 @@ urlpatterns += [
     path("jet/dashboard/", include("jet.dashboard.urls", namespace="jet-dashboard")),
     path("flatpage/", include("django.contrib.flatpages.urls")),
     path(settings.ADMIN_FILEBROWSER_URL, site.urls),
+    # path('grappelli/', include('grappelli.urls')),
     path(settings.ADMIN_URL, admin.site.urls),
     path(settings.ADMIN_DOC_URL, include("django.contrib.admindocs.urls")),
 ]
