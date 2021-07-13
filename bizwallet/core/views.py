@@ -90,6 +90,9 @@ class ServiceListView(DetailView):
     context_object_name = 'services'
     queryset = Services.objects.filter(active=True)
 
+    def get_object(self, queryset=None):
+        return Services.objects.get(pk=self.kwargs.get("pk"))
+
 service_detail = ServiceListView.as_view()
 
 

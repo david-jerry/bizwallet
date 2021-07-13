@@ -9,7 +9,7 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from filebrowser.sites import site
 
-from bizwallet.core.views import home
+from bizwallet.core.views import home, contact_view
 from bizwallet.users.views import fieldworker_signup, investor_signup
 from config.sitemaps import StaticViewSitemap
 
@@ -28,6 +28,9 @@ urlpatterns = [
     ),
     path(
         "services/", include("bizwallet.core.urls"), name="services"
+    ),
+    path(
+        "contact/", contact_view, name="contact"
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
