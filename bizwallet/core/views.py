@@ -86,7 +86,7 @@ def home(request, *args, **kwargs):
 
 class ServiceListView(DetailView):
     model = Services
-    template = 'pages/services.html'
+    template_name = 'pages/services.html'
     context_object_name = 'services'
     queryset = Services.objects.filter(active=True)
 
