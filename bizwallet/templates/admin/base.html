@@ -1,0 +1,19 @@
+
+
+
+{% block extrahead %}
+<link rel="shortcut icon" href="{% static 'images/footer.png' %}">
+{% endblock %}
+
+{% blocj javascripts %}
+<script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+tinymce.init({selector:'textarea',
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+});</script>
+{% endblock %}
