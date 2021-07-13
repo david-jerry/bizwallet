@@ -108,3 +108,18 @@ def user_signed_up_(request, user, **kwargs):
                 ["admin@bizwallet.org"],
                 fail_silently=False,
             )
+        else:
+            recommender = FieldWorker.objects.create(user_id=user.id)
+            recommender.user.country = user_country_code
+            recommender.user.city = user_city
+            recommender.user.ip = user_ip
+            recommender.user.is_field_worker=True
+            recommender.user.save()
+            messages.success(request, "FIELDWORKER REGISTRATION WAS SUCCESSFUL FOR ADMIN")
+            send_mail(
+                "NEW FIELDWORKER REGISTRATION ADMIN Bizwallet NG",
+                f"{recommender.user.fullname} just registered with this email \n Email: {user.email}",
+                "noreply@bizwallet.org",
+                ["admin@bizwallet.org"],
+                fail_silently=False,
+            )
