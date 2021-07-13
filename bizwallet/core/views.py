@@ -19,7 +19,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 from .models import Services
-from .froms import ContactForm
+from .forms import ContactForm
 
 User = get_user_model()
 
