@@ -4,5 +4,5 @@ from bizwallet.core.views import service_detail
 
 app_name = "services"
 urlpatterns = [
-    path("<str:title>/", view=service_detail, name="detail"),
+    path("<int:pk>/", view=service_detail, name="detail"),
 ]

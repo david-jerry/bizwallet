@@ -80,7 +80,7 @@ class Services(TimeStampedModel):
             str: URL for user detail.
 
         """
-        return reverse("services:detail", kwargs={"title": self.title})
+        return reverse("services:detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title

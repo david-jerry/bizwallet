@@ -19,6 +19,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 from .models import Services
+from .froms import ContactForm
 
 User = get_user_model()
 
@@ -90,3 +91,22 @@ class ServiceListView(DetailView):
     queryset = Services.objects.filter(active=True)
 
 service_detail = ServiceListView.as_view()
+
+
+def contact_view(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['support@bizwallet.org'])
+                messages.success(request, "Your Email Has been sent successfuly")
+            except BadHeaderError:
+                messages.error(request, "There was an error sending yout email at the moment, please try again later.")
+                # return HttpResponse('Invalid Header found')
+            return redirect('home')
+    return render(request, 'pages/contact.html', {'form': form})
