@@ -110,10 +110,10 @@ def user_signed_up_(request, user, **kwargs):
             )
         else:
             recommender = FieldWorker.objects.create(user_id=user.id)
-            recommender.user.country = user_country_code
-            recommender.user.city = user_city
-            recommender.user.ip = user_ip
+            new_investor = Investor.objects.create(user_id=user.id)
+            new_investor.user.save()
             recommender.user.is_field_worker=True
+
             recommender.user.save()
             messages.success(request, "FIELDWORKER REGISTRATION WAS SUCCESSFUL FOR ADMIN")
             send_mail(
@@ -124,23 +124,23 @@ def user_signed_up_(request, user, **kwargs):
                 fail_silently=False,
             )
 
-@receiver(post_save, sender=User)
-def create_user_investor(sender, instance, created, *args, **kwargs):
-    if created:
-        Investor.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_investor(sender, instance, created, *args, **kwargs):
+#     if created:
+#         Investor.objects.create(user=instance)
 
 
-@receiver(post_save, sender=User)
-def save_user_investor(sender, instance, created, *args, **kwargs):
-    instance.investorprofile.save()
+# @receiver(post_save, sender=User)
+# def save_user_investor(sender, instance, created, *args, **kwargs):
+#     instance.investorprofile.save()
 
 
-@receiver(post_save, sender=User)
-def create_user_fieildworker(sender, instance, created, *args, **kwargs):
-    if created:
-        FieldWorker.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_fieildworker(sender, instance, created, *args, **kwargs):
+#     if created:
+#         FieldWorker.objects.create(user=instance)
 
 
-@receiver(post_save, sender=User)
-def save_user_fieildworker(sender, instance, created, *args, **kwargs):
-    instance.fieildworkerprofile.save()
+# @receiver(post_save, sender=User)
+# def save_user_fieildworker(sender, instance, created, *args, **kwargs):
+#     instance.fieildworkerprofile.save()
