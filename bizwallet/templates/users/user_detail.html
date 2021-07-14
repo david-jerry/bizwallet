@@ -47,7 +47,7 @@ class="stretched"
 
           <ul class="tab-nav clearfix">
             <li><a href="#tab-investments"><i class="icon-wallet"></i> Investments</a></li>
-            {% if object.is_field_worker or object.is_superuser %}
+            {% if object.is_field_worker and not object.is_superuser %}
             <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
             {% endif %}
           </ul>
