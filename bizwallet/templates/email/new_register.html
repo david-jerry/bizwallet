@@ -1,0 +1,12 @@
+{% extends 'email_base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans 'Welcome Onboard - ' %}{{block.super}}{% endblock %}
+
+{% block content %}
+<p>
+    {{fullname}} just registered with this email below.
+    <br>
+    <b>Email: <code>{{user_email}}</code></b>
+</p>
+{% endblock %}
