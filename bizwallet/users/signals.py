@@ -124,32 +124,3 @@ def user_signed_up_(request, user, **kwargs):
                 fail_silently=False,
             )
 
-# @receiver(post_save, sender=User)
-# def create_user_fieldworker(sender, instance, created, *args, **kwargs):
-#     if created:
-#         FieldWorker.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def create_user_investor(sender, instance, created, *args, **kwargs):
-#     if created:
-#         Investor.objects.create(user=instance)
-
-
-# @receiver(post_save, sender=User)
-# def save_user_fieldworker(sender, instance, created, *args, **kwargs):
-#     instance.fieldworkerprofile.save()
-
-# @receiver(post_save, sender=User)
-# def save_user_fieldworker(sender, instance, created, *args, **kwargs):
-#     instance.investorprofile.save()
-
-
-# @receiver(post_save, sender=User)
-# def create_user_fieildworker(sender, instance, created, *args, **kwargs):
-#     if created:
-#         FieldWorker.objects.create(user=instance)
-
-
-# @receiver(post_save, sender=User)
-# def save_user_fieildworker(sender, instance, created, *args, **kwargs):
-#     instance.fieildworkerprofile.save()
