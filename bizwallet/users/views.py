@@ -24,8 +24,13 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.object
-        recommended_users = user.fieldworkerprofile.get_recommended_users()
-        context['my_recs'] = recommended_users
+        
+        if user.is_field_worker:
+            recommended_users = user.fieldworkerprofile.get_recommended_users()
+            context['my_recs'] = recommended_users
+        else:
+            pass
+        
         return context
 
 
