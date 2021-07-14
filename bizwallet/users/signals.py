@@ -90,7 +90,7 @@ def user_signed_up_(request, user, **kwargs):
             recommender.user.save()
             messages.success(request, "FIELDWORKER REGISTRATION WAS SUCCESSFUL")
             text_email = f"{recommender.user.fullname} just registered with this email \n Email: {user.email}"
-            html_message = render_to_string('email/new_register.html', {'fullname': f'{recommender.user.fullnam}', 'user_mail': f'{user.email}'})
+            html_message = render_to_string('email/new_register.html', {'fullname': f'{recommender.user.fullname}', 'user_mail': f'{user.email}'})
             send_mail(
                 "NEW FIELDWORKER REGISTRATION Bizwallet NG",
                 text_email,
@@ -108,7 +108,7 @@ def user_signed_up_(request, user, **kwargs):
             new_investor.user.save()
             messages.success(request, "INVESTOR REGISTRATION WAS SUCCESSFUL")
             text_email = f"{new_investor.user.fullname} just registered with this email \n Email: {user.email}"
-            html_message = render_to_string('email/new_register.html', {'fullname': f'{new_investor.user.fullnam}', 'user_mail': f'{user.email}'})
+            html_message = render_to_string('email/new_register.html', {'fullname': f'{new_investor.user.fullname}', 'user_mail': f'{user.email}'})
             send_mail(
                 "NEW INVESTOR REGISTRATION Bizwallet NG",
                 text_email,
