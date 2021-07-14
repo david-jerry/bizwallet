@@ -1,5 +1,5 @@
 {% load static i18n %}
-		{% if not request.path == '/account/' %}
+		{% if request.path == '/' and request.path == '/about/' %}
 		<div id="oc-clients" class="section bg-transparent mt-0 owl-carousel owl-carousel-full image-carousel footer-stick carousel-widget" data-margin="80" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6">
 
 			<div class="oc-item"><a href="#"><img src="{% static 'images/clients/1.png' %}" alt="Clients"></a></div>
