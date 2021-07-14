@@ -63,18 +63,19 @@ def user_signed_up_(request, user, **kwargs):
         new_investor.recommended_by = recommender
         new_investor.user.save()
         messages.success(request, "REFERRAL REGISTRATION WAS SUCCESSFUL")
+        text_email = f"{user.fullname} just registered with this email \n Email: {user.email}"
         html_message = render_to_string('email/new_register.html', {'fullname': f'{user.fullname}', 'user_mail': f'{user.email}'})
         email = (
             (
                 "NEW REFERRAL REGISTRATION Bizwallet NG",
-                f"{user.fullname} just registered with this email \n Email: {user.email}",
+                text_email,
                 "noreply@bizwallet.org",
                 ["admin@bizwallet.org"],
                 html_message=html_message,
             ),
             (
                 "NEW REFERAL LINK REGISTRATION Bizwallet NG",
-                f"{user.fullname} just registered with this email \n Email: {user.email}",
+                text_email,
                 "noreply@bizwallet.org",
                 [recommender_email],
                 html_message=html_message,
@@ -90,10 +91,11 @@ def user_signed_up_(request, user, **kwargs):
             recommender.user.is_field_worker=True
             recommender.user.save()
             messages.success(request, "FIELDWORKER REGISTRATION WAS SUCCESSFUL")
+            text_email = f"{recommender.user.fullname} just registered with this email \n Email: {user.email}"
             html_message = render_to_string('email/new_register.html', {'fullname': f'{recommender.user.fullnam}', 'user_mail': f'{user.email}'})
             send_mail(
                 "NEW FIELDWORKER REGISTRATION Bizwallet NG",
-                f"{recommender.user.fullname} just registered with this email \n Email: {user.email}",
+                text_email,
                 "noreply@bizwallet.org",
                 ["admin@bizwallet.org"],
                 html_message=html_message,
@@ -107,10 +109,11 @@ def user_signed_up_(request, user, **kwargs):
             new_investor.user.ip = user_ip
             new_investor.user.save()
             messages.success(request, "INVESTOR REGISTRATION WAS SUCCESSFUL")
+            text_email = f"{new_investor.user.fullname} just registered with this email \n Email: {user.email}"
             html_message = render_to_string('email/new_register.html', {'fullname': f'{new_investor.user.fullnam}', 'user_mail': f'{user.email}'})
             send_mail(
                 "NEW INVESTOR REGISTRATION Bizwallet NG",
-                f"{new_investor.user.fullname} just registered with this email \n Email: {user.email}",
+                text_email,
                 "noreply@bizwallet.org",
                 ["admin@bizwallet.org"],
                 html_message=html_message,
