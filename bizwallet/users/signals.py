@@ -71,17 +71,15 @@ def user_signed_up_(request, user, **kwargs):
                 text_email,
                 "noreply@bizwallet.org",
                 ["admin@bizwallet.org"],
-                html_message=html_message,
             ),
             (
                 "NEW REFERAL LINK REGISTRATION Bizwallet NG",
                 text_email,
                 "noreply@bizwallet.org",
                 [recommender_email],
-                html_message=html_message,
             ),
         )
-        send_mass_mail(email, fail_silently=False)
+        send_mass_mail(email, html_message=html_message, fail_silently=False)
     elif referrer_id is None:
         if request.path == "/accounts/signup-fieldworker/" and not request.path == "/accounts/signup/":
             recommender = FieldWorker.objects.create(user_id=user.id)
