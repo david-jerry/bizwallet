@@ -15,5 +15,5 @@
 {% endblock %}
 
 {% block content %}<p>{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're receiving this e-mail because user {{ user_display }} has given your e-mail address to register an account on {{ site_domain }}.
-<br>
-To confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}</p>{% endblock %}
+<br><br>
+To confirm this is correct, click the button below: <br> <a class="btn btn-primary" href="{{ activate_url }}">ACTIVATE ACCOUNT</a> <br>{% endblocktrans %}{% endautoescape %}</p>{% endblock %}
