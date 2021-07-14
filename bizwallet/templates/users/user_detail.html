@@ -32,7 +32,6 @@ class="stretched"
 
           <ul class="tab-nav clearfix">
             <li><a href="#tab-investments"><i class="icon-wallet"></i> Investments</a></li>
-            <li><a href="#tab-activities"><i class="icon-pencil2"></i> Activities</a></li>
             {% if object.is_field_worker or object.is_superuser %}
             <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
             {% endif %}
@@ -70,36 +69,6 @@ class="stretched"
               </table>
 
             </div>
-            <div class="tab-content clearfix" id="tab-activities">
-
-              <p>Track your login activities.</p>
-
-              <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Login Location</th>
-                  <th>Login IP</th>
-                  <th>Login Session</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>
-                  <code>5/23/2021</code>
-                  </td>
-                  <td>Abuja</td>
-                  <td>108.143.24.80</td>
-                  <td>
-                    <code>
-                      Active
-                    </code>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-
-            </div>
             {% if object.is_field_worker and not object.is_superuser %}
             <div class="tab-content clearfix" id="tab-connections">
 
@@ -117,6 +86,8 @@ class="stretched"
                   </div>
 
                 </div>
+                {% empty %}
+                No Referals Yet
                 {% endfor %}
               </div>
 
