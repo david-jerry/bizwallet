@@ -34,7 +34,7 @@ class="stretched"
 
     <div class="heading-block border-0">
       <h3>{{object.fullname}}</h3>
-      <span style="font-weight: 600; font-size: 1rem; color:grey;">{% if object.is_field_worker %}Referral Link: <a href="{% url 'ref-home' object.username %}"><code>https://www.bizwallet.org{% url 'ref-home' object.username %}</code></a>{% else %}{{object.balance}}{% endif %}</span>
+      <span style="font-weight: 600; font-size: 1rem; color:grey;">{% if object.is_field_worker and not object.is_superuser %}Referral Link: <a href="{% url 'ref-home' object.username %}"><code>https://www.bizwallet.org{% url 'ref-home' object.username %}</code></a>{% else %}{{object.balance}}{% endif %}</span>
     </div>
 
     <div class="clear"></div>
