@@ -105,8 +105,10 @@ def contact_view(request):
             subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
+            html_message = render_to_string('email/support_mail.html', {'message': message, 'from_email': from_email, 'subject': subject})
+
             try:
-                send_mail(subject, message, from_email, ['info@bizwallet.org'])
+                send_mail(subject, message, from_email, ['info@bizwallet.org'], html_message=html_message, fail_silently=False)
                 messages.success(request, "Your Email Has been sent successfuly")
             except BadHeaderError:
                 messages.error(request, "There was an error sending yout email at the moment, please try again later.")

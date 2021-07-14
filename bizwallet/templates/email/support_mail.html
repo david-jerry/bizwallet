@@ -1,0 +1,16 @@
+{% extends 'email/email_base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans 'New Support Mail from - ' %}{{from_email}}{% endblock %}
+
+{% block content %}
+    {{message|safe}}
+{% endblock %}
+
+{% block preheader %}
+{{subject}}
+{% endblock %}
+
+{% block email_subject %}
+Support Mail from {{email}}
+{% endblock %}
