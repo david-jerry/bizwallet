@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from bizwallet.users.models import Testimonial
 
 import json
 import os
@@ -39,6 +40,7 @@ def home(request, *args, **kwargs):
 
     ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "REMOTE_ADDR")
     services = Services.objects.all().filter(active=True)
+    testimonials = Testimonial.objects.order_by("-created")[:5]
 
     try:
         is_cached = "geodata" in request.session
@@ -70,7 +72,7 @@ def home(request, *args, **kwargs):
             ),
         )
 
-    return render(request, "pages/home.html", {"is_cached": is_cached, "services": services})
+    return render(request, "pages/home.html", {"is_cached": is_cached, "services": services, "testimonials": testimonials})
 
 
 class ServiceListView(DetailView):

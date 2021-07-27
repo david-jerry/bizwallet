@@ -178,42 +178,47 @@ NONE
             <div class="fslider testimonial p-0 border-0 shadow-none" data-animation="slide" data-arrows="false">
                 <div class="flexslider">
                     <div class="slider-wrap">
+                        {% for testi in testimonials %}
                         <div class="slide">
                             <div class="testi-image">
-                                <a href="#"><img src="{% static 'images/testimonials/3.jpg' %}" alt="Customer Testimonails"></a>
+                                <a href="#"><img src="{{testi.user.image.url}}" alt="{{testi.user.fullname}} testimonial photo"></a>
                             </div>
                             <div class="testi-content">
-                                <p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
+                                <p>{{testi.testimony}}</p>
                                 <div class="testi-meta">
-                                    Steve Jobs
-                                    <span>Apple Inc.</span>
+                                    {{testi.user.fullname|title}}
+                                    <span>{{testi.user.company}}</span>
                                 </div>
                             </div>
                         </div>
+                        {% empty %}
                         <div class="slide">
                             <div class="testi-image">
-                                <a href="#"><img src="{% static 'images/testimonials/2.jpg' %}" alt="Customer Testimonails"></a>
+                                <a href="{% url 'ceo' %}"><img src="{% static 'images/team/president.jpeg' %}" alt="President Image for creating a new testimony"></a>
                             </div>
                             <div class="testi-content">
-                                <p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
+                                <p>We have no testimony yet.</p>
+                                <p>You can <a href="{% url 'account_login' %}"><strong>login</strong></a> to leave one. Thank you</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% if request.user.is_authenticated %}
+                        <div class="slide">
+                            <div class="testi-image">
+                                <a href="{% url 'ceo' %}"><img src="{% static 'images/team/president.jpeg' %}" alt="President Image for creating a new testimony"></a>
+                            </div>
+                            <div class="testi-content">
+                                <p>Leave a testament for others to read</p>
                                 <div class="testi-meta">
-                                    Collis Ta'eed
-                                    <span>Envato Inc.</span>
+                                    <form action="{% url 'testimony' %}" method="post">
+                                        {% csrf_token %}
+                                        {{form.as_p}}
+                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="slide">
-                            <div class="testi-image">
-                                <a href="#"><img src="{% static 'images/testimonials/1.jpg' %}" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                <div class="testi-meta">
-                                    John Doe
-                                    <span>XYZ Inc.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

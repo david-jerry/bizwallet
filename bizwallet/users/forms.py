@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
-from .models import NextOfKin, EnrollmentPlan, Subscribe, Profile
+from .models import NextOfKin, EnrollmentPlan, Subscribe, Profile, Testimonial
 User = get_user_model()
 
 
@@ -68,6 +68,19 @@ class FieldWorkerSignupForm(SignupForm):
     def save(self):
         user = super().save(commit=False)
         user.is_field_worker = True
+        user.save()
+        return user
+
+
+class TestimonyForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ["testimony"]
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user = self.request.user
         user.save()
         return user
 

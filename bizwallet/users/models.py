@@ -231,6 +231,7 @@ class User(AbstractUser):
     address = CharField(
         _("Residntial Address"), max_length=600, null=True, blank=True, unique=True
     )
+    company = CharField(_("Company Name"), max_length=500, blank=True, null=True)
     occupation = CharField(_("Occupation"), max_length=500, blank=True, null=True)
     office_address = CharField(_("Office Address"), max_length=500, blank=True, null=True)
     is_field_worker = BooleanField(_("Are you a field worker"), default=True)
@@ -436,46 +437,15 @@ class NextOfKin(TimeStampedModel):
 
 
 
-# class Membership(TimeStampedModel):
-#     slug = SlugField(null=True, blank=True, unique=True)
-#     title = CharField(choices=MEMBERSHIP_CHOICES, default="FREE", max_length=30)
-#     # activated = Boolean(default=False)
-#     # forced_expired = BooleanField(default=False)
-#     # expires = IntegerField(default=365) # 7 Days
-#     price = DecimalField(default=0, max_digits=20, decimal_places=2)
+class Testimonial(TimeStampedModel):
+    user = ForeignKey(User, on_delete=SET_NULL, null=True, related_name="usertestimonial")
+    testimony = CharField(_("Testimony"), max_length=400, blank=True, null=True)
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.user.fullname
 
-#     class Meta:
-#         managed = True
-#         verbose_name = "Membership"
-#         verbose_name_plural = "Memberships"
-#         ordering = ["-created", "-modified"]
-
-
-# class UserMembership(TimeStampedModel):
-#     user = OneToOneField(User, on_delete=CASCADE, related_name="usermembership")
-#     membership = ForeignKey(
-#         Membership, on_delete=SET_NULL, null=True, related_name="usermembership"
-#     )
-
-#     def __str__(self):
-#         return self.user.fullname
-
-
-
-# class Subscription(TimeStampedModel):
-#     user_membership = ForeignKey(
-#         UserMembership, related_name="subscription", on_delete=CASCADE
-#     )
-#     active = BooleanField(default=False)
-
-#     def __str__(self):
-#         return self.user.fullname
-
-#     class Meta:
-#         managed = True
-#         verbose_name = "Subscription"
-#         verbose_name_plural = "Subscriptions"
-#         ordering = ["-created", "-modified"]
+    class Meta:
+        managed = True
+        verbose_name = "Testimonial"
+        verbose_name_plural = "Testimonials"
+        ordering = [ "-created", "-modified"]

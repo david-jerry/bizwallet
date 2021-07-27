@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from bizwallet.utils.export_as_csv import ExportCsvMixin
 
 from bizwallet.users.forms import ProfileForm, SubscribeForm, UserChangeForm, UserCreationForm, PlanForm, KinForm
-from bizwallet.users.models import Profile, NextOfKin, EnrollmentPlan, Subscribe
+from bizwallet.users.models import Profile, NextOfKin, EnrollmentPlan, Subscribe, Testimonial
 
 User = get_user_model()
 
@@ -126,6 +126,7 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
 
 
 admin.site.register(Profile)
+admin.site.register(Testimonial)
 admin.site.register(NextOfKin)
 
 
