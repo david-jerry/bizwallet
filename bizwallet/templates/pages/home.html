@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static crispy_forms_tags %}
 
 {% block title %}Welcome - Start Your Cooperative Saving & Investment with {{block.super|upper}}{% endblock title %}
 
@@ -209,13 +209,13 @@ NONE
                             </div>
                             <div class="testi-content">
                                 <p>Leave a testament for others to read</p>
-                                <div class="testi-meta">
-                                    <form action="{% url 'testimony' %}" method="post">
-                                        {% csrf_token %}
-                                        {{form.as_p}}
-                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
-                                    </form>
-                                </div>
+                                
+                                <form action="{% url 'home' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{form.crispy}}
+                                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                </form>
+                                
                             </div>
                         </div>
                         {% endif %}

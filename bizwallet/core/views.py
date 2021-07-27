@@ -1,4 +1,7 @@
 from __future__ import absolute_import
+
+from django.http.response import HttpResponseRedirect
+from bizwallet.users.forms import TestimonyForm
 from bizwallet.users.models import Testimonial
 
 import json
@@ -40,7 +43,16 @@ def home(request, *args, **kwargs):
 
     ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "REMOTE_ADDR")
     services = Services.objects.all().filter(active=True)
-    testimonials = Testimonial.objects.order_by("-created")[:5]
+    testimonials = Testimonial.objects.filter(active=True).order_by("-created")[:5]
+
+    if request.method == 'POST':
+        form = TestimonyForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = TestimonyForm()
 
     try:
         is_cached = "geodata" in request.session
@@ -72,7 +84,7 @@ def home(request, *args, **kwargs):
             ),
         )
 
-    return render(request, "pages/home.html", {"is_cached": is_cached, "services": services, "testimonials": testimonials})
+    return render(request, "pages/home.html", {"form":form, "is_cached": is_cached, "services": services, "testimonials": testimonials})
 
 
 class ServiceListView(DetailView):

@@ -440,7 +440,8 @@ class NextOfKin(TimeStampedModel):
 class Testimonial(TimeStampedModel):
     user = ForeignKey(User, on_delete=SET_NULL, null=True, related_name="usertestimonial")
     testimony = CharField(_("Testimony"), max_length=400, blank=True, null=True)
-
+    active = BooleanField(default=False)
+    
     def __str__(self):
         return self.user.fullname
 
