@@ -1,0 +1,161 @@
+[
+{
+  "model": "users.enrollmentplan",
+  "pk": 1,
+  "fields": {
+    "created": "2021-07-24T18:36:36.182Z",
+    "modified": "2021-07-24T18:36:36.182Z",
+    "title": "Diamond",
+    "percentage": "2.80",
+    "slug": null,
+    "duration": "336",
+    "invest": "50000.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "users.enrollmentplan",
+  "pk": 2,
+  "fields": {
+    "created": "2021-07-24T18:39:24.538Z",
+    "modified": "2021-07-24T18:39:24.538Z",
+    "title": "Premium Plan",
+    "percentage": "0.30",
+    "slug": null,
+    "duration": "112",
+    "invest": "50000.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "users.enrollmentplan",
+  "pk": 3,
+  "fields": {
+    "created": "2021-07-24T18:40:12.461Z",
+    "modified": "2021-07-24T18:40:12.461Z",
+    "title": "Gold Plan",
+    "percentage": "0.10",
+    "slug": null,
+    "duration": "28",
+    "invest": "50000.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 5,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$TXVQS0tHMzZ5SGhr$cm2gERRNU/bnrEZ+KQikGg",
+    "last_login": "2021-07-23T16:27:55.534Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-07-23T14:44:24.139Z",
+    "middle_name": null,
+    "balance": "0.00",
+    "ip": null,
+    "image": "",
+    "gender": null,
+    "dob": null,
+    "marital": null,
+    "plan": null,
+    "phone_no": null,
+    "country": null,
+    "city": null,
+    "state": null,
+    "address": null,
+    "company": null,
+    "occupation": null,
+    "office_address": null,
+    "is_field_worker": true,
+    "has_paid": false,
+    "accept_terms": false,
+    "recommended_by": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 11,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$Z0xPVUxMeVA3T1o2$wWypvuQTTKTrTWW9HAqglw",
+    "last_login": "2021-07-23T16:11:42Z",
+    "is_superuser": false,
+    "username": "programmingtext@gmail.com",
+    "first_name": "Sherry",
+    "last_name": "Rudman",
+    "email": "jeremiahedavid@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-07-23T16:10:39Z",
+    "middle_name": "Effiong",
+    "balance": "0.00",
+    "ip": null,
+    "image": "user-profile-photo/3028677894/3028677894.jpg",
+    "gender": "Male",
+    "dob": "1992-10-03",
+    "marital": "Single",
+    "plan": 2,
+    "phone_no": "07064857582",
+    "country": "NG",
+    "city": null,
+    "state": "Rivers",
+    "address": "20 Market Road, Rumuomasi",
+    "company": null,
+    "occupation": "Software Engineer",
+    "office_address": "10 BDA. LA PRRA Manati Puerto Rico 00674",
+    "is_field_worker": true,
+    "has_paid": false,
+    "accept_terms": true,
+    "recommended_by": 5,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.subscribe",
+  "pk": 8,
+  "fields": {
+    "created": "2021-07-24T19:08:30.838Z",
+    "modified": "2021-07-24T21:04:50.155Z",
+    "user": 11,
+    "bill": "120000.00",
+    "started_on": "2021-07-24T21:04:50.155Z",
+    "approved": true
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 6,
+  "fields": {
+    "created": "2021-07-23T16:10:39.990Z",
+    "modified": "2021-07-24T19:13:38.611Z",
+    "user": 11,
+    "account_number": 25217354,
+    "bvn": "09767583635",
+    "bank_name": "ACCESS BANK PLC"
+  }
+},
+{
+  "model": "users.nextofkin",
+  "pk": 2,
+  "fields": {
+    "created": "2021-07-24T18:15:40.414Z",
+    "modified": "2021-07-24T18:15:40.414Z",
+    "user": 11,
+    "first_name": "Sherry",
+    "middle_name": "salvadore",
+    "last_name": "Rudman",
+    "image": "user-kin-photo/1740162813/1740162813.jpg",
+    "gender": "Male",
+    "dob": "1992-10-03",
+    "phone_no": "4028031752",
+    "address": "10 BDA. LA PRRA Manati Puerto Rico 00674"
+  }
+}
+]

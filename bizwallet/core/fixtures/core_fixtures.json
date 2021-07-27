@@ -1,0 +1,138 @@
+[
+{
+  "model": "core.services",
+  "pk": 1,
+  "fields": {
+    "created": "2021-07-24T06:05:02.709Z",
+    "modified": "2021-07-24T06:05:02.709Z",
+    "image": "service-photo/1609063051/1609063051.jpg",
+    "title": "MAP",
+    "slug": "map",
+    "description": "<h2><strong>My Agro Payback</strong></h2>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 1rem;\">My Agro Payback is an interesting package whereby a member who wish to earn over 15% yield on monthly basis can receive training from our team of experts who <strong>QUALIFIED</strong> to train you on how to generate money around and within your environment by your self.</span></p>\r\n<p>Majority of our members are already receiving training on this package and the interesting part of this package is that it enables the member to manage his or her resources without entrusting his or her contributed funds under someone else's care.</p>\r\n<p>You can be part of this program from anywhere around the globe paying no flight ticket and you can even do better based on your environment.</p>\r\n<p>When you are thinking of a business that can pay 15% and above on a monthly basis please think of My Agro Payback which is a business you can manage by yourself even if you are currently on a white-collar job, you can do it by employing workers around you that will do the job for you while you make your returns on monthly basis.</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 2,
+  "fields": {
+    "created": "2021-07-24T06:48:53.682Z",
+    "modified": "2021-07-24T18:40:24.307Z",
+    "image": "service-photo/3389729465/3389729465.jpg",
+    "title": "MBP",
+    "slug": "mbp",
+    "description": "<h2><strong>My Biz Payback</strong></h2>\r\n<p>&nbsp;</p>\r\n<p>Just as the name implies, it will entitle here a member who choose to contribute into My Biz Payback to receive 10% of his or her contributed funds ranging from ₦ 50,000 - ₦ 1.5 million naira monthly or annually!</p>\r\n<p>In this package you could choose Gold or Diamond.</p>\r\n<p>Gold plan members will receive 10% every month and at the end of the year his/her capital returns to the Biz Payback member and if such member wishes to continue, he/she can roll over his or her contributed funds.</p>\r\n<p>Diamond plan member will receive his/her capital back at the end of the year plus addition of 180% interest making it 280% total. The member can choose to roll over his/her contributed funds to continue earning on the package.</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 3,
+  "fields": {
+    "created": "2021-07-24T07:25:19.845Z",
+    "modified": "2021-07-24T08:39:28.626Z",
+    "image": "service-photo/2049008814/2049008814.jpg",
+    "title": "ESPOL",
+    "slug": "espol",
+    "description": "<h2><strong>Entrepreneurial Support To People's Out-let (ESPOL)&nbsp;</strong></h2>\r\n<p>&nbsp;</p>\r\n<p>In our society today, we can see clearly that the majority amongst the poor in many African countries have some ideas and talents that are just wasting away! It is an undeniable fact that if we train this majority on how to put their ideas, skills and talents into good use, there will surely be positive growth in our economy, thus helping to reduce crimes and other vices in our society today.</p>\r\n<p><strong>ESPOL</strong> major aim is to assist in training and equally and supporting its participants financially to enable them start up business in their area of interest. It also points out to its participants those things around them that can transform them into millionaires in their various areas.</p>\r\n<p><strong>ESPOL</strong> also encourage its participants to team up as starters while they maintain their individual focus which will surely come on board moment the teamed up business generates proceeds.</p>\r\n<p>At the end of the program, we will reward participants:</p>\r\n<p><strong>Class \"A\" will receive 1million naira x two.</strong></p>\r\n<p><strong>Class \"B\" will receive 500,000 x two.</strong></p>\r\n<p><strong>Class \"C\" will receive 250,000 x two.</strong></p>\r\n<p>Subsequently, all those that received the training from ESPOL shall be invited to showcase their talents to the world, thus helping others to learn how to get out of financial poor state.</p>\r\n<p>Finally, the best 10 amongst the participants who showcased their new skills, will be rewarded at the end of the show tagged \"<strong><em>Africa what we should do</em></strong>\".</p>\r\n<p>&nbsp;</p>\r\n<p><strong>PS:<em> this is a yearly program for ESPOL participants</em></strong>.</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 4,
+  "fields": {
+    "created": "2021-07-24T07:30:42.197Z",
+    "modified": "2021-07-24T07:30:42.197Z",
+    "image": "service-photo/629304959/629304959.jpg",
+    "title": "PAME",
+    "slug": "pame",
+    "description": "<h2><strong>PAME</strong></h2>\r\n<p>&nbsp;</p>\r\n<p>BizWallet cooperative has its members at heart which is a reason the cooperative introduced<strong> (PAME).</strong></p>\r\n<p>Realising how important it is to for any reasonable human who is struggling for ends meet to own properties of their own, properties such as <strong>lands, house, cars, or buses,</strong> to continue living. Our cooperative knowing that it is imperative to have a structure that will assist our members to gain properties with fewer struggles!</p>\r\n<p>With these in mind, we entered a strong <span style=\"background-color: #f1c40f;\">p</span><span style=\"background-color: #f1c40f; font-size: 1rem;\">artnership with some real esta</span><span style=\"background-color: #f1c40f;\">te c</span><span style=\"background-color: #f1c40f;\">ompanies</span><span style=\"font-size: 1rem;\"> to enable us have more plots of land these makes it possible for most of our members in need of land to gain them through monthly contributions stretches into two or three years.</span></p>\r\n<p>For our members that has gain land already but needed support to develop them, we step in to action by moving into the site after reaching a concrete agreement with such member such that within a year interval such honorable member can move into his house, escaping the rent payment issues while he clear up the building payment through monthly contributions!</p>\r\n<p>Our cooperative is truly unique because our members are now using my <strong>Biz Payback</strong> returns to gain more properties as they so desire. Through PAME you can gain more properties by paying only 50% the worth of such properties!</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 5,
+  "fields": {
+    "created": "2021-07-24T07:36:40.963Z",
+    "modified": "2021-07-24T07:36:40.963Z",
+    "image": "service-photo/1890659216/1890659216.jpg",
+    "title": "MBE",
+    "slug": "mbe",
+    "description": "<h2><strong>My Biz Empower</strong></h2>\r\n<p>&nbsp;</p>\r\n<p>Receive money to support your existing business every three months and....read more.</p>\r\n<p>It will interest you to know that, when you are in business knowing that there is always a place to access funds with little protocols to grab an opportunity of buying cheaper to sell higher!</p>\r\n<p>Business strive faster especially when there is financial backup whenever the need arises.</p>\r\n<p>My Biz Empower is a package prepared by BizWallet Cooperative to support our members that are already in business.</p>\r\n<p>Members receive this support accordingly to what they can handle to enable them sprout. Interested members in this package will ensure that their businesses has a location and equally can deliver results. Approach BizWallet if you already have have an existing business that needs support!</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 6,
+  "fields": {
+    "created": "2021-07-24T08:09:47.772Z",
+    "modified": "2021-07-24T08:09:47.772Z",
+    "image": "service-photo/3474353447/3474353447.jpg",
+    "title": "BIZCON",
+    "slug": "bizcon",
+    "description": "<h2><strong>BIZ WALLET CONTRIBUTION</strong>.</h2>\r\n<p>&nbsp;</p>\r\n<p>You can earn 10-50% from your contributed funds, which means, as a member of Bizwallet Cooperative you can choose to contribute your funds either weekly or monthly and receive back your money after 12 months with additional interest based on the package chosen by you!&nbsp;</p>\r\n<p>Gold members will earn <strong>25%</strong>,</p>\r\n<p>Platinum members will earn <strong>30%</strong>,</p>\r\n<p>VIP members will earn <strong>35%</strong>,</p>\r\n<p>while VVIP members will earn <strong>40%</strong> interest added to their contributed funds at the end of the year!</p>\r\n<p>Your earnings depend on the package chosen by you.&nbsp;</p>\r\n<p>Our cooperative in these regards is unique because you can gain more properties through weekly/monthly contributions and achieve more! Interestingly, our cooperative will collectively assist you to pay off <strong>50%</strong> for you if you so desire. You can read more under properties acquisition made easier.</p>\r\n<p>You can convert your contributed funds for a property which you really need.</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.services",
+  "pk": 7,
+  "fields": {
+    "created": "2021-07-24T08:37:57.061Z",
+    "modified": "2021-07-24T08:37:57.061Z",
+    "image": "service-photo/254211508/254211508.jpg",
+    "title": "VMT",
+    "slug": "vmt",
+    "description": "<h2><strong>VALUE MARKET TRADE (VMT)</strong></h2>\r\n<p>&nbsp;</p>\r\n<p>With trade and marketing today, we can all agree that it is products/goods and services, exchange and investment.</p>\r\n<p>When you observe the market place and review what happens between the buyers and the marketers, it will shock to note that they do not include the buyers when rendering services. Meanwhile, without the buyers, these marketers will go hungry.</p>\r\n<p>Considering this we have provided a solution to offer our esteemed members a solution we call&nbsp;<strong>VALUE MARKET TRADE&nbsp;</strong>which put their interest into significant consideration.</p>\r\n<p>In our VMT community, a buyer will earn a car, houses, a truck and lots more for just buying from us over time! Just as the name implies, we designed this market to assist our members that are into the business of buying and selling of legally approved commodities and services.</p>",
+    "active": true
+  }
+},
+{
+  "model": "core.servicesvariations",
+  "pk": 1,
+  "fields": {
+    "created": "2021-07-24T06:48:53.748Z",
+    "modified": "2021-07-24T06:49:50.574Z",
+    "service": 2,
+    "title": "Gold Plan",
+    "slug": "gold-plan",
+    "min_investment": "50000.00",
+    "percentage": "0.10",
+    "duration": "28",
+    "active": true
+  }
+},
+{
+  "model": "core.servicesvariations",
+  "pk": 2,
+  "fields": {
+    "created": "2021-07-24T06:48:53.749Z",
+    "modified": "2021-07-24T18:40:24.337Z",
+    "service": 2,
+    "title": "Premium Plan",
+    "slug": "premium-plan",
+    "min_investment": "50000.00",
+    "percentage": "0.30",
+    "duration": "112",
+    "active": true
+  }
+},
+{
+  "model": "core.servicesvariations",
+  "pk": 3,
+  "fields": {
+    "created": "2021-07-24T06:48:53.750Z",
+    "modified": "2021-07-24T06:48:53.750Z",
+    "service": 2,
+    "title": "Diamon Plan",
+    "slug": "diamon-plan",
+    "min_investment": "50000.00",
+    "percentage": "2.80",
+    "duration": "336",
+    "active": true
+  }
+}
+]
