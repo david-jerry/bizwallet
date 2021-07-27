@@ -14,8 +14,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   # psycopg2 dependencies
   libpq-dev \
+  # lxml webscraping dependencies
+  libxml2-dev \
+  libxslt-dev \ 
+  python-dev \
+  python3-lxml \
   # libmagic for image compression
-  libmagic1
+  libmagic1 \
+  libmagic-dev \
+  python3-magic 
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
@@ -43,6 +50,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev \
   # Translations dependencies
   gettext \
+  # lxml webscraping dependencies
+  libxml2-dev \
+  libxslt-dev \ 
+  python-dev \
+  python3-lxml \
+  # libmagic for image compression
+  libmagic1 \
+  libmagic-dev \
+  python3-magic \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

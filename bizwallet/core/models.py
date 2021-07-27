@@ -70,6 +70,7 @@ class Services(TimeStampedModel):
     title = CharField(
         _("Service Title"), max_length=500, blank=True, null=True,
     )
+    slug = SlugField(_('Service Slug'), max_length=500, unique=True, null=True, blank=True)
     description = HTMLField(_("Service Description"),null=True, blank=True)
     active = BooleanField(_("Activate Services"), default=False)
 
@@ -90,3 +91,39 @@ class Services(TimeStampedModel):
         verbose_name = "Service"
         verbose_name_plural = "Services"
         ordering = ["-created", "-modified"]
+
+
+
+
+class ServicesVariations(TimeStampedModel):
+    DURATION = (
+        ("0", "0"),
+        ("28", "28"),
+        ("64", "64"),
+        ("112", "112"),
+        ("168", "168"),
+        ("336", "336"),
+        ("672", "672")
+    )
+    service = ForeignKey(Services, on_delete=CASCADE, related_name="servicevariation")
+    title = CharField(
+        _("Service Title"), max_length=500, blank=True, null=True,
+    )
+    slug = SlugField(_('Variation Slug'), max_length=500, unique=True, null=True, blank=True)
+    min_investment = DecimalField(
+        _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
+    )
+    percentage = DecimalField(_("Variation Percentage"), max_digits=3, decimal_places=2, null=True, blank=True, default=1.0, help_text="1.00 means 100%, 0.50 mean 50%")
+    duration = CharField(_("Duration"), max_length=4, choices=DURATION, null=True, blank=True, default="168")
+    active = BooleanField(_("Activate Variation"), default=False)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        managed = True
+        verbose_name = "ServicesVariation"
+        verbose_name_plural = "ServicesVariations"
+        ordering = ["-created", "-modified"]
+
+

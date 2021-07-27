@@ -27,6 +27,9 @@ urlpatterns = [
         "about/team/", TemplateView.as_view(template_name="pages/team.html"), name="team"
     ),
     path(
+        "about/president/ayo-ogungbe/", TemplateView.as_view(template_name="pages/ceo.html"), name="ceo"
+    ),
+    path(
         "services/", include("bizwallet.core.urls"), name="services"
     ),
     path(

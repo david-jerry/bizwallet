@@ -279,6 +279,8 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "bizwallet.utils.context_processors.settings_context",
                 "bizwallet.core.core_processors.all_services",
+                "bizwallet.core.core_processors.all_users",
+                "bizwallet.core.core_processors.all_field_users",
             ],
         },
     }

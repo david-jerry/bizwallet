@@ -1,0 +1,10 @@
+{% extends 'email/email_base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans 'Welcome Onboard - ' %}{{block.super}}{% endblock %}
+
+{% block content %}
+<p>
+    Your subscription has been approved and started
+</p>
+{% endblock %}

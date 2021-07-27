@@ -30,7 +30,7 @@ class="stretched"
   <div class="w-100 line d-block d-md-none"></div>
   <div class="col-md-9">
 
-    <img src="{% if request.user.image %}{{request.user.image.url}}{% else %}{% static 'images/team/7.jpg' %}{% endif %}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar" style="max-width: 84px;">
+    <img src="{% if object.image %}{{object.image.url}}{% else %}{% static 'images/team/7.jpg' %}{% endif %}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar" style="max-width: 84px;">
 
     <div class="heading-block border-0">
       <h3>{{object.fullname}}</h3>
@@ -47,7 +47,7 @@ class="stretched"
 
           <ul class="tab-nav clearfix">
             <li><a href="#tab-investments"><i class="icon-wallet"></i> Investments</a></li>
-            {% if object.is_field_worker and not object.is_superuser %}
+            {% if object.is_field_worker %}
             <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
             {% endif %}
           </ul>
@@ -72,13 +72,13 @@ class="stretched"
                   <code>5/23/2021</code>
                   </td>
                   <td>Payment for VPS2 completed</td>
-                  <td>N 350,000.00</td>
+                  <td>N {{object.balance}}</td>
                 </tr>
                 </tbody>
               </table>
 
             </div>
-            {% if object.is_field_worker and not object.is_superuser %}
+            {% if object.is_field_worker %}
             <div class="tab-content clearfix" id="tab-connections">
 
               <div class="row topmargin-sm">
@@ -87,10 +87,10 @@ class="stretched"
 
                   <div class="team">
                     <div class="team-image">
-                      <img src="{% if refs.user.image %}{{refs.user.image.url}}{% else %}images/team/3.jpg{% endif %}" alt="John Doe">
+                      <img src="{% if refs.image %}{{refs.image.url}}{% else %}images/team/3.jpg{% endif %}" alt="John Doe">
                     </div>
                     <div class="team-desc">
-                      <div class="team-title"><h4>{{refs.user.fullname}}</h4><span>{{refs.user.gender}}</span></div>
+                      <div class="team-title"><h4>{{refs.fullname}}</h4><span>{{refs.gender}}</span></div>
                     </div>
                   </div>
 

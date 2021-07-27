@@ -20,6 +20,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 from .models import Services
 from .forms import ContactForm
+from django.template.loader import render_to_string
+
 
 User = get_user_model()
 
@@ -35,7 +37,7 @@ def home(request, *args, **kwargs):
     # get referrer linked to reffered using username
     username = str(kwargs.get("username"))
 
-    ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "")
+    ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "REMOTE_ADDR")
     services = Services.objects.all().filter(active=True)
 
     try:
@@ -45,21 +47,22 @@ def home(request, *args, **kwargs):
             response = requests.get("https://reallyfreegeoip.org/json/%s" % ip_address)
             request.session["geodata"] = response.json()
 
+        user = User.objects.get(username=username)
+        if user.is_field_worker:
+            request.session["fieldworker_id"] = user.id
+            user_ip = request.session["fieldworker_id"]
+            print("referral name: ", user_ip)
+
         geodata = request.session["geodata"]
         request.session["user_ip"] = geodata["ip"]
-        user_ip = request.session["user_ip"]
         request.session["country"] = geodata["country_name"]
         request.session["country_code"] = geodata["country_code"]
         request.session["region_name"] = geodata["region_name"]
         request.session["city"] = geodata["city"]
-
-        user = User.objects.get(username=username, is_field_worker=True)
-        request.session["fieldworker_id"] = user.id
-        fw_ref = request.session["fieldworker_id"]
     except:
         pass
 
-    if not "user_ip" in request.session:
+    if not request.session.get("user_ip"):
         messages.info(
             request,
             _(
@@ -67,21 +70,7 @@ def home(request, *args, **kwargs):
             ),
         )
 
-    return render(
-        request,
-        "pages/home.html",
-        {
-            # 'ip': geodata['ip'],
-            # 'country': geodata['country_name'],
-            # 'country_code': geodata['country_code'],
-            # 'region_name': geodata['region_name'],
-            # 'latitude': geodata['latitude'],
-            # 'longitude': geodata['longitude'],
-            # 'api_key': 'AIzaSyC1UpCQp9zHokhNOBK07AvZTiO09icwD8I',  # Don't do this! This is just an example. Secure your keys properly.
-            "is_cached": is_cached,
-            'services': services,
-        },
-    )
+    return render(request, "pages/home.html", {"is_cached": is_cached, "services": services})
 
 
 class ServiceListView(DetailView):

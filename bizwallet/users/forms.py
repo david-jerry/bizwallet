@@ -1,10 +1,12 @@
+from django.db.models import fields
 from allauth.account.forms import SignupForm
 from django.contrib.auth import forms as admin_forms
+from django.db import transaction
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django import forms
 
-from .models import FieldWorker, Investor
-
+from .models import NextOfKin, EnrollmentPlan, Subscribe, Profile
 User = get_user_model()
 
 
@@ -52,22 +54,62 @@ class UserCreationForm(admin_forms.UserCreationForm):
         }
 
 
-# class InvestorSignupForm(SignupForm):
-#     def save(self, request):
-#         user = super(InvestorSignupForm, self).save(request)
-#         investor_user = Investor(user=user, user_is_field_worker=False)
-#         investor_user.save()
+class InvestorSignupForm(SignupForm):
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.is_field_worker = False
+        user.save()
+        return user
 
-#         return investor_user.user
+
+class FieldWorkerSignupForm(SignupForm):
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.is_field_worker = True
+        user.save()
+        return user
 
 
-# class FieldWorkerSignupForm(SignupForm):
-#     def save(self, request):
-#         user = super(FieldWorkerSignupForm, self).save(request)
-#         fw_user = FieldWorker(user=user, user_is_field_worker=True)
-#         print("is working", fw_user)
-#         # user.is_field_worker=True
-#         # user.save()
-#         fw_user.save()
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            "account_number",
+            "bvn",
+            "bank_name"
+        ]
 
-#         return fw_user.user
+
+class KinForm(forms.ModelForm):
+    class Meta():
+        model = NextOfKin
+        fields = ['first_name', 'middle_name', 'last_name', 'image', 'gender', 'dob', 'phone_no', 'address']
+
+    @transaction.atomic
+    def save(self):
+        kin = super().save(commit=False)
+        kin.user = self.request.user
+        kin.save()
+        return kin
+
+
+
+class PlanForm(forms.ModelForm):
+    class Meta():
+        model = EnrollmentPlan
+        fields = ['title', "percentage", "invest", 'status', 'duration']
+
+
+class SubscribeForm(forms.ModelForm):
+    class Meta():
+        model = Subscribe
+        fields = ['bill']
+
+    @transaction.atomic
+    def save(self):
+        sub = super().save(commit=False)
+        sub.user = self.request.user
+        sub.save()
+        return sub

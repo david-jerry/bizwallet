@@ -93,7 +93,18 @@ maxminddb==2.0.3
 # ------------------------------------------------------------------------------
 readtime==1.1.1
 
-# Add webdriver for selenium use (web scraping)
+# Dynamic Scraper for django
+# ------------------------------------------------------------------------------
+# Scrapy is a fast high-level web crawling and web scraping framework, 
+# used to crawl websites and extract structured data from their pages. 
+# It can be used for a wide range of purposes, from data mining to 
+# monitoring and automated testing.
 # ------------------------------------------------------------------------------
 webdriver-manager==3.4.2
+lxml==4.6.3 
+scrapy-djangoitem==1.1.1
+word2word==1.0.0 
+requests-html==0.10.0
+django-filter==2.4.0 
+
 #Todo: Django Filter Search, Ajax Commenting, Language Integration, Cookie Consent

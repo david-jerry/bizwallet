@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Ayo Ogungbe - The President Bizwallet 2021' %} {{block.super|upper}}{% endblock title %}
+
+{% block desc %}{% trans 'Experienced Specialist with a demonstrated history of working in the oil & energy industry. Strong professional skilled in Gas, Petroleum, Analytical Skills, Technical Support, and Enterprise Software.' %}{% endblock %}
+
+{% block kw %}bizwallet, bizwallet group, bizwallet team, bizwallet experts, bizwallet limited, co-operative company{% endblock %}
+
+{% block body_class %}
+class="stretched"
+{% endblock %}
+
+{% block header %}
+	<!-- Page Title
+	============================================= -->
+	<section id="page-title">
+
+		<div class="container clearfix">
+			<h1>Mr. Ayo Ogungbe</h1>
+			<span>Experienced Specialist with the oil & energy industry.</span>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'about' %}">About Us</a></li>
+				<li class="breadcrumb-item active" aria-current="page">The President</li>
+			</ol>
+		</div>
+
+	</section><!-- #page-title end -->
+{% endblock %}
+
+{% block content %}
+<div class="fancy-title title-border">
+	<h3>Our President</h3>
+</div>
+
+<div class="row justify-content-center col-mb-50 mb-0">
+	<div class="col-sm-12 col-lg-12">
+		<div class="team">
+			<div class="team-image">
+				<img src="{% static 'images/team/president.jpeg' %}" alt="AYO OGUNGBE">
+			</div>
+			<div class="team-desc">
+				<div class="team-title"><h4>Ayo Ogungbe</h4><span>PRESIDENT</span></div>
+                <br>
+                <p>Experienced Specialist with a demonstrated history of working in the oil & energy industry. Strong professional skilled in Gas, Petroleum, Analytical Skills, Technical Support, and Enterprise Software.</p>
+				<a href="https://www.linkedin.com/in/ayo-ogungbe-26a80929" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
+					<i class="icon-linkedin"></i>
+					<i class="icon-linkedin"></i>
+				</a>
+				<a href="https://www.facebook.com/omohottest" class="social-icon inline-block si-small si-light si-rounded si-facebook">
+					<i class="icon-facebook"></i>
+					<i class="icon-facebook"></i>
+				</a>
+				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
+					<i class="icon-twitter"></i>
+					<i class="icon-twitter"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
