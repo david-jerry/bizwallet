@@ -11,7 +11,6 @@ from decimal import Decimal
 # Third partie imports
 from countries_plus.models import Country
 from dateutil import relativedelta
-from django.contrib.auth import get_user_model
 # django imports
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
@@ -41,9 +40,6 @@ from django_resized import ResizedImageField
 from model_utils.models import TimeStampedModel
 from tinymce.models import HTMLField
 
-User = get_user_model()
-
-
 # REGEX Expressions for validation
 SSN_REGEX = "^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4}\\d{4}$)"
 NUM_REGEX = "^[0-9]*$"
@@ -67,11 +63,10 @@ def services_image(instance, filename):
 
 
 class EmailSubscribe(TimeStampedModel):
-    user = OneToOneField(User, on_delete=SET_NULL, null=True, blank=True)
-    email = EmailField(_("Email Please"), required=True, blank=True, null=True)
+    email = EmailField(_("Email Please"), blank=True, null=True)
 
     def __str__(self):
-        return f"{self.user.fullname} just subscribed to the mailing list"
+        return f"{self.email} just subscribed to the mailing list"
 
     class Meta:
         managed = True

@@ -17,6 +17,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView
 from tinymce.views import render_to_image_list
 
 from bizwallet.users.forms import TestimonyForm
@@ -119,8 +120,10 @@ def contact_view(request):
             return redirect('home')
     return render(request, 'pages/contact.html', {'form': form})
 
+from django.contrib.messages.views import SuccessMessageMixin
 
-class UserEmailSubscribe(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+class UserEmailSubscribe(SuccessMessageMixin, CreateView):
 
     model = EmailSubscribe
     template_name = "snippets/footer.html"
