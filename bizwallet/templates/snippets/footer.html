@@ -29,6 +29,7 @@
 
 		<div class="subscribe-widget">
 			<form action="{% url 'services:subscribe' %}" method="post" class="mb-0">
+				{% csrf_token %}
 				<div class="input-group input-group-lg mx-auto" style="max-width:600px;">
 					<div class="input-group-prepend">
 						<div class="input-group-text"><i class="icon-email2"></i></div>
@@ -184,7 +185,7 @@
 							<div class="widget subscribe-widget clearfix">
 								<h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
 								<div class="widget-subscribe-form-result"></div>
-								<form id="widget-subscribe-form" action="include/subscribe.php" method="post" class="mb-0">
+								<form id="widget-subscribe-form" action="{% url 'services:subscribe' %}" method="POST" class="mb-0">
 									{% csrf_token %}
 									<div class="input-group mx-auto">
 										<div class="input-group-prepend">
