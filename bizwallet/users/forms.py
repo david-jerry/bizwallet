@@ -1,12 +1,13 @@
-from django.db.models import fields
 from allauth.account.forms import SignupForm
-from django.contrib.auth import forms as admin_forms
-from django.db import transaction
-from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
 from django import forms
+from django.contrib.auth import forms as admin_forms
+from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.db.models import fields
+from django.utils.translation import gettext_lazy as _
 
-from .models import NextOfKin, EnrollmentPlan, Subscribe, Profile, Testimonial
+from .models import EnrollmentPlan, NextOfKin, Profile, Subscribe, Testimonial
+
 User = get_user_model()
 
 
@@ -76,14 +77,6 @@ class TestimonyForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ["testimony"]
-
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user = self.request.user
-        user.save()
-        return user
-
 
 class ProfileForm(forms.ModelForm):
     class Meta:

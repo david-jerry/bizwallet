@@ -48,6 +48,7 @@ def home(request, *args, **kwargs):
         form = TestimonyForm(request.POST)
 
         if form.is_valid():
+            form.user = request.user
             form.save()
             return HttpResponseRedirect(reverse('home'))
             messages.success(request, "Your review has been submitted successfuly")
