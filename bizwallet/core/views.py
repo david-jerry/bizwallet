@@ -44,19 +44,6 @@ def home(request, *args, **kwargs):
     services = Services.objects.all().filter(active=True)
     testimonials = Testimonial.objects.filter(active=True).order_by("-created")[:5]
 
-    if request.method == 'POST':
-        form = TestimonyForm(request.POST)
-
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = request.user
-            form.save()
-            return HttpResponseRedirect(reverse('home'))
-            messages.success(request, "Your review has been submitted successfuly")
-            send_mail("New Testimonial Submitted", "Some Just submitted a new testimonial", "noreply@bizwallet.org", ['info@bizwallet.org'], fail_silently=False)
-    else:
-        form = TestimonyForm()
-
     try:
         is_cached = "geodata" in request.session
         # get user ip and get information of the user
@@ -86,6 +73,19 @@ def home(request, *args, **kwargs):
                 "Welcome to Bizwallet Co-Operative. Please feel free to communicate any challanges with the support team."
             ),
         )
+
+    if request.method == 'POST':
+        form = TestimonyForm(request.POST)
+
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+            messages.success(request, "Your review has been submitted successfuly")
+            send_mail("New Testimonial Submitted", "Some Just submitted a new testimonial", "noreply@bizwallet.org", ['info@bizwallet.org'], fail_silently=False)
+    else:
+        form = TestimonyForm()
 
     return render(request, "pages/home.html", {"form":form, "is_cached": is_cached, "services": services, "testimonials": testimonials})
 
