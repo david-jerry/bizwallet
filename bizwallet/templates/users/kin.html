@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Kin for - {{ user.username }} | {{ block.super }}{% endblock %}
+
+{% block body_class %}
+class="stretched"
+{% endblock %}
+
+{% block content %}
+<div class="row clearfix mt-5">
+    <div class="col-md-3">
+      {% if user == request.user %}
+      <div class="list-group">
+        <a href="{% url 'users:detail' user.username %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Profile</div><i class="icon-user"></i></a>
+        <a href="{% url 'users:update' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Update Profile</div><i class="icon-user"></i></a>
+        {% if not object.nextofkin %}
+        <a href="{% url 'users:kin' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Add Kin</div><i class="icon-users"></i></a>        
+        {% endif %}
+        <a href="{% url 'account_email' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Messages</div><i class="icon-envelope2"></i></a>
+        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Invest</div><i class="icon-credit-cards"></i></a>
+        {% if not object.has_paid %}
+        <a href="{% url 'users:subscribe' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Membership Subscription</div><i class="icon-credit-cards"></i></a>
+        {% endif %}
+        <a href="{% url 'account_change_password' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Settings</div><i class="icon-cog"></i></a>
+        <a href="{% url 'account_logout' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Logout</div><i class="icon-line2-logout"></i></a>
+        {% if object == request.user.is_superuser or object == request.user.is_staff %}
+        <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Logout</div><i class="icon-line2-logout"></i></a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="w-100 line d-block d-md-none"></div>
+  
+    <div class="col-md-9">
+        <h1>{{ user.username }}</h1>
+        <h3>ADD YOUR NEXT OF KIN</h3>
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'users:kin' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="button btn btn-primary">Add</button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

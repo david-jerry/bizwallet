@@ -6,10 +6,11 @@ from django.db.models import F
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+
 from bizwallet.utils.send_mass_html_mail import send_mass_html_mail
-from .models import Profile, Subscribe
 from bizwallet.utils.unique_slug_generator import unique_slug_generator
 
+from .models import Profile, Subscribe
 
 User = get_user_model()
 
@@ -59,14 +60,15 @@ def post_save_send_email(sender, instance, created, *args, **kwargs):
         obj.send_subscribed_mail()
 
 
-
-
-
-
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse_lazy
 
 
 @receiver(user_logged_in)
 def user_logged_in_(request, user, **kwargs):
+    if not user.has_paid:
+        HttpResponseRedirect(reverse_lazy("users:subscribe"))
+        
     user_ip = request.session.get("user_ip")
     # user_country = request.session.get("country")
     # user_country_code = request.session.get("country_code")

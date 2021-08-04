@@ -15,7 +15,7 @@ class UserChangeForm(admin_forms.UserChangeForm):
     class Meta(admin_forms.UserChangeForm.Meta):
         model = User
         fields = [
-            "username"
+            "username",
             # "first_name",
             # "last_name",
             # "username",
@@ -23,10 +23,10 @@ class UserChangeForm(admin_forms.UserChangeForm):
             # "phone_no",
             # "gender",
             # "dob",
-            # "marital",
+            "marital",
             # "phone_no",
             # "state",
-            # "address",
+            "address",
             # "accept_terms",
         ]
 
@@ -91,7 +91,16 @@ class ProfileForm(forms.ModelForm):
 class KinForm(forms.ModelForm):
     class Meta():
         model = NextOfKin
-        fields = ['first_name', 'middle_name', 'last_name', 'image', 'gender', 'dob', 'phone_no', 'address']
+        fields = [
+            'first_name', 
+            'middle_name', 
+            'last_name', 
+            'image', 
+            'gender', 
+            'dob', 
+            'phone_no', 
+            'address'
+        ]
 
     @transaction.atomic
     def save(self):
@@ -105,7 +114,13 @@ class KinForm(forms.ModelForm):
 class PlanForm(forms.ModelForm):
     class Meta():
         model = EnrollmentPlan
-        fields = ['title', "percentage", "invest", 'status', 'duration']
+        fields = [
+            'title', 
+            "percentage", 
+            "invest", 
+            'status', 
+            'duration'
+        ]
 
 
 class SubscribeForm(forms.ModelForm):
