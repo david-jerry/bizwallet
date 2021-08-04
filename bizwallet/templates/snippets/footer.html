@@ -65,6 +65,23 @@
 
 								<p>We believe in <strong>Stable</strong>, <strong>Dependable</strong> &amp; <strong>Financial</strong> power.</p>
 
+							</div>
+
+						</div>
+
+						<div class="col-md-4">
+
+							<div class="widget widget_links clearfix">
+
+								<h4>Quick Links</h4>
+
+								<ul>
+									{% if request.user.is_field_worker %}
+									<li><a href="{% url 'users:detail' request.user.username %}">Field Portal</a></li>
+									{% endif %}
+									<li><a href="{% url 'contact' %}">Support</a></li>
+								</ul>
+
 								<div style="background: url('{% static "images/world-map.png" %}') no-repeat center center; background-size: 100%;">
 									<address>
 										<strong>Headquarters:</strong><br>
@@ -77,27 +94,6 @@
 									<abbr title="Phone Number 3"><strong>Phone 3:</strong></abbr> (234) 704 998 7004<br>
 									<abbr title="Email Address"><strong>Email:</strong></abbr> info@bizwallet.org
 								</div>
-
-							</div>
-
-						</div>
-
-						<div class="col-md-4">
-
-							<div class="widget widget_links clearfix">
-
-								<h4>Quick Links</h4>
-
-								<ul>
-									<li><a href="https://codex.wordpress.org/">FAQ</a></li>
-									<li><a href="https://wordpress.org/support/forum/requests-and-feedback">Subscription</a></li>
-									{% if request.user.is_field_worker %}
-									<li><a href="https://wordpress.org/extend/plugins/">Field Portal</a></li>
-									{% endif %}
-									<li><a href="https://wordpress.org/support/">Support</a></li>
-									<li><a href="https://wordpress.org/extend/themes/">Investment Options</a></li>
-								</ul>
-
 							</div>
 
 						</div>
@@ -106,8 +102,8 @@
 
 							<div class="widget clearfix">
 								<h4>Recent Posts</h4>
-
-								<div class="posts-sm row col-mb-30" id="post-list-footer">
+								<p>None For now</p>
+								<!-- <div class="posts-sm row col-mb-30" id="post-list-footer">
 									<div class="entry col-12">
 										<div class="grid-inner row">
 											<div class="col">
@@ -152,7 +148,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 
 						</div>
