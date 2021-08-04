@@ -72,16 +72,7 @@
 						<div class="col-md-4">
 
 							<div class="widget widget_links clearfix">
-
-								<h4>Quick Links</h4>
-
-								<ul>
-									{% if request.user.is_field_worker %}
-									<li><a href="{% url 'users:detail' request.user.username %}">Field Portal</a></li>
-									{% endif %}
-									<li><a href="{% url 'contact' %}">Support</a></li>
-								</ul>
-
+								
 								<div style="background: url('{% static "images/world-map.png" %}') no-repeat center center; background-size: 100%;">
 									<address>
 										<strong>Headquarters:</strong><br>
