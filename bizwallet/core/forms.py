@@ -29,10 +29,3 @@ class EmailSubscribeForm(forms.ModelForm):
     class Meta:
         model = EmailSubscribe
         fields = ['email']
-
-    @transaction.atomic
-    def save(self):
-        form = super().save(commit=False)
-        form.user = self.request.user
-        form.save()
-        return form
