@@ -131,6 +131,7 @@ class UserEmailSubscribe(SuccessMessageMixin, CreateView):
     model = EmailSubscribe
     template_name = "snippets/footer.html"
     form_class = EmailSubscribeForm
+    success_url = reverse_lazy("home")
     success_message = _("Email successfully added to our email list")
 
     # def form_valid(self, form):
