@@ -48,6 +48,7 @@ def home(request, *args, **kwargs):
         form = TestimonyForm(request.POST)
 
         if form.is_valid():
+            form = form.save(commit=False)
             form.user = request.user
             form.save()
             return HttpResponseRedirect(reverse('home'))
@@ -122,20 +123,20 @@ def contact_view(request):
     return render(request, 'pages/contact.html', {'form': form})
 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 
 
 class UserEmailSubscribe(SuccessMessageMixin, CreateView):
 
     model = EmailSubscribe
     template_name = "snippets/footer.html"
-    fields = ["email"]
+    form_class = EmailSubscribeForm
     success_message = _("Email successfully added to our email list")
 
-    def get_success_url(self):
-        return self.request.user.get_absolute_url()  # type: ignore [union-attr]
-
-    def get_object(self):
-        return self.request.user
-
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.user = self.request.user
+    #     self.object.save()
+    #     return HttpResponseRedirect(self.get_success_url())
 
 email_subscribe = UserEmailSubscribe.as_view()
