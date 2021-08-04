@@ -3,13 +3,15 @@ from django.contrib import admin
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
 from django.urls import reverse
-from tinymce.widgets import TinyMCE
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from tinymce.widgets import TinyMCE
+
 from bizwallet.utils.export_as_csv import ExportCsvMixin
 
 from .forms import ServicesForm, ServicesVariationForm
-from .models import Services, ServicesVariations
+from .models import EmailSubscribe, Services, ServicesVariations
+
 
 class CustomFlatPageAdmin(FlatPageAdmin):
     """
@@ -87,3 +89,4 @@ admin.site.register(Services, ServicesAdmin)
 
 
 
+admin.site.register(EmailSubscribe)
