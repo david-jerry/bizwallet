@@ -81,7 +81,7 @@ def home(request, *args, **kwargs):
         messages.info(
             request,
             _(
-                "Welcome to Bizwallet Co-Operative. Please accept our consent form below as they enable us serve you better and securely."
+                "Welcome to Bizwallet Co-Operative. Please feel free to communicate any challanges with the support team."
             ),
         )
 
