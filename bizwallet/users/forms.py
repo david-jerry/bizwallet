@@ -102,12 +102,12 @@ class KinForm(forms.ModelForm):
             'address'
         ]
 
-    @transaction.atomic
-    def save(self):
-        kin = super().save(commit=False)
-        kin.user = self.request.user
-        kin.save()
-        return kin
+    # @transaction.atomic
+    # def save(self):
+    #     kin = super().save(commit=False)
+    #     kin.user = self.request.user
+    #     kin.save()
+    #     return kin
 
 
 
@@ -128,9 +128,9 @@ class SubscribeForm(forms.ModelForm):
         model = Subscribe
         fields = ['bill']
 
-    @transaction.atomic
-    def save(self):
-        sub = super().save(commit=False)
-        sub.user = self.request.user
-        sub.save()
-        return sub
+    # @transaction.atomic
+    # def save(self):
+    #     sub = super().save(commit=False)
+    #     sub.user = self.request.user
+    #     sub.save()
+    #     return sub

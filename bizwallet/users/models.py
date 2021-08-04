@@ -2,22 +2,19 @@ from __future__ import absolute_import
 
 # development system imports
 import datetime
-from django.utils import timezone
 import os
 import random
 import uuid
 from datetime import date, timedelta
 from decimal import Decimal
-from django.conf import settings
-from django.db.models.fields import BigIntegerField
-from django.core.mail import send_mail
-from django.template.loader import get_template
+
 # Third partie imports
 from countries_plus.models import Country
-from django_resized import ResizedImageField
 from dateutil import relativedelta
+from django.conf import settings
 # django imports
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db.models import (
     CASCADE,
@@ -39,15 +36,17 @@ from django.db.models import (
     URLField,
     UUIDField,
 )
-from django.template.loader import render_to_string
+from django.db.models.fields import BigIntegerField
+from django.template.loader import get_template, render_to_string
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
-from model_utils.models import TimeStampedModel
-from model_utils.fields import StatusField
+from django_resized import ResizedImageField
 from model_utils import Choices
-
+from model_utils.fields import StatusField
+from model_utils.models import TimeStampedModel
 from tinymce.models import HTMLField
+
 from bizwallet.core.models import Services
 
 # Developer defined imports
@@ -221,7 +220,6 @@ class User(AbstractUser):
     marital = CharField(
         _("Marital Status"), max_length=10, blank=True, null=True, choices=MARITAL
     )
-    plan = ForeignKey(EnrollmentPlan, on_delete=SET_NULL, null=True, blank=True, related_name="userplan")
     phone_no = CharField(_("Phone Number"), blank=True, null=True, max_length=13)
     country = CharField(_("User Country"), blank=False, null=True, max_length=50)
     city = CharField(_("Located City"), max_length=50, null=True, blank=True)
@@ -290,6 +288,7 @@ class User(AbstractUser):
 
 class Subscribe(TimeStampedModel):
     user = OneToOneField(User, on_delete=SET_NULL, null=True, blank=True)
+    plan = ForeignKey(EnrollmentPlan, on_delete=SET_NULL, null=True, blank=True, related_name="userplan")
     bill = DecimalField(
         _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
     )
@@ -297,7 +296,7 @@ class Subscribe(TimeStampedModel):
     approved = BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.fullname} subscribed for {self.user.plan.title} with {self.bill} for over {self.user.plan.duration} days"
+        return f"{self.user.fullname} subscribed for {self.plan.title} with {self.bill} for over {self.plan.duration} days"
 
 
     # check if user has paid for a subscription
@@ -314,7 +313,7 @@ class Subscribe(TimeStampedModel):
 
     def send_subscribed_mail(self):
         if self.subscribed:
-            html_ = render_to_string("email/subscribe_approve.html", {"fullname": f"{self.user.fullname}", "user_mail": f"{self.plan.title}"}, request=request)
+            html_ = render_to_string("email/subscribe_approve.html", {"fullname": f"{self.user.fullname}", "user_plan": f"{self.plan}"})
             subject = "1-Time Subscription Plan Started Successfully"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient = [self.user.email]

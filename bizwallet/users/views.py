@@ -95,10 +95,9 @@ class SubscribeView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return self.request.user.get_absolute_url()  # type: ignore [union-attr]
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        form.instance.user = self.request.user
+        form.instance.save()
+        return super().form_valid(form)
 
 subscribe_view = SubscribeView.as_view()
 
@@ -112,9 +111,8 @@ class KinCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return self.request.user.get_absolute_url()  # type: ignore [union-attr]
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        form.instance.user = self.request.user
+        form.instance.save()
+        return super().form_valid(form)
 
 kin_creation = KinCreateView.as_view()
