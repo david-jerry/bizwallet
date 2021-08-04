@@ -166,8 +166,8 @@ EMAIL_TIMEOUT=518400
 EMAIL_HOST='premium202.web-hosting.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT=465
-EMAIL_HOST_USER=env("EMAIL_HOST_USER", default='noreply@bizwallet.org')
-EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD", default="p@55word123.")
+EMAIL_HOST_USER=env("EMAIL_HOST_USER", default='user@mail.org')
+EMAIL_HOST_PASSWORD=env("EMAIL_HOST_PASSWORD", default="password")
 
 # django-compressor
 # ------------------------------------------------------------------------------

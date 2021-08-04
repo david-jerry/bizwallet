@@ -1,7 +1,8 @@
-from bizwallet.core.models import ServicesVariations, Services
 from django import forms
 from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
+
+from bizwallet.core.models import EmailSubscribe, Services, ServicesVariations
 
 
 class ContactForm(forms.Form):
@@ -21,3 +22,17 @@ class ServicesVariationForm(forms.ModelForm):
     class Meta:
         model = ServicesVariations
         fields = ['service', 'title', 'min_investment', "percentage", 'duration', 'active']
+
+
+class EmailSubscribeForm(forms.ModelForm):
+
+    class Meta:
+        model = EmailSubscribe
+        fields = ['email']
+
+    @transaction.atomic
+    def save(self):
+        form = super().save(commit=False)
+        form.user = self.request.user
+        form.save()
+        return form

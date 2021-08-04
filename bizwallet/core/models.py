@@ -10,8 +10,8 @@ from decimal import Decimal
 
 # Third partie imports
 from countries_plus.models import Country
-from django_resized import ResizedImageField
 from dateutil import relativedelta
+from django.contrib.auth import get_user_model
 # django imports
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
@@ -37,8 +37,11 @@ from django.db.models import (
 )
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django_resized import ResizedImageField
 from model_utils.models import TimeStampedModel
 from tinymce.models import HTMLField
+
+User = get_user_model()
 
 
 # REGEX Expressions for validation
@@ -62,6 +65,19 @@ def services_image(instance, filename):
         new_filename=new_filename, final_filename=final_filename
     )
 
+
+class EmailSubscribe(TimeStampedModel):
+    user = OneToOneField(User, on_delete=SET_NULL, null=True, blank=True)
+    email = EmailField(_("Email Please"), required=True, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.fullname} just subscribed to the mailing list"
+
+    class Meta:
+        managed = True
+        verbose_name = "Email Subscriber"
+        verbose_name_plural = "Email Subscribers"
+        ordering = ["-created", "-modified"]
 
 class Services(TimeStampedModel):
     """services in bizwallet."""

@@ -1,9 +1,5 @@
 from __future__ import absolute_import
 
-from django.http.response import HttpResponseRedirect
-from bizwallet.users.forms import TestimonyForm
-from bizwallet.users.models import Testimonial
-
 import json
 import os
 
@@ -11,21 +7,23 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.core.mail import EmailMessage, send_mail, send_mass_mail
+from django.core.mail import BadHeaderError, EmailMessage, send_mail, send_mass_mail
 from django.http import Http404, HttpResponse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
-from tinymce.views import render_to_image_list
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
-from .models import Services
-from .forms import ContactForm
-from django.template.loader import render_to_string
+from tinymce.views import render_to_image_list
 
+from bizwallet.users.forms import TestimonyForm
+from bizwallet.users.models import Testimonial
+
+from .forms import ContactForm, EmailSubscribeForm
+from .models import EmailSubscribe, Services
 
 User = get_user_model()
 
@@ -51,6 +49,8 @@ def home(request, *args, **kwargs):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('home'))
+            messages.success(request, "Your review has been submitted successfuly")
+            send_mail("New Testimonial Submitted", "Some Just submitted a new testimonial", "noreply@bizwallet.org", ['info@bizwallet.org'], fail_silently=False)
     else:
         form = TestimonyForm()
 
@@ -118,3 +118,20 @@ def contact_view(request):
                 # return HttpResponse('Invalid Header found')
             return redirect('home')
     return render(request, 'pages/contact.html', {'form': form})
+
+
+class UserEmailSubscribe(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = EmailSubscribe
+    template_name = "snippets/footer.html"
+    fields = ["email"]
+    success_message = _("Email successfully added to our email list")
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()  # type: ignore [union-attr]
+
+    def get_object(self):
+        return self.request.user
+
+
+email_subscribe = UserEmailSubscribe.as_view()

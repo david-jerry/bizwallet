@@ -28,13 +28,12 @@
 		</div>
 
 		<div class="subscribe-widget">
-			<div class="widget-subscribe-form-result"></div>
-			<form id="widget-subscribe-form2" action="include/subscribe.php" method="post" class="mb-0">
+			<form action="{% url 'services:subscribe' %}" method="post" class="mb-0">
 				<div class="input-group input-group-lg mx-auto" style="max-width:600px;">
 					<div class="input-group-prepend">
 						<div class="input-group-text"><i class="icon-email2"></i></div>
 					</div>
-					<input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+					<input type="email" required id="id_email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
 					<div class="input-group-append">
 						<button class="btn btn-secondary" type="submit">Subscribe Now</button>
 					</div>
