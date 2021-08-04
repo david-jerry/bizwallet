@@ -138,3 +138,8 @@ class ServicesVariations(TimeStampedModel):
         ordering = ["-created", "-modified"]
 
 
+
+
+# class Transactions(TimeStampedModel):
+#     service = ForeignKey(Services, on_delete=SET_NULL, null=True)
+#     amount_invested = 
