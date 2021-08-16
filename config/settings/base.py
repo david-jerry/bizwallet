@@ -557,3 +557,5 @@ APPEND_SLASH = True
 # COOKIE_CONSENT_NAME = "bizwallet_cookie_consent"
 # COOKIE_CONSENT_DECLINE = 0
 # COOKIE_CONSENT_ENABLED = lambda r: DEBUG or (r.user.is_authenticated() and r.user.is_field_worker and r.user.is_staff)
+# PAYSTACK_PUB_API_KEY = ""
+# PAYSTACK_SEC_API_KEY = ""
