@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_dashboard.html" %}
 {% load i18n static %}
 
 {% block title %}{% if object.is_field_worker and not object.is_superuser %}FieldWorker:{% elif object.is_superuser and object.is_field_worker %}Admin:{% else %}User:{% endif %} {{ object.fullname }} - {{block.super|upper}}{% endblock title %}
@@ -7,153 +7,289 @@
 
 {% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
 
-{% block body_class %}
-class="stretched"
-{% endblock %}
 
 {% block content %}
-<div class="row clearfix mt-5">
-  <div class="col-md-3">
-    {% if object == request.user %}
-    <div class="list-group">
-      <a href="{% url 'users:update' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Update Profile</div><i class="icon-user"></i></a>
-      {% if not object.nextofkin %}
-      <a href="{% url 'users:kin' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Add Kin</div><i class="icon-users"></i></a>        
-      {% endif %}
-      <a href="{% url 'account_email' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Messages</div><i class="icon-envelope2"></i></a>
-      <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Invest</div><i class="icon-credit-cards"></i></a>
-      {% if not object.has_paid %}
-      <a href="{% url 'users:subscribe' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Membership Subscription</div><i class="icon-credit-cards"></i></a>
-      {% endif %}
-      <a href="{% url 'account_change_password' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Settings</div><i class="icon-cog"></i></a>
-      <a href="{% url 'account_logout' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Logout</div><i class="icon-line2-logout"></i></a>
-      {% if object == request.user.is_superuser or object == request.user.is_staff %}
-      <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action d-flex justify-content-between"><div>Logout</div><i class="icon-line2-logout"></i></a>
-      {% endif %}
+
+<div class="row">
+  <div class="col-xl-8 mb-5 mb-xl-0">
+    <div class="card bg-gradient-default shadow">
+      <div class="card-header bg-transparent">
+        <div class="row align-items-center">
+          <div class="col">
+            <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+            <h2 class="text-white mb-0">Sales value</h2>
+          </div>
+          <div class="col">
+            <ul class="nav nav-pills justify-content-end">
+              <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="₦" data-suffix="k">
+                <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
+                  <span class="d-none d-md-block">Month</span>
+                  <span class="d-md-none">M</span>
+                </a>
+              </li>
+              <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="₦" data-suffix="k">
+                <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
+                  <span class="d-none d-md-block">Week</span>
+                  <span class="d-md-none">W</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- Chart -->
+        <div class="chart">
+          <!-- Chart wrapper -->
+          <canvas id="chart-sales" class="chart-canvas"></canvas>
+        </div>
+      </div>
     </div>
-    {% endif %}
   </div>
-  <div class="w-100 line d-block d-md-none"></div>
-  <div class="col-md-9">
-
-    <img src="{% if object.image %}{{object.image.url}}{% else %}{% static 'images/team/7.jpg' %}{% endif %}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar" style="max-width: 84px;">
-
-    <div class="heading-block border-0">
-      <h3>{{object.fullname}}</h3>
-      <span style="font-weight: 600; font-size: 1rem; color:grey;">{% if object.is_field_worker and not object.is_superuser %}Referral Link: <a href="{% url 'ref-home' object.username %}"><code>https://www.bizwallet.org{% url 'ref-home' object.username %}</code></a>{% else %}{{object.balance}}{% endif %}</span>
-    </div>
-
-    <div class="clear"></div>
-
-    <hr>
-
-    <div class="row clearfix">
-      <div class="heading-block border-0 col-md-12">
-        <h4>PERSONAL INFORMATION</h4>
+  <div class="col-xl-4">
+    <div class="card shadow">
+      <div class="card-header bg-transparent">
+        <div class="row align-items-center">
+          <div class="col">
+            <h6 class="text-uppercase text-muted ls-1 mb-1">Deposits</h6>
+            <h2 class="mb-0">Total Deposits</h2>
+          </div>
+        </div>
       </div>
-
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">Marital: </span> {{object.marital}}</p>
-      </div>
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">Gender: </span> {{object.gender}}</p>
-      </div>
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">DOB: </span> {{object.dob}}</p>
-      </div>
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">Accepted Terms: </span> {{object.accept_terms}}</p>
-      </div>
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">Company: </span> {{object.company}}</p>
-      </div>
-      <div class="col-md-4">
-        <p><span class="font-weight-bolder text-color color">Occupation: </span> {{object.occupation}}</p>
+      <div class="card-body">
+        <!-- Chart -->
+        <div class="chart">
+          <canvas id="chart-orders" class="chart-canvas"></canvas>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="clear"></div>
 
-    <hr>
 
-    <div class="row clearfix">
 
-      <div class="heading-block border-0 col-md-12">
-        <h4>CO-OPERATIVE INFORMATION</h4>
+
+<div class="row mt-5">
+  <div class="col-xl-8 mb-5 mb-xl-0">
+    <div class="card shadow">
+      <div class="card-header border-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <h3 class="mb-0">Page visits</h3>
+          </div>
+          <div class="col text-right">
+            <a href="#!" class="btn btn-sm btn-primary">See all</a>
+          </div>
+        </div>
       </div>
-
-      <div class="col-lg-12">
-
-        <div class="tabs tabs-alt clearfix" id="tabs-profile">
-
-          <ul class="tab-nav clearfix">
-            <li><a href="#tab-investments"><i class="icon-wallet"></i> Investments</a></li>
-            {% if object.is_field_worker %}
-            <li><a href="#tab-connections"><i class="icon-users"></i> Referral List</a></li>
-            {% endif %}
-          </ul>
-
-          <div class="tab-container">
-
-            <div class="tab-content clearfix" id="tab-investments">
-
-              <p>Track your Investments here. Get updated information of their expiry and renewal.</p>
-
-              <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Dates</th>
-                  <th>Investment Option</th>
-                  <th>Investment Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>
-                  <code>5/23/2021</code>
-                  </td>
-                  <td>Payment for VPS2 completed</td>
-                  <td>N {{object.balance}}</td>
-                </tr>
-                </tbody>
-              </table>
-
-            </div>
-            {% if object.is_field_worker %}
-            <div class="tab-content clearfix" id="tab-connections">
-
-              <div class="row topmargin-sm">
-                {% for refs in my_recs %}
-                <div class="col-lg-3 col-md-6 {% if not forloop.last %}bottommargin{% endif %}">
-
-                  <div class="team">
-                    <div class="team-image">
-                      <img src="{% if refs.image %}{{refs.image.url}}{% else %}images/team/3.jpg{% endif %}" alt="John Doe">
-                    </div>
-                    <div class="team-desc">
-                      <div class="team-title"><h4>{{refs.fullname}}</h4><span>{{refs.gender}}</span></div>
+      <div class="table-responsive">
+        <!-- Projects table -->
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Page name</th>
+              <th scope="col">Visitors</th>
+              <th scope="col">Unique users</th>
+              <th scope="col">Bounce rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                /argon/
+              </th>
+              <td>
+                4,569
+              </td>
+              <td>
+                340
+              </td>
+              <td>
+                <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                /argon/index.html
+              </th>
+              <td>
+                3,985
+              </td>
+              <td>
+                319
+              </td>
+              <td>
+                <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                /argon/charts.html
+              </th>
+              <td>
+                3,513
+              </td>
+              <td>
+                294
+              </td>
+              <td>
+                <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                /argon/tables.html
+              </th>
+              <td>
+                2,050
+              </td>
+              <td>
+                147
+              </td>
+              <td>
+                <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                /argon/profile.html
+              </th>
+              <td>
+                1,795
+              </td>
+              <td>
+                190
+              </td>
+              <td>
+                <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="card shadow">
+      <div class="card-header border-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <h3 class="mb-0">Social traffic</h3>
+          </div>
+          <div class="col text-right">
+            <a href="#!" class="btn btn-sm btn-primary">See all</a>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <!-- Projects table -->
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Referral</th>
+              <th scope="col">Visitors</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                Facebook
+              </th>
+              <td>
+                1,480
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">60%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
                     </div>
                   </div>
-
                 </div>
-                {% empty %}
-                No Referals Yet
-                {% endfor %}
-              </div>
-
-            </div>
-            {% endif %}
-          </div>
-
-        </div>
-
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Facebook
+              </th>
+              <td>
+                5,480
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">70%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Google
+              </th>
+              <td>
+                4,807
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">80%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Instagram
+              </th>
+              <td>
+                3,678
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">75%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                twitter
+              </th>
+              <td>
+                2,645
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <span class="mr-2">30%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
     </div>
-
   </div>
-
 </div>
+
 {% endblock content %}
 
 {% block inline_javascript %}

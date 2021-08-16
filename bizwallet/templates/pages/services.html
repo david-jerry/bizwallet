@@ -7,33 +7,248 @@
 
 {% block kw %}{{services.title}} bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
 
-{% block body_class %}
-class="stretched"
-{% endblock %}
-
-
 
 {% block header %}
-<!-- Page Title
-============================================= -->
-<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{{services.image.url}}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
-
-    <div class="container clearfix">
-        <h1>{{services.title}}</h1>
-        <span>{{services.description|safe|truncatewords:12}}</span>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{services.title}}</li>
-        </ol>
+<div class="container">
+    <div class="row justify-content-between align-items-end">
+        <div class="col-md-8">
+            <h2 class="display-4 text-dark fw-semibold ls--2">Know our wide range of <span>Innovative Solutions</span>.</h2>
+            <p class="text-dark mb-0">
+                With our innovative solutions we aim to provide civil servants and none civil servants the ability to lead a comfortable life whilst earning just enough or little.
+            </p>
+        </div>
+        <div class="col-md-3 text-md-end">
+            <a href="" class="button button-rounded button-large m-0 center fw-medium nott ls0 fw-normal">Don't Loose
+                Out</a>
+        </div>
     </div>
 
-</section><!-- #page-title end -->
-{% endblock %}
-
-{% block content %}
-<div class="row col-mb-50 mt-5 mb-0">
-    <div class="col-12">
-        {{services.description|safe}}
-    </div>
+    <img data-src="{% static 'images/services/gold.jpg' %}" alt="Image" class="rounded-4 my-5 lazy">
 </div>
 {% endblock %}
+
+
+{% block content %}
+<div class="section">
+    <div class="container">
+
+        <div class="row flex-row-reverse mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">VMT</div>
+                    <h2 class="nott fw-semibold mb-4">Value Market Trading</h2>
+                    <p>
+                        With trade and marketing today, we can all agree that it is products/goods and services, exchange and investment.
+
+                        When you observe the market place and review what happens between the buyers and the marketers, it will shock to note that they do not include the buyers when rendering services. Meanwhile, without the buyers, these marketers will go hungry.
+                        
+                        Considering this we have provided a solution to offer our esteemed members a solution we call <span class="color">VALUE MARKET TRADE</span> which put their interest into significant consideration.
+                        
+                        In our VMT community, a buyer will earn a car, houses, a truck and lots more for just buying from us over time! Just as the name implies, we designed this market to assist our members that are into the business of buying and selling of legally approved commodities and services.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/vmt.png' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+<div class="section bg-transparent">
+    <div class="container">
+
+        <div class="row mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">BWC</div>
+                    <h2 class="nott fw-semibold mb-4">Bizwallet Contribution</h2>
+                    <p>
+                        You can earn 10-50% from your contributed funds, which means, as a member of Bizwallet Cooperative you can choose to contribute your funds either weekly or monthly and receive back your money after 12 months with additional interest based on the package chosen by you! 
+                        <ul>
+                            <li>Gold members will earn 25%</li>
+                            <li>Platinum members will earn 30%</li>
+                            <li>VIP members will earn 35%,</li>
+                            <li>VVIP members will earn 40%</li>
+                        </ul>
+
+                        <em class="color"><b>Your earnings depend on the package chosen by you.</b> </em>
+                        
+                        <br>
+
+                        Our cooperative in these regards is unique because you can gain more properties through weekly/monthly contributions and achieve more! Interestingly, our cooperative will collectively assist you to pay off 50% for you if you so desire. You can read more under properties acquisition made easier.
+
+                        You can convert your contributed funds for a property which you really need.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/contribution.png' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<div class="section">
+    <div class="container">
+
+        <div class="row flex-row-reverse mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">Empowerment</div>
+                    <h2 class="nott fw-semibold mb-4">My Biz Empower</h2>
+                    <p>
+Receive money to support your existing business every three months and....read more.
+
+It will interest you to know that, when you are in business knowing that there is always a place to access funds with little protocols to grab an opportunity of buying cheaper to sell higher!
+
+Business strive faster especially when there is financial backup whenever the need arises.
+
+My Biz Empower is a package prepared by BizWallet Cooperative to support our members that are already in business.
+
+Members receive this support accordingly to what they can handle to enable them sprout. Interested members in this package will ensure that their businesses has a location and equally can deliver results. Approach BizWallet if you already have have an existing business that needs support!
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/empowerment.png' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+<div class="section bg-transparent">
+    <div class="container">
+
+        <div class="row mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">PAME</div>
+                    <h2 class="nott fw-semibold mb-4">Property Aquisition Made Easy</h2>
+                    <p>
+                        BizWallet cooperative has its members at heart which is a reason the cooperative introduced (PAME).
+                        <br>
+                        Realising how important it is to for any reasonable human who is struggling for ends meet to own properties of their own, properties such as lands, house, cars, or buses, to continue living. Our cooperative knowing that it is imperative to have a structure that will assist our members to gain properties with fewer struggles!
+                        <br>
+                        With these in mind, we entered a strong partnership with some real estate companies to enable us have more plots of land these makes it possible for most of our members in need of land to gain them through monthly contributions stretches into two or three years.
+                        <br>
+                        For our members that has gain land already but needed support to develop them, we step in to action by moving into the site after reaching a concrete agreement with such member such that within a year interval such honorable member can move into his house, escaping the rent payment issues while he clear up the building payment through monthly contributions!
+                        <br>
+                        Our cooperative is truly unique because our members are now using my Biz Payback returns to gain more properties as they so desire. Through PAME you can gain more properties by paying only 50% the worth of such properties!
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/pame.png' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<div class="section">
+    <div class="container">
+
+        <div class="row flex-row-reverse mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">ESPOL</div>
+                    <h2 class="nott fw-semibold mb-4">Entrepreneurial Support To People's Out-let </h2>
+                    <p>
+                        In our society today, we can see clearly that the majority amongst the poor in many African countries have some ideas and talents that are just wasting away! It is an undeniable fact that if we train this majority on how to put their ideas, skills and talents into good use, there will surely be positive growth in our economy, thus helping to reduce crimes and other vices in our society today.
+                        <br>
+                        ESPOL major aim is to assist in training and equally and supporting its participants financially to enable them start up business in their area of interest. It also points out to its participants those things around them that can transform them into millionaires in their various areas.
+                        <br>
+                        ESPOL also encourage its participants to team up as starters while they maintain their individual focus which will surely come on board moment the teamed up business generates proceeds.
+                        <br>
+                        At the end of the program, we will reward participants:
+                        <br>
+                        Class "A" will receive 1million naira x two.
+                        <br>
+                        Class "B" will receive 500,000 x two.
+                        <br>
+                        Class "C" will receive 250,000 x two.
+                        <br>
+                        Subsequently, all those that received the training from ESPOL shall be invited to showcase their talents to the world, thus helping others to learn how to get out of financial poor state.
+                        <br>
+                        Finally, the best 10 amongst the participants who showcased their new skills, will be rewarded at the end of the show tagged "Africa what we should do".
+                        <br>
+                        <br>
+                        
+                        
+                        
+                        <em>PS: this is a yearly program for ESPOL participants. </em>                   </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/entrepreneur.jpg' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+<div class="section bg-transparent">
+    <div class="container">
+
+        <div class="row mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">Payback</div>
+                    <h2 class="nott fw-semibold mb-4">My Biz Payback</h2>
+                    <p>
+                        Just as the name implies, it will entitle here a member who choose to contribute into My Biz Payback to receive 10% of his or her contributed funds ranging from ₦ 50,000 - ₦ 1.5 million naira monthly or annually!
+                        <br>
+                        In this package you could choose Gold or Diamond.
+
+Gold plan members will receive 10% every month and at the end of the year his/her capital returns to the Biz Payback member and if such member wishes to continue, he/she can roll over his or her contributed funds.
+                        <br>
+                        Diamond plan member will receive his/her capital back at the end of the year plus addition of 180% interest making it 280% total. The member can choose to roll over his/her contributed funds to continue earning on the package.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/payback.jpg' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<div class="section mb-0">
+    <div class="container">
+
+        <div class="row flex-row-reverse mb-5 gutter-lg-50 align-items-center">
+            <div class="col-lg-6 p-lg-5">
+                <div class="heading-block border-bottom-0 mb-0">
+                    <div class="before-heading">Agro</div>
+                    <h2 class="nott fw-semibold mb-4">My Agro Payback</h2>
+                    <p>
+                        My Agro Payback is an interesting package whereby a member who wish to earn over 15% yield on monthly basis can receive training from our team of experts who QUALIFIED to train you on how to generate money around and within your environment by your self.
+                        <br>
+                        Majority of our members are already receiving training on this package and the interesting part of this package is that it enables the member to manage his or her resources without entrusting his or her contributed funds under someone else's care.
+                        <br>
+                        You can be part of this program from anywhere around the globe paying no flight ticket and you can even do better based on your environment.
+
+                        When you are thinking of a business that can pay 15% and above on a monthly basis please think of My Agro Payback which is a business you can manage by yourself even if you are currently on a white-collar job, you can do it by employing workers around you that will do the job for you while you make your returns on monthly basis.                </div>
+            </div>
+            <div class="col-lg-6 p-lg-5">
+                <img class="lazy" data-src="{% static 'services/agro.png' %}" alt="Image">
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock content %}

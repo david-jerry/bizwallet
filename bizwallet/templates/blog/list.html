@@ -1,0 +1,184 @@
+{% extends "blog/base.html" %}
+{% load static humanize i18n %}
+
+{% block blog_title %}
+  {{ block.super }}
+{% endblock blog_title %}
+
+{% block header %}
+{{ block.super }}
+{% endblock header %}
+
+{% block blog_content %}
+<div id="posts" class="post-grid row grid-container gutter-30 mt-4">
+    {% for post in posts %}
+    <div class="entry col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="grid-inner">
+            {% if post.url %}
+            <div class="entry-image">
+                <a href="{{post.url}}" class="entry-link" target="_blank">
+                    {{post.url}}
+                    <span>- {{post.url}}</span>
+                </a>
+            </div>
+            {% elif post.videos %}
+            <video class="entry-image" poster="{% static 'images/logo@2x.png' %}" preload="auto" loop autoplay muted style="display: block; width: 100%;">
+                <source src='{{post.videos.url}}' type='application/mp4, video/mp4, video/mpeg, video/webm, audio/webm' />
+            </video>
+            <div class="entry-title">
+                <h2><a href="{{post.get_absolute_url}}">{{post.title|title}}</a></h2>
+            </div>
+            {% elif post.image_set %}
+            <div class="entry-image">
+                <div class="portfolio-single-image masonry-thumbs grid-container grid-4" data-big="3" data-lightbox="gallery">
+                    {% for image in post.image_set.all %}
+                    <a class="grid-item" href="{{image.image.url}}" data-lightbox="gallery-item"><img data-src="{{image.image.url}}" class="lazy" alt="Image"></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="entry-title">
+                <h2><a href="{{post.get_absolute_url}}">{{post.title|title}}</a></h2>
+            </div>
+            {% endif %}
+            <div class="entry-meta mb-0">
+                <ul>
+                    <li><i class="icon-calendar3"></i> {{post.pub_date}}</li>
+                </ul>
+            </div>
+            {% if not post.url %}
+            <div class="entry-content mt-0">
+                <p>{{post.content|safe|truncatewords:30}}</p>
+                <a href="{{post.get_absolute_url}}" class="more-link">Read More</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}  
+    <div class="entry col-12">
+        <div class="grid-inner">
+            <div class="entry-image">
+                <a href="{% url 'home' %}" class="entry-link">
+                    BIZWALLET.ORG
+                    <span>- No Post Yet</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div><!-- #posts end -->
+
+<div class="page-load-status">
+    <div class="css3-spinner infinite-scroll-request">
+        <div class="css3-spinner-ball-pulse-sync">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="alert alert-warning center infinite-scroll-last mx-auto" style="max-width: 20rem;">End of content</div>
+    <div class="alert alert-warning center infinite-scroll-error mx-auto" style="max-width: 20rem;">No more pages to load</div>
+</div>
+
+<!-- Pagination
+============================================= -->
+<div class="center d-none">
+    <a href="blog-masonry-page-2.html" class="button button-3d button-dark button-large button-rounded load-next-posts">Load more..</a>
+</div>
+
+{% endblock blog_content %}<div class="col-md-8">
+    <main class="l-main-content">
+        <div class="posts-group-2">
+            <!-- end .post-->
+            {% for post in posts %}
+            <!-- end .b-banner-->
+            {% if not post.url %}
+            <section class="b-post b-post-full clearfix">
+                <div class="entry-media">
+                    {% if post.image_set %}
+                    <div class="owl-carousel owl-theme owl-theme_mod-arrs enable-owl-carousel" data-pagination="false" data-navigation="true" data-items="1" data-auto-play="7000" data-transition-style="fade" data-main-text-animation="true" data-after-init-delay="3000" data-after-move-delay="1000"
+                    data-stop-on-hover="true">
+                        {% for image in post.image_set.all %}
+                        <img loading="lazy"  class="img-responsive" src="{{image.image.url}}" alt="{{post.title}}" />
+                        {% endfor %}
+                    </div>
+                    {% elif post.video %}
+                    <video poster="{% static 'images/bg-3.jpg' %}" preload="auto" loop autoplay muted
+                      style="display: block; width: 100%;">
+                      <source src='{{post.videos.url}}'
+                        type='application/mp4, video/mp4, video/mpeg, video/webm, audio/webm' />
+                    </video>
+                    {% endif %}
+                </div>
+                <div class="entry-main">
+                    <div class="entry-meta">
+                        <div class="entry-meta__group-left"><span class="entry-meta__item">Post by <a class="entry-meta__link" href="{{post.author.get_absolute_url}}"> {{post.author}}</a></span> <span class="entry-meta__item">On <a class="entry-meta__link" href="{{post.get_absolute_url}}"> {{post.pub_date|naturalday}}</a></span>
+                            {% for tag in post.tags.all %}<span class="entry-meta__categorie bg-primary">{{tag.title}}</span>{% endfor %}
+                        </div>
+                        <div class="entry-meta__group-right"><span class="entry-meta__item"><i class="icon fa fa-heart"></i><a class="entry-meta__link" href="blog-main.html"> 205</a></span><span class="entry-meta__item"><i class="icon fa fa-comment-o"></i>Comments<a class="entry-meta__link" href="blog-main.html"> 518</a></span>
+                        </div>
+                    </div>
+                    <div class="entry-header">
+                        <h2 class="entry-title"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+                    </div>
+                    <div class="entry-content">
+                        {{post.content|truncatewords:40|safe}}
+                    </div>
+                    <div class="entry-footer"><a class="btn btn-default" href="{{post.get_absolute_url}}">read more</a>
+                    </div>
+                </div>
+            </section>
+            {% elif post.url %}
+            <div class="b-bnr-3">
+                <div class="b-bnr-3__title"><a href="{{post.url}}">{{post.title}}</a></div>
+                <div class="b-bnr-3__info"><span class="b-bnr-3__info-item">Post by {{post.author}}</span><span class="b-bnr-3__info-item">On {{post.pub_date|naturalday}}</span>{% for tag in post.tags.all %}<a class="btn btn-primary" href="{% url 'blogs:posts_by_tag' tag.slug %}">{{tag.title}}</a>{% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- end .post-->
+            {% empty %}
+            <div class="b-bnr-3">
+                <div class="b-bnr-3__title">We offers the lowest car prices</div>
+                <div class="b-bnr-3__info"><span class="b-bnr-3__info-item">No Posts Yet</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if is_paginated %}
+        <ul class="pagination text-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{page_obj.previous_page_number}}"><i class="icon fa fa-angle-double-left"></i></a>
+            </li>
+            {% else %}
+            <li class="disabled"><a><i class="icon fa fa-angle-double-left"></i></a>
+            </li>
+            {% endif %}
+
+            {% if page_obj.number|add:'-4' > 1 %}
+            <li><a href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a>
+            </li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %} 
+            {% if page_obj.number == i %}
+            <li class="active"><a>{{ i }}</a></li>
+            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+            <li><a href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li><a href="?page={{page_obj.next_page_number}}"><i class="icon fa fa-angle-double-right"></i></a>
+            </li>
+            {% else %}
+            <li class="disabled"><a><i class="icon fa fa-angle-double-right"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </main>
+</div>

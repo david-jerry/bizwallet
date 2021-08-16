@@ -8,56 +8,39 @@
 {% block kw %}bizwallet, bizwallet group, bizwallet team, bizwallet experts, bizwallet limited, co-operative company{% endblock %}
 
 {% block body_class %}
-class="stretched"
+class="stretched page-transition"
 {% endblock %}
 
 {% block header %}
-	<!-- Page Title
-	============================================= -->
-	<section id="page-title">
+<div class="container">
+    <div class="row justify-content-between align-items-end">
+        <div class="col-md-8">
+            <h2 class="display-4 text-dark fw-semibold ls--2">Know our president <br> <span>Mr. Ben Jason</span>.</h2>
+            <p class="text-dark mb-0">
+                Experienced Specialist with a demonstrated history of working in the oil & energy industry. Strong professional skilled in Gas, Petroleum, Analytical Skills, Technical Support, and Enterprise Software.
+            </p>
+        </div>
+        <div class="col-md-3 text-md-end">
+            <a href="https://www.linkedin.com/in/ayo-ogungbe-26a80929" class="button button-rounded button-large m-0 center fw-medium nott ls0 fw-normal">Contact</a>
+        </div>
+    </div>
 
-		<div class="container clearfix">
-			<h1>Mr. Ben Johnson</h1>
-			<span>Experienced Specialist with the oil & energy industry.</span>
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-				<li class="breadcrumb-item"><a href="{% url 'about' %}">About Us</a></li>
-				<li class="breadcrumb-item active" aria-current="page">The President</li>
-			</ol>
-		</div>
-
-	</section><!-- #page-title end -->
+    <img data-src="{% static 'images/team/president.jpeg' %}" alt="Image" class="rounded-4 my-5 lazy">
+</div>
 {% endblock %}
 
 {% block content %}
-<div class="fancy-title title-border">
-	<h3>Our President</h3>
-</div>
-
-<div class="row justify-content-center col-mb-50 mb-0">
-	<div class="col-sm-12 col-lg-12">
-		<div class="team">
-			<div class="team-image">
-				<img src="{% static 'images/team/president.jpeg' %}" alt="Mr. Ben Johnson">
-			</div>
-			<div class="team-desc">
-				<div class="team-title"><h4>Mr. Ben Johnson</h4><span>PRESIDENT</span></div>
-                <br>
-                <p>Experienced Specialist with a demonstrated history of working in the oil & energy industry. Strong professional skilled in Gas, Petroleum, Analytical Skills, Technical Support, and Enterprise Software.</p>
-				<a href="https://www.linkedin.com/in/ayo-ogungbe-26a80929" class="social-icon inline-block si-small si-light si-rounded si-linkedin">
-					<i class="icon-linkedin"></i>
-					<i class="icon-linkedin"></i>
-				</a>
-				<a href="https://www.facebook.com/omohottest" class="social-icon inline-block si-small si-light si-rounded si-facebook">
-					<i class="icon-facebook"></i>
-					<i class="icon-facebook"></i>
-				</a>
-				<a href="#" class="social-icon inline-block si-small si-light si-rounded si-twitter">
-					<i class="icon-twitter"></i>
-					<i class="icon-twitter"></i>
-				</a>
-			</div>
-		</div>
-	</div>
+<div class="section mb-0 pb-0 bg-theme-light clearfix" style="padding-top: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-1">
+                <div class="before-heading">Don't Hesitate to Reach out to Us</div>
+                    <h2 class="nott fw-semibold display-4">Want to Talk?</h2>
+                <h4 class="fw-light mb-4">Call us at <a href="tel:+(61)8-234-532-45">+(61)8-234-532-45</a></h4>
+                <a href="{% url 'contact' %}" class="button button-rounded button-xlarge m-0 nott fw-semibold ls0 px-5">Mail Us</a>
+            </div>
+        </div>
+    </div>
+    <img src="{% static 'demos/coworking/images/footer-bg.jpg' %}" alt="Footer Image" class="footer-img">
 </div>
 {% endblock %}

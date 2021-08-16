@@ -122,6 +122,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     # Cookie consent
     "cookielaw",
+    "category",
     # "cookie_consent",
     # WYSWIC TEXT EDITOR
     # "filebrowser",
@@ -138,6 +139,7 @@ LOCAL_APPS = [
     "bizwallet.users.apps.UsersConfig",
     "bizwallet.core.apps.CoreConfig",
     # Your stuff: custom apps go here
+    "bizwallet.blog.apps.BlogConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_ADMIN + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -278,6 +280,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "bizwallet.utils.context_processors.settings_context",
+                "bizwallet.utils.context_processors.recent_posts",
                 "bizwallet.core.core_processors.all_services",
                 "bizwallet.core.core_processors.all_users",
                 "bizwallet.core.core_processors.all_field_users",
@@ -324,7 +327,7 @@ CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
-X_FRAME_OPTIONS = "DENY"
+X_FRAME_OPTIONS = "SAMESITE"
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
 
@@ -521,23 +524,30 @@ HTML_MINIFY = True
 EXCLUDE_FROM_MINIFYING = ("/admin/*", "/jet/*", "/jet/dashboard/*")
 KEEP_COMMENTS_ON_MINIFYING = True
 
+# TINYMCE_JS_URL = str(APPS_DIR / "static/tinymce/tinymce.min.js") # "https://bizwallet-bucket.s3.amazonaws.com/static/tinymce/tinymce.min.js" #str(APPS_DIR / "/static/tinymce/tinymce.min.js")
+# TINYMCE_JS_ROOT = str(APPS_DIR / "static/tinymce")  # "https://bizwallet-bucket.s3.amazonaws.com/static/tinymce" #str(APPS_DIR / "/static/tinymce")
 TINYMCE_JS_URL = "https://bizwallet-bucket.s3.amazonaws.com/static/tinymce/tinymce.min.js" #str(APPS_DIR / "/static/tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = "https://bizwallet-bucket.s3.amazonaws.com/static/tinymce" #str(APPS_DIR / "/static/tinymce")
 TINYMCE_DEFAULT_CONFIG = {
     "theme": "silver",
+    "width": "100%",
+    'relative_urls': False,
     "height": 500,
-    "menubar": True,
+    "menubar": False,
     "statusbar": True,
     "selector": "textarea",
     "content_css": "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
-    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
-    "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
+    "plugins": "a11ychecker,advcode,advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+    "searchreplace,visualblocks,code,fullpage,fullscreen,insertdatetime,media,table,tabfocus,paste,"
     "code,help,wordcount",
-    "toolbar": "undo redo | formatselect | "
+    "toolbar": "undo redo | formatselect | code"
     "bold italic backcolor | alignleft aligncenter "
     "alignright alignjustify | bullist numlist outdent indent | "
     "removeformat | help",
+    "menubar":"tools",
     "custom_undo_redo_levels": 10,
+    "fullpage_default_doctype": '<!DOCTYPE html>',
+    "fullpage_default_encoding": 'UTF-8'
 }
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True

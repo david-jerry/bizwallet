@@ -8,77 +8,94 @@
 
 {% block kw %}bizwallet, bizwallet contact, bizwallet group, bizwallet limited, co-operative company{% endblock %}
 
-{% block body_class %}
-class="stretched"
-{% endblock %}
-
-{% block header %}
-<!-- Page Title
-============================================= -->
-<section id="page-title" class="page-title-parallax page-title-dark include-header" style="padding: 250px 0; background-image: url('{% static "images/parallax.jpg" %}'); background-size: cover; background-position: center center;" data-bottom-top="background-position:0px 400px;" data-top-bottom="background-position:0px -500px;">
-
-    <div class="container clearfix">
-        <h1>{% trans 'Contact Us' %}</h1>
-        <span>{% trans 'Feel free to contact our help desk' %}</span>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{% trans 'Contact Us' %}</li>
-        </ol>
-    </div>
-
-</section><!-- #page-title end -->
-
-<!-- Google Map
-============================================= -->
-<!-- <section class="gmap slider-parallax vh-60" data-address="Melbourne, Australia" data-markers='[{address: "Melbourne, Australia", html: $("#map-marker-1").html(), icon:{ image: "images/icons/map-icon-red.png", iconsize: [32, 39], iconanchor: [32,39] } }]'></section>
-<div id="map-marker-1" class="d-none"><div style="width: 300px;"><h4 class="mb-2">Hi! We are <span>Bizwallet LTD!</span></h4><p class="mb-0" style="font-size:1rem;">Our mission is to help people to <strong>earn</strong> and to <strong>learn</strong> online. We operate <strong>serviceces within Nigeria</strong> where hundreds of thousands of people manage assets and investments every day.</p></div></div> -->
-
-{% endblock %}
 
 {% block content %}
-<div class="row gutter-40 col-mb-80">
-    <!-- Postcontent
-    ============================================= -->
-    <div class="postcontent col-lg-9">
+<div class="container">
 
-        <h3>Send us an Email</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h2 class="display-4 text-dark fw-semibold ls--2 mb-3">Contact Us</h2>
+            <p class="text-dark">We are always happy to here back from you leaving reviews or contacting us directly. For you, we are 24/7 days a week.</p>
 
-        <div class="form-widget">
+            <div class="form-widget topmargin">
 
-            <form class="mb-0" action="{% url 'contact' %}" method="POST">
+                <div class="form-result"></div>
 
-                {% csrf_token %}
+                <form class="mb-0" id="template-contactform" name="template-contactform" action="include/form.php" method="post">
 
-                {{ form|crispy }}
-                <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </div>
-                </div>
+                    <div class="form-process">
+                        <div class="css3-spinner">
+                            <div class="css3-spinner-scaler"></div>
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-name">Name<small class="text-danger">*</small></label>
+                            <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="form-control required" />
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-email">Email<small class="text-danger">*</small></label>
+                            <input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email form-control" />
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-phone">Phone<small class="text-danger">*</small></label>
+                            <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="required form-control" />
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-company">Company</label>
+                            <input type="text" id="template-contactform-company" name="company" value="" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-workspace">Workspace<small class="text-danger">*</small></label>
+                            <select id="template-contactform-workspace" name="template-contactform-workspace" class="required form-control">
+                                <option value="" disabled="disabled" selected>-- Select One --</option>
+                                <option value="Perth">Perth</option>
+                                <option value="Sydney">Sydney</option>
+                                <option value="Melbourne">Melbourne</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="template-contactform-service">Interested in<small class="text-danger">*</small></label>
+                            <select id="template-contactform-service" name="template-contactform-service" class="required form-control">
+                                <option value="" disabled="disabled" selected>-- Select One --</option>
+                                <option value="Day Pass">Day Pass</option>
+                                <option value="Shared Desk">Shared Desk</option>
+                                <option value="Flexible Desk">Flexible Desk</option>
+                                <option value="Private Desk">Private Desk</option>
+                            </select>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-12 form-group">
+                            <label for="template-contactform-message">Message<small class="text-danger">*</small></label>
+                            <textarea class="required form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
+                        </div>
+
+                        <div class="col-12 form-group d-none">
+                            <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control" />
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <button class="button button-rounded button-xlarge m-0 center fw-medium nott ls0 fw-normal" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Send Message</button>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="prefix" value="template-contactform-">
+
+                </form>
+            </div>
         </div>
-
-    </div><!-- .postcontent end -->
-
-    <!-- Sidebar
-    ============================================= -->
-    <div class="sidebar col-lg-3">
-
-        <address>
-            <strong>Headquarters:</strong><br>
-            Plot F6 Deborah Lawson House<br>
-            GRA Phase III, Port Harcourt<br>
-            Rivers State<br>
-        </address>
-        <abbr title="Phone Number 1"><strong>Phone 1:</strong></abbr> (234) 810 997 0226<br>
-        <abbr title="Phone Number 2"><strong>Phone 2:</strong></abbr> (234) 704 999 8952<br>
-        <abbr title="Phone Number 3"><strong>Phone 3:</strong></abbr> (234) 704 998 7004<br>
-        <abbr title="Email Address"><strong>Email:</strong></abbr> info@bizwallet.org
-
-    </div><!-- .sidebar end -->
+    </div>
 </div>
-
 {% endblock %}
 
 {% block inline_javascript %}

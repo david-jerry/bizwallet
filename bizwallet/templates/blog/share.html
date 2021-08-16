@@ -1,0 +1,104 @@
+{% extends "blog/base.html" %}
+{% load static humanize i18n crispy_forms_tags %}
+
+{% block blog_title %}
+Share {{post.title}} - {{ block.super }}
+{% endblock blog_title %}
+
+{% block blog_page_title %}
+Share {{post.title}}
+{% endblock blog_page_title %}
+
+{% block blog_content %}
+<div class="col-md-8">  
+<main class="l-main-content">
+    <div class="posts-group-2">
+        <section class="b-post b-post-full clearfix">
+            <div class="entry-main">
+                <div class="entry-header">
+                    {% if sent %}
+                    <h2 class="entry-title"><a href="{{post.get_absolute_url}}">{{post.title}} {% trans 'mailed successfully' %}.</a></h2>
+                    {% else %}
+                    <h2 class="entry-title">{% trans 'Share' %} <a href="{{post.get_absolute_url}}">{{post.title}}</a> {% trans 'by e-mail' %}</h2>
+                    {% endif %}
+                </div>
+                <div class="entry-content">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <button class="btn btn-primary" type="submit">{% trans 'Submit' %}</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+</div>
+<div class="col-md-4">
+    <aside class="l-sidebar-3">
+        <div class="widget widget-searce">
+            <form class="form-sidebar" id="search-global-form" method="GET" action="{% url 'blogs:search' %}">
+                <input class="form-sidebar__input form-control" name="q" type="search" placeholder="Search News ..." />
+                <button class="form-sidebar__btn"><i class="icon fa fa-search text-primary"></i>
+                </button>
+            </form>
+          </div>
+              <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">categories</h3>
+            <div class="widget-content">
+                <ul class="widget-list list list-mark-5">
+                    {% for cat in categories %}
+                    <li class="widget-list__item"><a class="widget-list__link" href="{% url 'blogs:posts_by_cat' cat.slug %}">{{cat.title}}</a>
+                    </li>
+                    {% empty %}
+                    <li class="widget-list__item">No Categories
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">recent posts</h3>
+            <div class="widget-content">
+                {% for post in recent_posts %}
+                <div class="post-widget clearfix">
+                    <div class="post-widget__media">
+                        <a href="{{post.get_absolute_url}}">
+                            <img loading="lazy"  class="img-responsive" src="{{post.image_set.first.image.url}}" alt="{{post.title}}" />
+                        </a>
+                    </div>
+                    <div class="post-widget__inner"><a class="post-widget__title" href="{{post.get_absolute_url}}">{{post.title}}</a>
+                        <div class="post-widget__date">On
+                            <time class="post-widget__time" datetime="{{post.pub_date}}">{{post.pub_date|naturalday}}</time>
+                        </div>
+                    </div>
+                    <!-- end .widget-post-->
+                </div>
+                {% empty %}
+                <li class="widget-list__item">No Recent Posts
+                </li>
+            {% endfor %}
+            </div>
+        </section>
+        <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">TAGs WIDGET</h3>
+            <div class="widget-content">
+                <ul class="list-tags list-unstyled">
+                    {% for tag in tags %}
+                    <li class="list-tags__item"><a class="list-tags__link" href="{% url 'blogs:posts_by_tag' tag.slug %}">{{tag.title}}</a>
+                    </li>
+                    {% empty %}
+                    <li class="widget-list__item">No Tags
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <!-- end .widget-->
+    </aside>
+    <!-- end .sidebar-->
+</div>
+{% endblock blog_content %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans 'News - All You Need To Know About' %} {{block.super|upper}}{% endblock title %}
+
+{% block desc %}{% trans 'Latest news updates straight from bizwallet' %}{% endblock %}
+
+{% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
+
+{% block header %}
+<div class="container">
+    <div class="row justify-content-between align-items-end">
+        <div class="col-md-8">
+            <h2 class="display-4 text-dark fw-semibold ls--2">Get updated <span>News and Information</span>.</h2>
+            <p class="text-dark mb-0">
+               Always stay updated with the latest happenings going on within and around bizwallet and its associates.
+            </p>
+        </div>
+        <!-- <div class="col-md-3 text-md-end">
+            <img data-src="{% static 'images/blog.jpg' %}" alt="Image" class="rounded-4 my-5 lazy">
+        </div> -->
+    </div>
+
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="container clearfix">
+    {% block blog_content %}
+        
+    {% endblock blog_content %}
+</div>
+{% endblock %}

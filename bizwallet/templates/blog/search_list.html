@@ -1,0 +1,177 @@
+{% extends "blog/base.html" %}
+{% load static humanize i18n %}
+
+{% block blog_title %}
+  {{ block.super }}
+{% endblock blog_title %}
+
+{% block blog_page_title %}
+News
+{% endblock blog_page_title %}
+
+{% block blog_content %}
+<div class="col-md-8">
+    <main class="l-main-content">
+        <div class="posts-group-2">
+            <!-- end .post-->
+            {% for post in posts %}
+            <!-- end .b-banner-->
+            {% if not post.url %}
+            <section class="b-post b-post-full clearfix">
+                <div class="entry-media">
+                    {% if post.image_set %}
+                    <div class="owl-carousel owl-theme owl-theme_mod-arrs enable-owl-carousel" data-pagination="false" data-navigation="true" data-items="1" data-auto-play="7000" data-transition-style="fade" data-main-text-animation="true" data-after-init-delay="3000" data-after-move-delay="1000"
+                    data-stop-on-hover="true">
+                        {% for image in post.image_set.all %}
+                        <img loading="lazy"  class="img-responsive" src="{{image.image.url}}" alt="{{post.title}}" />
+                        {% endfor %}
+                    </div>
+                    {% elif post.video %}
+                    <video poster="{% static 'images/bg-3.jpg' %}" preload="auto" loop autoplay muted
+                      style="display: block; width: 100%;">
+                      <source src='{{post.videos.url}}'
+                        type='application/mp4, video/mp4, video/mpeg, video/webm, audio/webm' />
+                    </video>
+                    {% endif %}
+                </div>
+                <div class="entry-main">
+                    <div class="entry-meta">
+                        <div class="entry-meta__group-left"><span class="entry-meta__item">Post by <a class="entry-meta__link" href="{{post.author.get_absolute_url}}"> {{post.author}}</a></span> <span class="entry-meta__item">On <a class="entry-meta__link" href="{{post.get_absolute_url}}"> {{post.pub_date|naturalday}}</a></span>
+                            {% for tag in post.tags.all %}<span class="entry-meta__categorie bg-primary">{{tag.title}}</span>{% endfor %}
+                        </div>
+                        <div class="entry-meta__group-right"><span class="entry-meta__item"><i class="icon fa fa-heart"></i><a class="entry-meta__link" href="blog-main.html"> 205</a></span><span class="entry-meta__item"><i class="icon fa fa-comment-o"></i>Comments<a class="entry-meta__link" href="blog-main.html"> 518</a></span>
+                        </div>
+                    </div>
+                    <div class="entry-header">
+                        <h2 class="entry-title"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+                    </div>
+                    <div class="entry-content">
+                        {{post.content|truncatewords:40|safe}}
+                    </div>
+                    <div class="entry-footer"><a class="btn btn-default" href="{{post.get_absolute_url}}">read more</a>
+                    </div>
+                </div>
+            </section>
+            {% elif post.url %}
+            <div class="b-bnr-3">
+                <div class="b-bnr-3__title"><a href="{{post.url}}">{{post.title}}</a></div>
+                <div class="b-bnr-3__info"><span class="b-bnr-3__info-item">Post by {{post.author}}</span><span class="b-bnr-3__info-item">On {{post.pub_date|naturalday}}</span>{% for tag in post.tags.all %}<a class="btn btn-primary" href="{% url 'blogs:posts_by_tag' tag.slug %}">{{tag.title}}</a>{% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- end .post-->
+            {% empty %}
+            <div class="b-bnr-3">
+                <div class="b-bnr-3__title">We offers the lowest car prices</div>
+                <div class="b-bnr-3__info"><span class="b-bnr-3__info-item">No Posts Yet</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if is_paginated %}
+        <ul class="pagination text-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{page_obj.previous_page_number}}"><i class="icon fa fa-angle-double-left"></i></a>
+            </li>
+            {% else %}
+            <li class="disabled"><a><i class="icon fa fa-angle-double-left"></i></a>
+            </li>
+            {% endif %}
+
+            {% if page_obj.number|add:'-4' > 1 %}
+            <li><a href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a>
+            </li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %} 
+            {% if page_obj.number == i %}
+            <li class="active"><a>{{ i }}</a></li>
+            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+            <li><a href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li><a href="?page={{page_obj.next_page_number}}"><i class="icon fa fa-angle-double-right"></i></a>
+            </li>
+            {% else %}
+            <li class="disabled"><a><i class="icon fa fa-angle-double-right"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </main>
+</div>
+<div class="col-md-4">
+    <aside class="l-sidebar-3">
+        <div class="widget widget-searce">
+            <form class="form-sidebar" id="search-global-form" method="GET" action="{% url 'blogs:search' %}">
+                <input class="form-sidebar__input form-control" name="q" type="search" placeholder="Search News ..." />
+                <button class="form-sidebar__btn"><i class="icon fa fa-search text-primary"></i>
+                </button>
+            </form>
+        </div>
+        <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">categories</h3>
+            <div class="widget-content">
+                <ul class="widget-list list list-mark-5">
+                    {% for cat in categories %}
+                    <li class="widget-list__item"><a class="widget-list__link" href="{% url 'blogs:posts_by_cat' cat.slug %}">{{cat.title}}</a>
+                    </li>
+                    {% empty %}
+                    <li class="widget-list__item">No Categories
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">recent posts</h3>
+            <div class="widget-content">
+                {% for post in recent_posts %}
+                <div class="post-widget clearfix">
+                    <div class="post-widget__media">
+                        <a href="{{post.get_absolute_url}}">
+                            <img loading="lazy"  class="img-responsive" src="{{post.image_set.first.image.url}}" alt="{{post.title}}" />
+                        </a>
+                    </div>
+                    <div class="post-widget__inner"><a class="post-widget__title" href="{{post.get_absolute_url}}">{{post.title}}</a>
+                        <div class="post-widget__date">On
+                            <time class="post-widget__time" datetime="{{post.pub_date}}">{{post.pub_date|naturalday}}</time>
+                        </div>
+                    </div>
+                    <!-- end .widget-post-->
+                </div>
+                {% empty %}
+                <li class="widget-list__item">No Recent Posts
+                </li>
+            {% endfor %}
+            </div>
+        </section>
+        <!-- end .widget-->
+        <section class="widget section-sidebar">
+            <h3 class="widget-title ui-title-inner">TAGs WIDGET</h3>
+            <div class="widget-content">
+                <ul class="list-tags list-unstyled">
+                    {% for tag in tags %}
+                    <li class="list-tags__item"><a class="list-tags__link" href="{% url 'blogs:posts_by_tag' tag.slug %}">{{tag.title}}</a>
+                    </li>
+                    {% empty %}
+                    <li class="widget-list__item">No Tags
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <!-- end .widget-->
+    </aside>
+    <!-- end .sidebar-->
+
+</div>
+{% endblock blog_content %}

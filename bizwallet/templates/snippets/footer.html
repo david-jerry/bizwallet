@@ -4,239 +4,186 @@
 {% url 'about' as about_url %}
 
 
-{% if request.path == home_url or request.path == about_url %}
-<div id="oc-clients" class="section bg-transparent mt-0 owl-carousel owl-carousel-full image-carousel footer-stick carousel-widget" data-margin="80" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6">
-
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/1.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/2.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/4.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/5.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/6.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/7.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/8.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/9.png' %}" alt="Clients"></a></div>
-	<div class="oc-item"><a href="#"><img src="{% static 'images/clients/10.png' %}" alt="Clients"></a></div>
-
-</div>
-<div class="section mb-0">
-	<div class="container clearfix">
-
-		<div class="heading-block center">
-			<h3>Subscribe to our <span>Newsletter</span></h3>
-		</div>
-
-		<div class="subscribe-widget">
-			<form action="{% url 'services:subscribe' %}" method="post" class="mb-0">
-				{% csrf_token %}
-				<div class="input-group input-group-lg mx-auto" style="max-width:600px;">
-					<div class="input-group-prepend">
-						<div class="input-group-text"><i class="icon-email2"></i></div>
-					</div>
-					<input type="email" required id="id_email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
-					<div class="input-group-append">
-						<button class="btn btn-secondary" type="submit">Subscribe Now</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-	</div>
-</div>
-{% endif %}
-<!-- Footer
-============================================= -->
-<footer id="footer" class="dark mt-5">
-	<div class="container">
-
-		<!-- Footer Widgets
+		<!-- Footer
 		============================================= -->
-		<div class="footer-widgets-wrap">
+		<footer id="footer" class="border-0" style="background-color: #6f210e; padding-top: 80px">
 
-			<div class="row col-mb-50">
-				<div class="col-lg-8">
+			<div class="container">
 
-					<div class="row col-mb-50">
-						<div class="col-md-4">
+				<!-- Footer Widgets
+				============================================= -->
+				<div class="footer-widgets-wrap dark pb-5 clearfix">
 
+					<div class="row">
+
+						<div class="col-lg-3 col-md-4 col-6">
 							<div class="widget clearfix">
 
-								<img src="{% static 'images/footer.png' %}" alt="Bizwallet Footer Logo" class="footer-logo" height="150px">
+								<h4 class="ls0 mb-4 nott text-white">Popular Links</h4>
 
-								<p>We believe in <strong>Stable</strong>, <strong>Dependable</strong> &amp; <strong>Financial</strong> power.</p>
+								<ul class="list-unstyled ms-0">
+									<li class="mb-2"><a href="{% url 'home' %}">Home</a></li>
+									<li class="mb-2"><a href="#">Blog</a></li>
+									<li class="mb-2"><a href="#">T & C</a></li>
+								</ul>
 
 							</div>
-
 						</div>
-
-						<div class="col-md-4">
-
-							<div class="widget widget_links clearfix">
-								
-								<div style="background: url('{% static "images/world-map.png" %}') no-repeat center center; background-size: 100%;">
-									<address>
-										<strong>Headquarters:</strong><br>
-										Plot F6 Deborah Lawson House<br>
-										GRA Phase III, Port Harcourt<br>
-										Rivers State<br>
-									</address>
-									<abbr title="Phone Number 1"><strong>Phone 1:</strong></abbr> (234) 810 997 0226<br>
-									<abbr title="Phone Number 2"><strong>Phone 2:</strong></abbr> (234) 704 999 8952<br>
-									<abbr title="Phone Number 3"><strong>Phone 3:</strong></abbr> (234) 704 998 7004<br>
-									<abbr title="Email Address"><strong>Email:</strong></abbr> info@bizwallet.org
-								</div>
-							</div>
-
-						</div>
-
-						<div class="col-md-4">
-
+						<div class="col-lg-3 col-md-4 col-6">
 							<div class="widget clearfix">
-								<h4>Recent Posts</h4>
-								<p>None For now</p>
-								<!-- <div class="posts-sm row col-mb-30" id="post-list-footer">
-									<div class="entry col-12">
-										<div class="grid-inner row">
-											<div class="col">
-												<div class="entry-title">
-													<h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-												</div>
-												<div class="entry-meta">
-													<ul>
-														<li>10th July 2021</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
 
-									<div class="entry col-12">
-										<div class="grid-inner row">
-											<div class="col">
-												<div class="entry-title">
-													<h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
-												</div>
-												<div class="entry-meta">
-													<ul>
-														<li>10th July 2021</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
+								<h4 class="ls0 mb-4 nott text-white">Get to Know us</h4>
 
-									<div class="entry col-12">
-										<div class="grid-inner row">
-											<div class="col">
-												<div class="entry-title">
-													<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-												</div>
-												<div class="entry-meta">
-													<ul>
-														<li>10th July 2021</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> -->
+								<ul class="list-unstyled ms-0">
+									<li class="mb-2"><a href="{% url 'about' %}">About</a></li>
+									<li class="mb-2"><a href="{% url 'services' %}">Services</a></li>
+									<li class="mb-2"><a href="{% url 'ceo' %}">CEO</a></li>
+								</ul>
+
 							</div>
-
 						</div>
-					</div>
 
-				</div>
+						<div class="col-lg-6 col-md-4">
+							<div id="instagram" class="widget clearfix">
 
-				<div class="col-lg-4">
+								<h4 class="ls0 mb-4 nott text-white">Instagram Photos</h4>
+								<div id="instagram-photos" class="instagram-photos masonry-thumbs grid-5" data-user="blog.canvastemplate" data-count="10"></div>
 
-					<div class="row col-mb-50">
-						<div class="col-md-4 col-lg-12">
-							<div class="widget clearfix" style="margin-bottom: -20px;">
+							</div>
+						</div>
 
-								<div class="row">
-									<!-- <div class="col-lg-6 bottommargin-sm">
-										<div class="counter counter-small"><span data-from="50" data-to="15065421" data-refresh-interval="80" data-speed="3000" data-comma="true"></span></div>
-										<h5 class="mb-0">Total Downloads</h5>
+						<div class="line"></div>
+
+						<div class="row">
+							<div class="col-sm-3">
+								<a href="index.html"><img src="{% static 'images/logo@2x.png' %}" height="90" alt="Bizwallet Footer Logo" class="mb-4" height="20"></a>
+								<p class="text-white-50">We believe in Stable, Dependable & Financial power.</p>
+								<a href="#" class="social-icon si-small si-light si-facebook" title="Facebook">
+									<i class="icon-facebook"></i>
+									<i class="icon-facebook"></i>
+								</a>
+								<a href="#" class="social-icon si-small si-light si-twitter" title="Twitter">
+									<i class="icon-twitter"></i>
+									<i class="icon-twitter"></i>
+								</a>
+								<a href="#" class="social-icon si-small si-light si-github" title="Github">
+									<i class="icon-github"></i>
+									<i class="icon-github"></i>
+								</a>
+								<a href="#" class="social-icon si-small si-light si-instagram" title="instagram">
+									<i class="icon-instagram"></i>
+									<i class="icon-instagram"></i>
+								</a>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-white-50">Do you have futher enquiries?</p>
+								<div class="toggle toggle-border">
+									<div class="toggle-header">
+										<div class="toggle-icon">
+											<i class="toggle-closed icon-line-plus"></i>
+											<i class="toggle-open icon-line-minus"></i>
+										</div>
+										<div class="toggle-title">
+											Who is bizwallet?
+										</div>
 									</div>
--->
-									<div class="col-lg-12 bottommargin-sm">
-										<div class="counter counter-small"><span data-from="1" data-to="{{all_users}}" data-refresh-interval="50" data-speed="2000" data-comma="true"></span></div>
-										<h5 class="mb-0">Registered Members</h5>
+									<div class="toggle-content">
+										Bizwallet is a very stable, secure online and offline platform that assist it's members develope discipline for saving and investing in assets whilst earning little or enough.
 									</div>
 								</div>
-
-							</div>
-						</div>
-
-						<div class="col-md-5 col-lg-12">
-							<div class="widget subscribe-widget clearfix">
-								<h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
-								<div class="widget-subscribe-form-result"></div>
-								<form id="widget-subscribe-form" action="{% url 'services:subscribe' %}" method="POST" class="mb-0">
-									{% csrf_token %}
-									<div class="input-group mx-auto">
-										<div class="input-group-prepend">
-											<div class="input-group-text"><i class="icon-email2"></i></div>
+								<div class="toggle toggle-border">
+									<div class="toggle-header">
+										<div class="toggle-icon">
+											<i class="toggle-closed icon-line-plus"></i>
+											<i class="toggle-open icon-line-minus"></i>
 										</div>
-										<input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
-										<div class="input-group-append">
-											<button class="btn btn-success" type="submit">Subscribe</button>
+										<div class="toggle-title">
+											Is Bizwallet Registered?
 										</div>
 									</div>
-								</form>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-lg-12">
-							<div class="widget clearfix" style="margin-bottom: -20px;">
-
-								<div class="row">
-									<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-										<a href="#" class="social-icon si-dark si-colored si-facebook mb-0" style="margin-right: 10px;">
-											<i class="icon-facebook"></i>
-											<i class="icon-facebook"></i>
-										</a>
-										<a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
-									</div>
-									<div class="col-6 col-md-12 col-lg-6 clearfix">
-										<a href="#" class="social-icon si-dark si-colored si-rss mb-0" style="margin-right: 10px;">
-											<i class="icon-rss"></i>
-											<i class="icon-rss"></i>
-										</a>
-										<a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
+									<div class="toggle-content">
+										Yes!
+										<br>
+										<br>
+										BizWallet Ltd. (RC 1658722)
+										Eco-BizWallet Multipurpose Co-operative Society Limited. (RS 320355)
 									</div>
 								</div>
-
+								<div class="toggle toggle-border">
+									<div class="toggle-header">
+										<div class="toggle-icon">
+											<i class="toggle-closed icon-line-plus"></i>
+											<i class="toggle-open icon-line-minus"></i>
+										</div>
+										<div class="toggle-title">
+											Is Bizwallet only for CIVIL SERVAENTS?
+										</div>
+									</div>
+									<div class="toggle-content">
+										No!
+										<br>
+										<br>
+										BizWallet cooperative business is for Civil servants, and non-civil servants (example; farmers,students, Lawyers, medical workers,business men, Church members, and all others who want a better life are welcomed to join.
+									</div>
+								</div>
+								<div class="toggle toggle-border">
+									<div class="toggle-header">
+										<div class="toggle-icon">
+											<i class="toggle-closed icon-line-plus"></i>
+											<i class="toggle-open icon-line-minus"></i>
+										</div>
+										<div class="toggle-title">
+											How does BizWallet generate 50% to complete my 50% for me?
+										</div>
+									</div>
+									<div class="toggle-content">
+										BizWallet cooperative gives loans to civil servants and other fintech companies, and does other profitable trades with expert advice, and so are able to cover the 50% for her members with ease,from the accruing interest ,within the 12 months financing period.
+									</div>
+								</div>
+								<div class="toggle toggle-border">
+									<div class="toggle-header">
+										<div class="toggle-icon">
+											<i class="toggle-closed icon-line-plus"></i>
+											<i class="toggle-open icon-line-minus"></i>
+										</div>
+										<div class="toggle-title">
+											Does BizWallet give loan to her Members?
+										</div>
+									</div>
+									<div class="toggle-content">
+										Yes!
+										<br>
+										<br>
+										But only to her registered members across Africa.
+									</div>
+								</div>
 							</div>
 						</div>
 
 					</div>
 
 				</div>
-			</div>
-
-		</div><!-- .footer-widgets-wrap end -->
-
-	</div>
-
-	<!-- Copyrights
-	============================================= -->
-	<div id="copyrights">
-		<div class="container">
-
-			<div class="row col-mb-30">
-
-				<div class="col-md-6 text-center text-md-left">
-					Copyrights &copy; 2020 All Rights Reserved by BizWallet Co-Op.<br>
-					<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
-				</div>
-
-				<div class="col-md-6 text-center text-md-right">
-					<i class="icon-envelope2"></i> info@bizwallet.org <span class="middot">&middot;</span> <i class="icon-headphones"></i> +234-801-997-0226 <span class="middot">&middot;</span> <i class="icon-skype2"></i> bizwallet
-				</div>
 
 			</div>
 
-		</div>
-	</div><!-- #copyrights end -->
-</footer><!-- #footer end -->
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights" class="bg-transparent dark pt-0">
+
+				<div class="line mt-0"></div>
+
+				<div class="container clearfix">
+
+					<div class="row">
+						<div class="col-12">
+							<p class="mb-2 text-white-50">Copyrights &copy; 2020 All Rights Reserved by Canvas Inc.</p>
+							<div class="copyright-links text-white-50"><a href="#" class="text-white-50">Terms of Use</a> / <a href="#" class="text-white-50">Privacy Policy</a></div>
+						</div>
+					</div>
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+

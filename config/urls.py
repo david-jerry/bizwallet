@@ -9,7 +9,7 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from filebrowser.sites import site
 
-from bizwallet.core.views import home, contact_view
+from bizwallet.core.views import contact_view, home
 from bizwallet.users.views import fieldworker_signup, investor_signup
 from config.sitemaps import StaticViewSitemap
 
@@ -24,7 +24,7 @@ urlpatterns = [
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
     path(
-        "about/team/", TemplateView.as_view(template_name="pages/team.html"), name="team"
+        "about/services/", TemplateView.as_view(template_name="pages/services.html"), name="services"
     ),
     path(
         "about/president/ayo-ogungbe/", TemplateView.as_view(template_name="pages/ceo.html"), name="ceo"
@@ -35,6 +35,7 @@ urlpatterns = [
     path(
         "contact/", contact_view, name="contact"
     ),
+    path("news/", include("bizwallet.blog.urls", namespace="blog")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # User URIs

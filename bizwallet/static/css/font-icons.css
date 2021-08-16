@@ -91,6 +91,8 @@
 
 .iconlist li {
 	position: relative;
+	display: flex;
+	align-items: baseline;
 }
 
 .iconlist ul {
@@ -101,22 +103,21 @@
 .iconlist > li [class^="icon-"]:first-child,
 .iconlist > li [class*=" icon-"]:first-child {
 	position: relative;
-	display: inline-block;
-	width: 1.75em;
 	text-align: center;
 	top: 1px;
-	width: 14px;
-	margin-right: 0.5rem;
+	width: 1rem;
+    margin-right: 0.75rem;
+    flex: 0 0 auto;
 }
 
 .rtl .iconlist > li [class^="icon-"]:first-child,
 .rtl .iconlist > li [class*=" icon-"]:first-child {
-	margin-left: 0.5rem;
+	margin-left: 0.75rem;
 	margin-right: 0;
 }
 
 .iconlist.iconlist-large {
-	font-size: 16px;
+	font-size: 1.5rem;
 }
 
 .iconlist.iconlist-large li {
@@ -125,7 +126,7 @@
 
 .iconlist.iconlist-large > li [class^="icon-"],
 .iconlist.iconlist-large > li [class*=" icon-"] {
-	width: 16px;
+	width: 1.5rem;
 	margin-right: 5px;
 }
 
@@ -135,8 +136,8 @@
 	margin-right: 0;
 }
 
-.iconlist-color li i {
-	color: #1abc9c;
+.iconlist > li [class^="icon-"]:first-child {
+	color: #1ABC9C;
 	color: var(--themecolor);
 }
 

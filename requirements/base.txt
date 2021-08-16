@@ -108,3 +108,4 @@ requests-html==0.10.0
 django-filter==2.4.0 
 
 #Todo: Django Filter Search, Ajax Commenting, Language Integration, Cookie Consent
+django-category==2.0.1 #

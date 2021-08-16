@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% load static humanize i18n %}
+
+{% block blog_title %}
+{{post.title}} -  {{ block.super }}
+{% endblock blog_title %}
+
+{% block header %}
+<div class="container">
+  <div class="row justify-content-between align-items-end">
+      <div class="col-md-8">
+          <h2 class="display-4 text-dark fw-semibold ls--2">{{post.title}}</h2>
+          <p class="text-dark mb-0">
+             {{post.content|safe|truncatewords:30}}
+          </p>
+      </div>
+      <!-- <div class="col-md-3 text-md-end">
+          <img data-src="{% static 'images/blog.jpg' %}" alt="Image" class="rounded-4 my-5 lazy">
+      </div> -->
+  </div>
+
+</div>
+{% endblock header %}
+
+{% block blog_content %}
+
+{% endblock blog_content %}

@@ -7,12 +7,13 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import BadHeaderError, EmailMessage, send_mail, send_mass_mail
 from django.http import Http404, HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
@@ -35,12 +36,37 @@ def compress_whitespace(s):
     return " ".join(s.split())
 
 
-@cache_page(1)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
+@cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
 def home(request, *args, **kwargs):
     # get referrer linked to reffered using username
     username = str(kwargs.get("username"))
 
-    ip_address = request.META.get("HTTP_X_FORWARDED_FOR", "REMOTE_ADDR")
+    ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '105.112.98.89')
+    print(ip_address)
+
+    # if not settings.DEBUG:
+    #     print("returning FORWARDED_FOR")
+    #     ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    #     try: 
+    #         return ip
+    #     except (KeyError, IndexError): 
+    #         pass 
+    # elif request.META.get('HTTP_X_REAL_IP'):
+    #     print("returning REAL_IP")
+    #     ip = request.META.get('HTTP_X_REAL_IP')
+    #     try: 
+    #         return ip
+    #     except (KeyError, IndexError): 
+    #         pass 
+    # else:
+    #     print("returning REMOTE_ADDR")
+    #     ip = request.META.get('REMOTE_ADDR')
+    #     try: 
+    #         return ip
+    #     except (KeyError, IndexError): 
+    #         pass 
+    # return str(ip)
+    
     services = Services.objects.all().filter(active=True)
     testimonials = Testimonial.objects.filter(active=True).order_by("-created")[:5]
 
@@ -48,14 +74,14 @@ def home(request, *args, **kwargs):
         is_cached = "geodata" in request.session
         # get user ip and get information of the user
         if not is_cached:
-            response = requests.get("https://reallyfreegeoip.org/json/%s" % ip_address)
+            response = requests.get(f"https://reallyfreegeoip.org/json/{ip_address}")
+            print(response)
             request.session["geodata"] = response.json()
 
         user = User.objects.get(username=username)
         if user.is_field_worker:
             request.session["fieldworker_id"] = user.id
             user_ip = request.session["fieldworker_id"]
-            print("referral name: ", user_ip)
 
         geodata = request.session["geodata"]
         request.session["user_ip"] = geodata["ip"]
@@ -122,8 +148,6 @@ def contact_view(request):
             return redirect('home')
     return render(request, 'pages/contact.html', {'form': form})
 
-from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
 
 
 class UserEmailSubscribe(SuccessMessageMixin, CreateView):

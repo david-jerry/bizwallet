@@ -1,0 +1,14 @@
+{% load static compress %}
+
+
+{% block css %}
+
+<!-- Your stuff: Third-party CSS libraries go here -->
+{% compress css inline %}
+<!-- This file stores project-specific CSS -->
+<link rel="stylesheet" href="{% static 'js/plugins/nucleo/css/nucleo.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/argon-dashboard.css' %}" type="text/css" />
+{% endcompress %}
+
+{% endblock %}

@@ -9,6 +9,8 @@ FROM python as python-build-stage
 ARG BUILD_ENVIRONMENT=local
 
 # Install apt packages
+# RUN sudo add-apt-repository ppa:maxmind/ppa
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
   build-essential \
@@ -22,6 +24,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # libmagic for image compression
   libmagic1 \
   libmagic-dev \
+  # libmaxminddb0 \
+  # libmaxminddb-dev \
+  # mmdb-bin \
   python3-magic 
 
 # Requirements are installed here to ensure they will be cached.
@@ -45,6 +50,8 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 WORKDIR ${APP_HOME}
 
 # Install required system dependencies
+# RUN sudo add-apt-repository ppa:maxmind/ppa
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # psycopg2 dependencies
   libpq-dev \
@@ -59,6 +66,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libmagic1 \
   libmagic-dev \
   python3-magic \
+  # libmaxminddb0 \
+  # libmaxminddb-dev \
+  # mmdb-bin \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

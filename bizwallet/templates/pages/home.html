@@ -3,58 +3,9 @@
 
 {% block title %}Welcome - Start Your Cooperative Saving & Investment with {{block.super|upper}}{% endblock title %}
 
-{% block desc %}Bizwallet is a <strong>very stable & secure online & offline</strong> platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.{% endblock %}
+{% block desc %}Bizwallet is a <strong>very stable, secure online & offline</strong> platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.{% endblock %}
 
 {% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
-
-{% block extra_css %}
-<style>
-
-    .revo-slider-emphasis-text {
-        font-size: 64px;
-        font-weight: 700;
-        letter-spacing: -1px;
-        font-family: 'Poppins', sans-serif;
-        padding: 15px 20px;
-        border-top: 2px solid #FFF;
-        border-bottom: 2px solid #FFF;
-    }
-
-    .revo-slider-desc-text {
-        font-size: 20px;
-        font-family: 'Lato', sans-serif;
-        width: 650px;
-        text-align: center;
-        line-height: 1.5;
-    }
-
-    .revo-slider-caps-text {
-        font-size: 16px;
-        font-weight: 400;
-        letter-spacing: 3px;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .tp-video-play-button { display: none !important; }
-
-    .tp-caption { white-space: nowrap; }
-
-</style>
-{% endblock %}
-
-{% block body_class %}
-class="stretched"
-{% endblock %}
-
-{% block service_navs %}
-{% for service in services %}
-<li class="menu-item">
-    <a class="menu-link" href="{{service.get_absolute_url}}"><div>{{service.title}}</div></a>
-</li>
-{% empty %}
-NONE
-{% endfor %}
-{% endblock %}
 
 
 {% block header %}
@@ -62,281 +13,354 @@ NONE
 {% endblock %}
 
 {% block content %}
-<div class="mx-auto center clearfix" style="max-width: 900px;">
-    <img class="bottommargin" src="{% static 'images/footer.png' %}" height="170px" alt="Image">
-    <h1>Welcome! This is <span>BizWallet</span>.</h1>
-    <h2>Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilst earning little or enough. These members can acquire property, Auto Mobiles or Vehicles, Pay School fees, plan towards investing in agriculture and many more.</h2>
-    <a href="{% url 'about' %}" class="button button-3d button-dark button-large ">Get More Info</a>
-    <a href="{% url 'account_signup' %}" class="button button-3d button-large">Get Started Today</a>
-</div>
+<div class="section mt-0 pt-md-5 pt-0">
+    <div class="container clearfix">
+        <div class="row align-items-md-center mb-5">
+            <div class="col-md-6 pe-5">
+                <div class="heading-block mb-4 border-bottom-0">
+                    <div class="before-heading">Know More</div>
+                    <h2 class="nott fw-semibold">Amazing Offers, just for you.</h2>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-6 mb-4">
+                        <div class="counter color fw-semibold"><span data-from="1" data-to="3" data-refresh-interval="2" data-speed="600"></span>+</div>
+                        <h5 class="mt-0 fw-medium">Branches</h5>
+                    </div>
 
-<div class="line"></div>
-{% endblock %}
+                    <div class="col-6 col-sm-6 mb-4">
+                        <div class="counter color fw-semibold"><span data-from="1" data-to="37" data-refresh-interval="11" data-speed="900"></span>+</div>
+                        <h5 class="mt-0 fw-medium">Investors</h5>
+                    </div>
 
+                    <div class="col-6 col-sm-6 mb-4">
+                        <div class="counter color fw-semibold"><span data-from="1" data-to="21" data-refresh-interval="3" data-speed="1000"></span>+</div>
+                        <h5 class="mt-0 fw-medium">Loan Approved</h5>
+                    </div>
 
-{% block content_wide %}
-<div class="row bottommargin-lg align-items-stretch">
-
-    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #1abc9c;">
-        <div>
-            <h3 class="text-uppercase" style="font-weight: 600;">Why choose Us</h3>
-            <p style="line-height: 1.8;">
-                We intend to be a leading co-operative organization in <b>Africa</b>,poised to primarily expose millions of <b>Nigerians (nay Africans)</b> to the opportunity
-                of making them acquire with relative ease, some of their choice facilities or amenities, like plots of land, houses, vehicles, domestic and business technologies
-                or equipments, viable business concerns, educations/vocational skill training facilities, <b>ETC.</b>
-            </p>
-            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
-            <i class="icon-bulb bgicon"></i>
-        </div>
-    </div>
-
-    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #34495e;">
-        <div>
-            <h3 class="text-uppercase" style="font-weight: 600;">Our Mission</h3>
-            <p style="line-height: 1.8;">
-                Our mission is and will always be to ostensibly, engrain in our members and sundry clients, the thought-process of how to achieve their cherished key amenities of value
-                and equally expose them to an easily-accessible and sustainable financial base for the acquisition and maintenance of the said amenities. We remain primarily inspired 
-                to enhance the upliftment of the socio economic conditions of Nigerians and people of other neighbouring Nations at large.
-            </p>
-            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
-            <i class="icon-cog bgicon"></i>
-        </div>
-    </div>
-
-    <div class="col-lg-4 dark col-padding overflow-hidden" style="background-color: #e74c3c;">
-        <div>
-            <h3 class="text-uppercase" style="font-weight: 600;">Our Vision</h3>
-            <p style="line-height: 1.8;">
-                We have a vision to facilitate the creation of a largely middle classs community of Nigerians, who are opportuned to acquire their desired basic amenities or facilities 
-                of life with relative ease, and in the process, invariably contribute to the emergence, growth and sustainance of an economically viable and stable Nigerian Nation.
-            </p>
-            <a href="{% url 'about' %}" class="button button-border button-light button-rounded text-uppercase m-0">Read More</a>
-            <i class="icon-thumbs-up bgicon"></i>
-        </div>
-    </div>
-
-    <div class="clear"></div>
-
-</div>
-
-<div class="container clearfix">
-
-    <div class="row col-mb-50">
-        <div class="col-lg-8">
-            <div class="fancy-title title-border">
-                <h4>Recent Posts</h4>
-            </div>
-
-            <div class="row posts-md col-mb-30">
-                <div class="entry col-md-6">
-                    <div class="grid-inner">
-                        <div class="entry-image">
-                            <a href="#"><img src="{% static 'images/magazine/thumb/11.jpg' %}" alt="Image"></a>
-                        </div>
-                        <div class="entry-title title-sm nott">
-                            <h3><a href="blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
-                        </div>
-                        <div class="entry-meta">
-                            <ul>
-                                <li><i class="icon-calendar3"></i> 10th Feb 2021</li>
-                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
-                            </ul>
-                        </div>
-                        <div class="entry-content">
-                            <p>Medecins du Monde eradicate sustainability free expression contribution assessment expert humanitarian relief.</p>
-                        </div>
+                    <div class="col-6 col-sm-6 mb-4">
+                        <div class="counter color fw-semibold"><span data-from="100" data-to="4500" data-refresh-interval="100" data-speed="1500"></span>+</div>
+                        <h5 class="mt-0 fw-medium">Sqr. Meters Left</h5>
                     </div>
                 </div>
-
-                <div class="entry col-md-6">
-                    <div class="grid-inner">
-                        <div class="entry-image">
-                            <a href="#"><img src="{% static 'images/magazine/thumb/14.jpg' %}" alt="Image"></a>
-                        </div>
-                        <div class="entry-title title-sm nott">
-                            <h3><a href="blog-single.html">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h3>
-                        </div>
-                        <div class="entry-meta">
-                            <ul>
-                                <li><i class="icon-calendar3"></i> 10th Feb 2021</li>
-                                <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
-                            </ul>
-                        </div>
-                        <div class="entry-content">
-                            <p>Urban public institutions life-saving women and children Rockefeller combat malaria honesty. Sustainability foster immunize treatment.</p>
-                        </div>
+                <p class="text-muted">As a <b class="color">Co-Operative Organization</b>, we seek the advancement of our members, their wellfare and continued growth.</p>
+                <a class="top-phone" href="tel:+618-234-532-45"><i class="icon-book2"></i> <span class="d-none d-md-inline-block">Read More</span></a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card shadow-sm border-light" data-animate="fadeIn">
+                    <img data-src="{% static 'images/services/rent.jpg' %}" alt="Featured image 1" class="card-img-top lazy">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold color">Pay my Rent</h5>
+                        <p class="card-text">As a service, we offer our members the opportunity to own or get landed properties for themselves or family members.</p>
+                    </div>
+                </div>
+                <div class="card shadow-sm border-light mt-4" data-animate="fadeIn" data-delay="400">
+                    <img data-src="{% static 'images/services/farm.jpg' %}" alt="Featured image 2" class="card-img-top lazy">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold color">Farming Season</h5>
+                        <p class="card-text">Some quick example text. similique reprehenderit ab voluptatibus eaque.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 ps-sm-3 mt-3 mt-sm-0">
+                <div class="card shadow-sm border-light" data-animate="fadeIn" data-delay="700">
+                    <img data-src="{% static 'images/services/education.jpg' %}" alt="Featured image 3" class="card-img-top lazy">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold color">Education Support</h5>
+                        <p class="card-text">With the Milan Education Support Initiative (MESI), we take care of your school fees worries for you.</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="col-lg-4">
-            <div class="fancy-title title-border">
-                <h4>Client Testimonials</h4>
-            </div>
 
-            <div class="fslider testimonial p-0 border-0 shadow-none" data-animation="slide" data-arrows="false">
-                <div class="flexslider">
-                    <div class="slider-wrap">
-                        {% for testi in testimonials %}
-                        <div class="slide">
-                            <div class="testi-image">
-                                <a href="#"><img src="{{testi.user.image.url}}" alt="{{testi.user.fullname}} testimonial photo"></a>
+
+<div class="section bg-transparent" style="padding: 80px 0">
+    <div class="container">
+        <div class="heading-block border-bottom-0 mb-0">
+            <div class="before-heading">Select your Plan</div>
+            <h2 class="nott fw-semibold mb-0">Membership</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="price-carousel" class="owl-carousel carousel-widget" data-margin="30" data-nav="false" data-pagi="true" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3">
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/membership.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Premium Membership</h3>
+                                <p class="card-text mb-0">Start here</p>
                             </div>
-                            <div class="testi-content">
-                                <p>{{testi.testimony}}</p>
-                                <div class="testi-meta">
-                                    {{testi.user.fullname|title}}
-                                    <span>{{testi.user.company}}</span>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦50,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                              <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 20% After 365 Days</li>
+                              <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                              <li class="list-group-item ps-0 text-black-50"><i class="icon-line-check pe-3 color"></i> <del>Membership upgrade after 3 months & top up.</del></li>
+                            </ul>
+
+                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/premium.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Platinum Membership</h3>
+                                <p class="card-text mb-0">Economical and Flexible</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦100,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 25% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                              </ul>
+
+                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/gold.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Gold Membership</h3>
+                            <p class="card-text mb-0">Fulfill your dream</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦250,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 30% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦500, 000</li>
+                            </ul>
+
+                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/vip.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">VIP Membership</h3>
+                            <p class="card-text mb-0">Its all Yours!</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦500,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 40% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦1,000,000</li>
+                            </ul>
+
+                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/vvip.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">VVIP Membership</h3>
+                            <p class="card-text mb-0">No limits!</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦1,000,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦5,000,000</li>
+                            </ul>
+
+                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-11 mt-5 offset-md-1" data-animate="shakeX">
+                <h3>Terms &amp; Conditions</h3>
+                <ul class="ps-4 mb-0">
+                    <li class="mb-1">You are not permitted to use our services when you are under <b class="color">18 Years of age</b>.</li>
+                    <li class="mb-1"> <b class="color">Co-Operative Membership Fee</b> is compulsary to benefit from our other plans.</li>
+                    <li class="mb-1">All plan signups are for 365 days.</li>
+                    <li class="mb-1">The services of Biz-wallet could be used if only you agree to form a binding contract with Biz-wallet cooperative limited and must not be bankrupt.</li>
+                    <li class="mb-1">You can only upgrade when you have equivalent amount for that plan in your wallet and has passed 3 months in any previous plan subscribed to.</li>
+                    <li class="mb-1">Biz-wallet will from time to time ensure that the website is available and bug free.</li>
+                    <li class="mb-1">You must <a class="color" href=""><b>own an account</b></a> with us to be able to select from one of our plans.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="section p-0 mb-0 testimonials clearfix">
+    <div class="container" style="padding: 120px 0">
+        <div class="heading-block border-bottom-0 center">
+            <div class="before-heading">What our Members Say</div>
+            <h2 class="nott fw-semibold">Testimonials</h2>
+            <p class="mb-0 mt-1"><span class="fw-semibold">Excellent, Service</span> from all <span class="fw-semibold">2,118</span> reviews. </p>
+        </div>
+
+        <div id="testimonials-carousel" class="owl-carousel carousel-widget testimonial testimonial-full bg-transparent border-0 shadow-none p-0 mx-auto text-start clearfix" data-animate-in="fadeIn" data-animate-out="fadeOut" data-margin="24" data-nav="false" data-pagi="true" data-items="1" style="max-width: 740px">
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                    </div>
+                    <p>Collaboratively enhance intermandated innovation via cutting-edge core competencies. Professionally extend covalent e-markets and mission-critical communities. Dramatically communicate revolutionary web services for interactive synergy. Synergistically.</p>
+                    <div class="testi-meta mt-4">
+                        Steve Jobs
+                        <span class="ls0">Apple Inc.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star-half2"></i>
+                    </div>
+                    <p>Intrinsicly synergize excellent content whereas user friendly action items. Rapidiously transition multimedia based information after top-line alignments. Authoritatively integrate accurate outsourcing vis-a-vis principle-centered systems energistically</p>
+                    <div class="testi-meta mt-4">
+                        Collis Ta'eed
+                        <span class="ls0">Envato Inc.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                    </div>
+                    <p>Compellingly engage multimedia based niche markets via value-added manufactured products. Competently formulate goal-oriented content for installed base users. Uniquely leverage other's granular ROI without 24/365 collaboration and idea-sharing.</p>
+                    <div class="testi-meta mt-4">
+                        John Doe
+                        <span class="ls0">XYZ Inc.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="section bg-transparent clearfix" style="padding: 80px 0">
+    <div class="container">
+        <div class="heading-block border-bottom-0 center">
+            <div class="before-heading">See What's Up in Latest</div>
+            <h2 class="nott fw-semibold">News &amp; Events</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="price-carousel" class="owl-carousel carousel-widget" data-margin="30" data-nav="false" data-pagi="true" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3">
+                        {% for post in recent_posts %}
+                        <div class="price-list shadow-sm card border-0 rounded">
+                            {% if post.url %}
+                            <div class="position-relative">
+                                <a href="{{post.url}}" class="entry-link" target="_blank">
+                                    External Link
+                                    <span>- {{post.url}}</span>
+                                </a>
+                            </div>
+                            {% elif post.videos %}
+                            <div class="position-relative">
+                                <iframe src="{{post.videos.url}}" width="500" height="281" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            </div>
+                            {% elif post.image_set %}
+                            <div class="position-relative">
+                                <div class="portfolio-single-image masonry-thumbs grid-container grid-4" data-big="3" data-lightbox="gallery">
+                                    {% for image in post.image_set.all %}
+                                    <a class="grid-item" href="{{image.image.url}}" data-lightbox="gallery-item"><img data-src="{{image.image.url}}" class="lazy" alt="Image"></a>
+                                    {% endfor %}
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if not post.url %}
+                            <div class="card-body">
+                                <div class="price-title pb-3">{{post.title|title}}</div>
+                                <p class="list-group list-group-flush mb-4">{{post.content|safe|truncatewords:35}}</p>
+                                <a href="{{post.get_absolute_url}}" class="button button-rounded button-large w-100 m-0 center fw-medium">Read More</a>
+                            </div>
+                            {% endif %}
                         </div>
                         {% empty %}
                         <div class="slide">
-                            <div class="testi-image">
-                                <a href="{% url 'ceo' %}"><img src="{% static 'images/team/president.jpeg' %}" alt="President Image for creating a new testimony"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>We have no testimony yet.</p>
-                                <p>You can <a href="{% url 'account_login' %}"><strong>login</strong></a> to leave one. Thank you</p>
+                            <div class="grid-inner">
+                                <div class="entry-image">
+                                    <a href="{% url 'home' %}" class="entry-link">
+                                        BIZWALLET.ORG
+                                        <span>- No Post Yet</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         {% endfor %}
-                        {% if request.user.is_authenticated %}
-                        <div class="slide">
-                            <div class="testi-image">
-                                <a href="{% url 'ceo' %}"><img src="{% static 'images/team/president.jpeg' %}" alt="President Image for creating a new testimony"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Leave a testament for others to read</p>
-                                
-                                <form action="{% url 'home' %}" method="POST">
-                                    {% csrf_token %}
-                                    {{form|crispy}}
-                                    <button type="submit" class="btn btn-success btn-block">Submit</button>
-                                </form>
-                                
-                            </div>
-                        </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
-
-            <div class="card topmargin overflow-hidden">
-                <div class="card-body">
-                    <h4>Opening Hours</h4>
-
-                    <p>Our offices are open 6 days a week.</p>
-
-                    <ul class="iconlist mb-0">
-                        <li><i class="icon-time color"></i> <strong>Mondays-Fridays:</strong> 9AM to 5PM</li>
-                        <li><i class="icon-time color"></i> <strong>Saturdays:</strong> 11AM to 3PM</li>
-                        <li><i class="icon-time text-danger"></i> <strong>Sundays:</strong> Closed</li>
-                    </ul>
-
-                    <i class="icon-time bgicon"></i>
-                </div>
-            </div>
         </div>
+
     </div>
 
 </div>
 
-{% endblock %}
+<div class="section mb-0 pb-0 bg-theme-light clearfix" style="padding-top: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-1">
+                <div class="before-heading">Don't Hesitate to Reach out to Us</div>
+                    <h2 class="nott fw-semibold display-4">Want to Talk?</h2>
+                <h4 class="fw-light mb-4">Call us at <a href="tel:+(61)8-234-532-45">+(61)8-234-532-45</a></h4>
+                <a href="{% url 'contact' %}" class="button button-rounded button-xlarge m-0 nott fw-semibold ls0 px-5">Mail Us</a>
+            </div>
+        </div>
+    </div>
+    <img src="{% static 'demos/coworking/images/footer-bg.jpg' %}" alt="Footer Image" class="footer-img">
+</div>
 
 
-{% block inline_javascript %}
-<script>
-
-    var tpj = jQuery;
-    var revapi202;
-    var $ = jQuery.noConflict();
-
-    tpj(document).ready(function() {
-        if (tpj("#rev_slider_579_1").revolution == undefined) {
-            revslider_showDoubleJqueryError("#rev_slider_579_1");
-        } else {
-            revapi202 = tpj("#rev_slider_579_1").show().revolution({
-                sliderType: "standard",
-                jsFileLocation: "include/rs-plugin/js/",
-                sliderLayout: "fullscreen",
-                dottedOverlay: "none",
-                delay: 9000,
-                responsiveLevels: [1140, 1024, 778, 480],
-                visibilityLevels: [1140, 1024, 778, 480],
-                gridwidth: [1140, 1024, 778, 480],
-                gridheight: [728, 768, 960, 720],
-                lazyType: "none",
-                shadow: 0,
-                spinner: "off",
-                stopLoop: "on",
-                stopAfterLoops: 0,
-                stopAtSlide: 1,
-                shuffle: "off",
-                autoHeight: "off",
-                fullScreenAutoWidth: "off",
-                fullScreenAlignForce: "off",
-                fullScreenOffsetContainer: "",
-                fullScreenOffset: "",
-                disableProgressBar: "on",
-                hideThumbsOnMobile: "off",
-                hideSliderAtLimit: 0,
-                hideCaptionAtLimit: 0,
-                hideAllCaptionAtLilmit: 0,
-                debugMode: false,
-                fallbacks: {
-                    simplifyAll:"off",
-                    disableFocusListener:false,
-                },
-                parallax: {
-                    type:"mouse",
-                    origo:"slidercenter",
-                    speed:300,
-                    levels:[2,4,6,8,10,12,14,16,18,20,22,24,49,50,51,55],
-                },
-                navigation: {
-                    keyboardNavigation:"off",
-                    keyboard_direction: "horizontal",
-                    mouseScrollNavigation:"off",
-                    onHoverStop:"off",
-                    touch:{
-                        touchenabled:"on",
-                        swipe_threshold: 75,
-                        swipe_min_touches: 1,
-                        swipe_direction: "horizontal",
-                        drag_block_vertical: false
-                    },
-                    arrows: {
-                        style: "hermes",
-                        enable: true,
-                        hide_onmobile: false,
-                        hide_onleave: false,
-                        tmp: '<div class="tp-arr-allwrapper">	<div class="tp-arr-imgholder"></div>	<div class="tp-arr-titleholder">{{title}}</div>	</div>',
-                        left: {
-                            h_align: "left",
-                            v_align: "center",
-                            h_offset: 10,
-                            v_offset: 0
-                        },
-                        right: {
-                            h_align: "right",
-                            v_align: "center",
-                            h_offset: 10,
-                            v_offset: 0
-                        }
-                    }
-                }
-            });
-            revapi202.on("revolution.slide.onloaded",function (e) {
-                setTimeout( function(){ SEMICOLON.slider.sliderDimensions(); }, 200 );
-            });
-
-            revapi202.on("revolution.slide.onchange",function (e,data) {
-                SEMICOLON.slider.revolutionSliderMenu();
-            });
-        }
-    }); /*ready*/
-
-</script>
 {% endblock %}

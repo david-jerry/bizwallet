@@ -1,0 +1,195 @@
+{% load static i18n compress %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Bizwallet{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more. {% endblock %}">
+    <meta name="author" content="Jeremiah David">
+    <meta name="keywords" content="{% block kw %}{% endblock %}">
+    <meta name="format-detection" content="telephonr=no">
+    <meta name="HandheldFriendly" content="true">
+
+
+    <meta property="OG:author" content="Jeremiah David">
+    <meta property="og:title" content="Bizwallet - Your trusted cooporative fintech">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{% block og_desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more. {% endblock %}">
+    <meta property="og:image" content="{% static 'images/logo.jpg' %}">
+    <meta property="og:url" content="http://bizwallet.org">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Bizwallet - Your trusted cooporative fintech">
+    <meta name="twitter:image:alt" content="Bizwallet Logo Icon">
+
+    <!-- social analytics from fb and twitter -->
+    <meta property="fb:app_id" content="">
+    <meta name="twitter:site" content="@buzwallet_ng">
+
+    <link rel="canonical" href="{% url 'home' %}">
+
+    <!-- Preconnects to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+
+    <!-- Your Fonts: Third-party css libraries go here -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+
+    {# vue js 3 package for frontend ajaxing must be in the header section #}
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <link href="{% static 'css/iziToast.min.css' %}" rel="stylesheet">
+    {% include 'snippets/dash_css.html' %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    {{form.media}}
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body class="">
+    {% include 'snippets/dash_nav.html' %}
+    <div class="main-content">
+      <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+        <div class="container-fluid">
+          <!-- Brand -->
+          <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">{% block page_title %}
+            
+          {% endblock page_title %}</a>
+          <!-- Form -->
+          
+          <!-- User -->
+          <ul class="navbar-nav align-items-center d-none d-md-flex">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder" src="{% if request.user.photo %}{% else %}{% static 'images/team-1-800x800.jpg' %}{% endif %}">
+                  </span>
+                  <div class="media-body ml-2 d-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold">{% if request.user.is_authenticated %}{{request.user.fullname}}{% endif %}</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                <div class=" dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome!</h6>
+                </div>
+                <a href="{% url 'users:update' %}" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>My profile</span>
+                </a>
+                <a href="{% url 'account_change_password' %}" class="dropdown-item">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>Settings</span>
+                </a>
+                <a href="./examples/profile.html" class="dropdown-item">
+                  <i class="ni ni-calendar-grid-58"></i>
+                  <span>Activity</span>
+                </a>
+                <a href="{% url 'contact' %}" class="dropdown-item">
+                  <i class="ni ni-support-16"></i>
+                  <span>Support</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'account_logout' %}" class="dropdown-item">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      {% include "snippets/dash_header.html" %}
+      
+      <div class="container-fluid mt-7">
+        {% block content %}
+        {% endblock %}
+        {% include 'snippets/dash_footer.html' %}
+      </div>
+
+
+    </div> <!-- /container -->
+
+    {% block modal %}{% endblock modal %}
+
+
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Your stuff: Third-party javascript libraries go here -->
+      <script src="{% static 'js/iziToast.min.js' %}"></script>
+      {% include 'snippets/dash_js.html' %}
+
+    {% endblock javascript %}
+
+
+    {# izi message signals for django #}
+    {% for message in messages %}
+      <script type=text/javascript>
+        iziToast.settings({
+          timeout: 9000,
+          position: 'topRight',
+          drag: true,
+          pauseOnHover: true,
+          transitionIn: 'flipInX',
+          transitionOut: 'flipOutX',
+          transitionInMobile: 'fadeInUp',
+          transitionOutMobile: 'fadeOutDown',
+          close: true,
+          balloon: true,
+          progressBar: true,
+          progressBarEasing: 'ease',
+          pauseOnHover: true,
+          icon: 'material-icons',
+          iconText: '{% if message.tags == "info" %}info{% elif message.tags == "success" %}check_circle{% elif message.tags == "warning" %}warning{% else %}priority_high{% endif %}',
+        });
+        iziToast.{{ message.tags }}({
+          id: '{{ message.tags }}',
+          title: '{{ message.tags|capfirst }}',
+          message: '{{ message }}',
+        });
+      </script>
+    {% endfor %}
+
+  {# tiny mce settings configuration #}
+  
+  <script >
+    tinymce.init({
+      selector: 'textarea',
+      menubar: false,
+      plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+      ],
+      setup: function (editor) {
+        editor.on('change', function (e) {
+          editor.save();
+        });
+      }
+    });
+  </script>
+
+
+    {% block inline_javascript %}
+    {# Script tags with only code, no src (defer by default) #}
+    {% endblock inline_javascript %}
+  </body>
+</html>

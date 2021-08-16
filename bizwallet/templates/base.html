@@ -1,4 +1,4 @@
-{% load static i18n compress cookielaw_tags %}
+{% load static i18n compress %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,18 +32,16 @@
 
     <!-- Preconnects to improve performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <!-- <link rel="preconnect" href="https://stackpath.bootstrapcdn.com/"> -->
 
 
     <!-- Your Fonts: Third-party css libraries go here -->
-    <!-- Latest compiled and minified Bootstrap CSS -->
-    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700&display=swap" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="icon" href="{% static 'images/footer.png' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
 
     {# vue js 3 package for frontend ajaxing must be in the header section #}
     <!-- <script src="https://unpkg.com/vue@next"></script> -->
@@ -62,65 +60,21 @@
     <![endif]-->
   </head>
 
-  <body {% block body_class %}{% endblock %}>
+  <body class="stretched page-transition"  data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800"></body>
 
     <div class="clearfix" id="wrapper">
 
       {% include 'snippets/nav.html' %}
 
-      {% block header %}
-      {% endblock %}
-
-      <!-- <div class="mb-1">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'home' %}">bizwallet</a>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                </li>
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </nav>
-
-      </div> -->
       <section id="content">
-        <div class="content-wrap">
-            <div class="container clearfix">
+        <div class="content-wrap pt-3 pb-0">
+
+            {% block header %}
+            {% endblock %}
 
             {% block content %}
             {% endblock %}
 
-            </div>
-
-            {% block content_wide %}
-            {% endblock %}
         </div>
       </section>
 
@@ -141,11 +95,6 @@
     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
-      <!-- Bootstrap JS and its dependencies-->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
       <!-- Your stuff: Third-party javascript libraries go here -->
       <script src="{% static 'js/iziToast.min.js' %}"></script>
       {% include 'snippets/js.html' %}
@@ -181,6 +130,25 @@
       </script>
     {% endfor %}
 
+  {# tiny mce settings configuration #}
+  
+  <script >
+    tinymce.init({
+      selector: 'textarea',
+      menubar: false,
+      plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+      ],
+      setup: function (editor) {
+        editor.on('change', function (e) {
+          editor.save();
+        });
+      }
+    });
+  </script>
 
 
     {% block inline_javascript %}
