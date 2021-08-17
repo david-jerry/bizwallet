@@ -47,6 +47,18 @@
     <link href="{% static 'css/iziToast.min.css' %}" rel="stylesheet">
     {% include 'snippets/dash_css.html' %}
 
+
+
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Your stuff: Third-party javascript libraries go here -->
+      <script defer src="{% static 'js/iziToast.min.js' %}"></script>
+      {% include 'snippets/dash_js.html' %}
+
+    {% endblock javascript %}
+
     {% block extra_css %}
     {% endblock %}
 
@@ -146,15 +158,6 @@
     {% block modal %}{% endblock modal %}
 
 
-    <!-- Le javascript
-    ================================================== -->
-    {# Placed at the top of the document so pages load faster with defer #}
-    {% block javascript %}
-      <!-- Your stuff: Third-party javascript libraries go here -->
-      <script src="{% static 'js/iziToast.min.js' %}"></script>
-      {% include 'snippets/dash_js.html' %}
-
-    {% endblock javascript %}
 
 
     {# izi message signals for django #}

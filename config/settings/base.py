@@ -53,7 +53,7 @@ LANGUAGE_COOKIE_DOMAIN = None
 LANGUAGE_COOKIE_PATH = "/"
 LANGUAGE_COOKIE_SECURE = False
 LANGUAGE_COOKIE_HTTPONLY = False
-LANGUAGE_COOKIE_SAMESITE = None
+LANGUAGE_COOKIE_SAMESITE = True
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id

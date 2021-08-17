@@ -48,6 +48,19 @@
     <link href="{% static 'css/iziToast.min.css' %}" rel="stylesheet">
     {% include 'snippets/css.html' %}
 
+
+        {# <!-- {% cookielaw_banner %} --> #}
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Your stuff: Third-party javascript libraries go here -->
+      <script defer src="{% static 'js/iziToast.min.js' %}"></script>
+      {% include 'snippets/js.html' %}
+
+    {% endblock javascript %}
+
+
     {% block extra_css %}
     {% endblock %}
 
@@ -89,17 +102,6 @@
     <div id="gotoTop" class="icon-angle-up"></div>
 
 
-
-    {# <!-- {% cookielaw_banner %} --> #}
-    <!-- Le javascript
-    ================================================== -->
-    {# Placed at the top of the document so pages load faster with defer #}
-    {% block javascript %}
-      <!-- Your stuff: Third-party javascript libraries go here -->
-      <script src="{% static 'js/iziToast.min.js' %}"></script>
-      {% include 'snippets/js.html' %}
-
-    {% endblock javascript %}
 
 
     {# izi message signals for django #}
