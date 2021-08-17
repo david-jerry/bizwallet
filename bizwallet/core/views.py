@@ -36,7 +36,7 @@ def compress_whitespace(s):
     return " ".join(s.split())
 
 
-@cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
+# @cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
 def home(request, *args, **kwargs):
     # get referrer linked to reffered using username
     username = str(kwargs.get("username"))
