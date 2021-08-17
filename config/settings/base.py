@@ -327,9 +327,21 @@ CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
-X_FRAME_OPTIONS = "SAMESITE"
+X_FRAME_OPTIONS = "'ALLOW-FROM SAMEORIGIN https://www.bizwallet.org/ https://bizwallet-bucket.s3.amazonaws.com'"
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
+
+CSP_DEFAULT_SRC = ["'none'"]
+CSP_SCRIPT_SRC = [
+    "https://stackpath.bootstrapcdn.com",
+    "https://bizwallet-bucket.s3.amazonaws.com",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com"
+]
+CSP_STYLE_SRC = [
+    "https://stackpath.bootstrapcdn.com", 
+    "https://bizwallet-bucket.s3.amazonaws.com"
+]
 
 # EMAIL
 # ------------------------------------------------------------------------------
