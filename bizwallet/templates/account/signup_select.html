@@ -1,0 +1,60 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Select an Option to signup" %}{% endblock %}
+
+{% block inner %}
+<div class="row mt-0 pt-0">
+    <div class="col-12 mb-5 mb-xl-0 mt-xl-0">
+        <h1 class="text-center my-4 font-weight-700 h1">{% trans "Sign Up" %}</h1>
+    </div>
+    <div class="col-xl-6 mb-5 mb-xl-0">
+        <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="text-center">
+                <h2 class="mb-0 font-weight-700 h1">Co-operative Investor</h2>
+            </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+            <div class="text-center">
+                <h3>
+                    Signup as an Investor
+                </h3>
+                <p class="font-weight-400">
+                    As an investor you wont need to earn bonuses from referrals. But you gain extra advantage in requesting for a loan and other financial benefits.
+                </p>
+                <hr class="my-4">
+                <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a>.</p>
+
+                <a href="{% url 'account_signup' %}" class="btn btn-success btn-block">Show more</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-xl-6 mb-5 mb-xl-0">
+        <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="text-center">
+                <h2 class="mb-0 font-weight-700 h1">Co-operative Field Manager</h2>
+            </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+            <div class="text-center">
+                <h3>
+                    Signup as a Field Manager
+                </h3>
+                <p class="font-weight-400">
+                    As a Field Manager you earn bonuses from referrals. And will be required to do marketing tasks for us as well as meet a targeted quota each month to remain in this position or be demoted back as an investor.
+                </p>
+                <hr class="my-4">
+                <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a>.</p>
+
+                <a href="{% url 'worker_signup' %}" class="btn btn-primary btn-block">Show more</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

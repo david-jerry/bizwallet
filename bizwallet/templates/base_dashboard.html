@@ -87,6 +87,7 @@
                 <div class=" dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'users:update' %}" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
@@ -108,14 +109,31 @@
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
+                {% else %}
+                <a href="{% url 'account_login' %}" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>Login</span>
+                </a>
+                <a href="{% url 'account_select' %}" class="dropdown-item">
+                  <i class="ni ni-spaceship"></i>
+                  <span>Signup</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'contact' %}" class="dropdown-item">
+                  <i class="ni ni-support-16"></i>
+                  <span>Support</span>
+                </a>
+                {% endif %}
               </div>
             </li>
           </ul>
         </div>
       </nav>
-  
-      {% include "snippets/dash_header.html" %}
       
+      {% if request.user.is_authenticated and not request.path == '/accounts/email/' and not request.path == '/accounts/logout/' and not request.path == '/accounts/password/change/' %}
+      {% include "snippets/dash_header.html" %}
+      {% endif %}
+
       <div class="container-fluid mt-7">
         {% block content %}
         {% endblock %}

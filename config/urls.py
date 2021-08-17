@@ -42,6 +42,9 @@ urlpatterns = [
 urlpatterns += [
     # User management
     # Custom users registration
+    path(
+        "accounts/select/", TemplateView.as_view(template_name="account/signup_select.html"), name="account_select"
+    ),
     path("accounts/signup/", investor_signup, name="account_signup"),
     path("accounts/signup-fieldworker/", fieldworker_signup, name="worker_signup"),
     path("users/", include("bizwallet.users.urls", namespace="users")),

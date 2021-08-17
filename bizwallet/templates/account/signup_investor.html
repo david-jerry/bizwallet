@@ -10,9 +10,9 @@ Investor SignUp
 {% endblock %}
 
 {% block inner %}
-<h1>{% trans "Investor SignUp" %}</h1>
+<h1 class="mb-5">{% trans "Investor SignUp" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a>.</p>
 
 <form class="signup" id="signup_form" enctype="multipart/form-data" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}

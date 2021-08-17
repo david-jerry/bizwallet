@@ -1,18 +1,31 @@
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
-
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from bizwallet.utils.export_as_csv import ExportCsvMixin
+from django.utils.translation import gettext_lazy as _
 
-from bizwallet.users.forms import ProfileForm, SubscribeForm, UserChangeForm, UserCreationForm, PlanForm, KinForm
-from bizwallet.users.models import Profile, NextOfKin, EnrollmentPlan, Subscribe, Testimonial
+from bizwallet.users.forms import (  # PlanForm,; SubscribeForm,
+    KinForm,
+    ProfileForm,
+    UserChangeForm,
+    UserCreationForm,
+)
+from bizwallet.users.models import (  # Subscribe, EnrollmentPlan
+    LoginHistory,
+    Membership,
+    NextOfKin,
+    Profile,
+    Subscription,
+    Testimonial,
+    UserMembership,
+)
+from bizwallet.utils.export_as_csv import ExportCsvMixin
 
 User = get_user_model()
 
-
+admin.site.register(UserMembership)
+admin.site.register(LoginHistory)
 
 class ProfileAdmin(admin.StackedInline):
     form = ProfileForm
@@ -130,42 +143,39 @@ admin.site.register(Testimonial)
 admin.site.register(NextOfKin)
 
 
-class PlanAdmin(admin.ModelAdmin, ExportCsvMixin):
-    form = PlanForm
-    model = EnrollmentPlan
+class MembershipAdmin(admin.ModelAdmin, ExportCsvMixin):
+    # form = PlanForm
+    model = Membership
     list_per_page = 250
     empty_value_display = '-empty-'
     search_fields = ["__str__"]
     list_display = [
         "__str__",
-        'title',
-        "percentage",
-        "invest",
-        'status',
-        'duration'
+        'membership_type',
+        "duration",
+        "price",
+        'created',
+        'modified'
     ]
     list_editable = [
-        'title',
-        "percentage",
-        "invest",
-        'status',
-        'duration'
+        'membership_type',
     ]
     actions = [
         "export_as_csv",
     ]
 
-admin.site.register(EnrollmentPlan, PlanAdmin)
+admin.site.register(Membership, MembershipAdmin)
 
 
 class SubAdmin(admin.ModelAdmin, ExportCsvMixin):
-    model = Subscribe
+    model = Subscription
     list_per_page = 250
     empty_value_display = '-empty-'
     search_fields = ["__str__"]
-    list_display = ["__str__", 'bill']
+    list_display = ["__str__", 'expires_in', 'active']
+    list_editable = ['active']
     actions = [
         "export_as_csv",
     ]
 
-admin.site.register(Subscribe, SubAdmin)
+admin.site.register(Subscription, SubAdmin)

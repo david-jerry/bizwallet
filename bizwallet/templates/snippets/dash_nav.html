@@ -59,12 +59,12 @@
             </a>
             {% else %}
             <a href="{% url 'account_login' %}" class="dropdown-item">
-                <i class="ni ni-support-16"></i>
+                <i class="ni ni-single-02"></i>
                 <span>Login</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
+              <a href="{% url 'account_select' %}" class="dropdown-item">
+                <i class="ni ni-spaceship"></i>
                 <span>Signup</span>
               </a>
               {% endif %}
@@ -92,11 +92,13 @@
         <!-- Form -->
         <!-- Navigation -->
         <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
           <li class="nav-item  active ">
             <a class="nav-link  active " href="{% url 'users:detail' request.user.username %}">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link " href="./examples/icons.html">
               <i class="ni ni-planet text-blue"></i> Activities
@@ -107,6 +109,7 @@
               <i class="ni ni-pin-3 text-orange"></i> Support
             </a>
           </li>
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link " href="{% url 'users:update' %}">
               <i class="ni ni-single-02 text-yellow"></i> User profile
@@ -117,6 +120,7 @@
               <i class="ni ni-single-02 text-yellow"></i> Next of Kin
             </a>
           </li>
+          {% endif %}
           {% if object == request.user.is_superuser or object == request.user.is_staff %}
           <li class="nav-item">
             <a class="nav-link " href="{% url 'admin:index' %}">
@@ -131,11 +135,18 @@
         <h6 class="navbar-heading text-muted">Configuration</h6>
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_change_password' %}">
-              <i class="ni ni-spaceship"></i> Password Setting
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_change_password' %}">
+                  <i class="ni ni-key-25"></i> Password Setting
+                </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/accounts/email/">
+                <i class="ni ni-email-83"></i> Email Setting
             </a>
-          </li>
+            </li>
+            {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
               <i class="ni ni-palette"></i> Notification Setting

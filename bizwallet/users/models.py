@@ -1,11 +1,10 @@
 from __future__ import absolute_import
 
 # development system imports
-import datetime
 import os
 import random
 import uuid
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 
 # Third partie imports
@@ -30,6 +29,7 @@ from django.db.models import (
     GenericIPAddressField,
     ImageField,
     OneToOneField,
+    PositiveIntegerField,
     SlugField,
     TextChoices,
     TextField,
@@ -173,36 +173,6 @@ BANKS = (
     ('ZENITH BANK PLC', _('ZENITH BANK PLC')),
 )
 
-class EnrollmentPlan(TimeStampedModel):
-    DURATION = (
-        ("0", "0"),
-        ("28", "28"),
-        ("64", "64"),
-        ("112", "112"),
-        ("168", "168"),
-        ("336", "336"),
-        ("672", "672")
-    )
-    STATUS = Choices("pending", "approved", "rejected", "expired")
-    title = CharField(_('Enrollment Plan Title'), max_length=255, null=True, blank=True)
-    percentage = DecimalField(_("Plan Percentage"), max_digits=3, decimal_places=2, null=True, blank=True, default=1.0, help_text="1.00 means 100%, 0.50 mean 50%")
-    slug = SlugField(_('Plan Slug'), max_length=500, unique=True, null=True, blank=True)
-    duration = CharField(_("Duration"), max_length=4, choices=DURATION, null=True, blank=True, default="168")
-    invest = DecimalField(
-        _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
-    )
-    status = StatusField(default="pending")
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        managed = True
-        verbose_name = "Plan"
-        verbose_name_plural = "Plans"
-        ordering = ["-created", "-modified"]
-
-
 
 class User(AbstractUser):
     """Default user for bizwallet."""
@@ -233,8 +203,8 @@ class User(AbstractUser):
     occupation = CharField(_("Occupation"), max_length=500, blank=True, null=True)
     office_address = CharField(_("Office Address"), max_length=500, blank=True, null=True)
     is_field_worker = BooleanField(_("Are you a field worker"), default=True)
-    has_paid = BooleanField(_("User has Paid"), default=False)
     accept_terms = BooleanField(_("Accept our terms"), default=False)
+    has_paid = BooleanField(_("Paid Initial Membership Fee"), default=False)
 
     
     # Referral fields
@@ -286,40 +256,98 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
 
 
-class Subscribe(TimeStampedModel):
-    user = OneToOneField(User, on_delete=SET_NULL, null=True, blank=True)
-    plan = ForeignKey(EnrollmentPlan, on_delete=SET_NULL, null=True, blank=True, related_name="userplan")
-    bill = DecimalField(
-        _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
-    )
-    started_on = DateTimeField(_("Plan Started on"), auto_now=True)
-    approved = BooleanField(default=False)
+
+class UserSettings(TimeStampedModel):
+    user = OneToOneField(User, on_delete=CASCADE, related_name='usersettings')
+    account_verified = BooleanField(default=False)
+    ver_expired = DateField(default=datetime.now().date() + timedelta(days=3))
+    verified_code = CharField(blank=True, null=True, max_length=100)
+    code_expired = BooleanField(default=False)
+    recieve_email_notice = BooleanField(default=True)
+
+class PayHistory(TimeStampedModel):
+    user = ForeignKey(User, on_delete=SET_NULL, null=True)
+    paystack_charge_id = CharField(max_length=100, default='', blank=True)
+    paystack_access_code = CharField(max_length=100, default='', blank=True)
+    payment_for = ForeignKey('Membership', on_delete=SET_NULL, null=True)
+    amount = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    paid = BooleanField(default=False)
+    date = DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.fullname} subscribed for {self.plan.title} with {self.bill} for over {self.plan.duration} days"
+        return self.user.fullname
 
 
-    # check if user has paid for a subscription
-    def subscribed(self):
-        # qs = User.objects.filter(user=self.user, has_paid=False)
-        if self.approved:
-            user = self.user
+class LoginHistory(TimeStampedModel):
+    user = ForeignKey(User, on_delete=CASCADE, related_name='loginhistory')
+
+    def __str__(self):
+        return f"{self.user.fullname} logged in {self.created}"
+    
+
+class Membership(TimeStampedModel):
+    MEMBERSHIP_CHOICES = (
+    	('Premium', 'Premium'), # Note that they are all capitalize//
+    	('Platinum', 'Platinum'),
+    	('Gold', 'Gold'),
+        ('VIP', 'VIP'),
+        ('VVIP', 'VVIP')
+    )
+    PERIOD_DURATION = (
+        ('Days', 'Days'),
+        ('Week', 'Week'),
+        ('Months', 'Months'),
+    )
+    slug = SlugField(null=True, blank=True)
+    membership_type = CharField(choices=MEMBERSHIP_CHOICES, default='Premium', max_length=30)
+    duration = PositiveIntegerField(default=365)
+    duration_period = CharField(max_length=100, default='Days', choices=PERIOD_DURATION)
+    price = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+       return self.membership_type
+
+class UserMembership(TimeStampedModel):
+    user = OneToOneField(User, related_name='user_membership', on_delete=CASCADE)
+    membership = ForeignKey(Membership, related_name='user_membership', on_delete=SET_NULL, null=True)
+    reference_code = CharField(max_length=100, default='', blank=True)
+
+    def __str__(self):
+       return self.user.fullname
+
+
+
+#### User Subscription
+class Subscription(TimeStampedModel):
+    user_membership = ForeignKey(UserMembership, related_name='subscription', on_delete=CASCADE, default=None)
+    expires_in = DateField(null=True, blank=True)
+    active = BooleanField(default=True)
+
+    def __str__(self):
+      return self.user_membership.user.fullname
+
+    def has_paid(self):
+        if self.active:
+            user = self.user_membership.user
             user.has_paid = True
-            self.started_on = timezone.now()
             user.save()
-            self.save()
-            return True
-        return False
+        else:
+            user = self.user_membership.user
+            user.has_paid = False
+            user.save()
 
     def send_subscribed_mail(self):
-        if self.subscribed:
-            html_ = render_to_string("email/subscribe_approve.html", {"fullname": f"{self.user.fullname}", "user_plan": f"{self.plan}"})
-            subject = "1-Time Subscription Plan Started Successfully"
+        user = self.user_membership.user
+        plan = self.user_membership.membership
+
+        if self.active:
+            html_ = render_to_string("email/subscribe_approve.html", {"fullname": f"{user.fullname}", "user_plan": f"{plan.membership_type}"})
+            subject = "Subscription Plan Started Successfully"
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient = [self.user.email]
+            recipient = [user.email]
             sent_mail = send_mail(
                 subject,
-                "Your subscription has been approved and started",
+                "Your subscription has been activated and started",
                 from_email,
                 recipient,
                 html_message=html_,
@@ -327,15 +355,6 @@ class Subscribe(TimeStampedModel):
             )
             return sent_mail
         return False
-
-
-    class Meta:
-        managed = True
-        verbose_name = "Subscribe"
-        verbose_name_plural = "Subscriptions"
-        ordering = ["-created", "-modified"]
-
-
 
 
 class Profile(TimeStampedModel):
@@ -393,49 +412,6 @@ class NextOfKin(TimeStampedModel):
 
 
 
-# class Plan(TimeStampedModel):
-#     STATUS = Choices("pending", "approved", "rejected", "expired")
-#     user = ForeignKey(User, on_delete=SET_NULL, null=True, related_name="plan")
-#     plan = ForeignKey(Services, on_delete=SET_NULL, null=True, related_name="services")
-#     slug = SlugField(_('Plan Slug'), max_length=500, unique=True, null=True, blank=True)
-#     invest = DecimalField(
-#         _("How much do you want to start with"), default=0.00, max_digits=20, decimal_places=2, blank=True, null=True
-#     )
-#     status = StatusField(default="pending")
-#     approved = BooleanField(default=False)
-
-#     def title(self):
-#         return f"{self.user.fullname} {self.plan.title} plan"
-
-#     def __str__(self):
-#         return f"{self.user.fullname} invested {self.invest} for {self.plan} over {self.plan.duration}"
-
-#     class Meta:
-#         managed = True
-#         verbose_name = "Plan"
-#         verbose_name_plural = "Plans"
-#         ordering = ["-created", "-modified"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Testimonial(TimeStampedModel):
     user = ForeignKey(User, on_delete=SET_NULL, null=True, related_name="usertestimonial")
     testimony = CharField(_("Testimony"), max_length=400, blank=True, null=True)
@@ -449,3 +425,132 @@ class Testimonial(TimeStampedModel):
         verbose_name = "Testimonial"
         verbose_name_plural = "Testimonials"
         ordering = [ "-created", "-modified"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# class EnrollmentPlan(TimeStampedModel):
+#     DURATION = (
+#         ("0", "0"),
+#         ("28", "28"),
+#         ("64", "64"),
+#         ("112", "112"),
+#         ("168", "168"),
+#         ("336", "336"),
+#         ("672", "672")
+#     )
+#     STATUS = Choices("pending", "approved", "rejected", "expired")
+#     title = CharField(_('Enrollment Plan Title'), max_length=255, null=True, blank=True)
+#     percentage = DecimalField(_("Plan Percentage"), max_digits=3, decimal_places=2, null=True, blank=True, default=1.0, help_text="1.00 means 100%, 0.50 mean 50%")
+#     slug = SlugField(_('Plan Slug'), max_length=500, unique=True, null=True, blank=True)
+#     duration = CharField(_("Duration"), max_length=4, choices=DURATION, null=True, blank=True, default="168")
+#     invest = DecimalField(
+#         _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
+#     )
+#     status = StatusField(default="pending")
+
+#     def __str__(self):
+#         return self.title
+
+#     class Meta:
+#         managed = True
+#         verbose_name = "Plan"
+#         verbose_name_plural = "Plans"
+#         ordering = ["-created", "-modified"]
+
+
+# class Subscribe(TimeStampedModel):
+#     user = OneToOneField(User, on_delete=SET_NULL, null=True, blank=True)
+#     plan = ForeignKey(EnrollmentPlan, on_delete=SET_NULL, null=True, blank=True, related_name="userplan")
+#     bill = DecimalField(
+#         _("Minimum & Maximum Investment Amount"), decimal_places=2, max_digits=20, validators=[MinValueValidator(Decimal('50000.00')), MaxValueValidator(Decimal('2000000.00'))], help_text="min-amount: ₦50,000.00, max-amount: ₦2,000,000.00", null=True, blank=True
+#     )
+#     started_on = DateTimeField(_("Plan Started on"), auto_now=True)
+#     approved = BooleanField(default=False)
+
+#     def __str__(self):
+#         return f"{self.user.fullname} subscribed for {self.plan.title} with {self.bill} for over {self.plan.duration} days"
+
+
+#     # check if user has paid for a subscription
+#     def subscribed(self):
+#         # qs = User.objects.filter(user=self.user, has_paid=False)
+#         if self.approved:
+#             user = self.user
+#             user.has_paid = True
+#             self.started_on = timezone.now()
+#             user.save()
+#             self.save()
+#             return True
+#         return False
+
+#     def send_subscribed_mail(self):
+#         if self.subscribed:
+#             html_ = render_to_string("email/subscribe_approve.html", {"fullname": f"{self.user.fullname}", "user_plan": f"{self.plan}"})
+#             subject = "1-Time Subscription Plan Started Successfully"
+#             from_email = settings.DEFAULT_FROM_EMAIL
+#             recipient = [self.user.email]
+#             sent_mail = send_mail(
+#                 subject,
+#                 "Your subscription has been approved and started",
+#                 from_email,
+#                 recipient,
+#                 html_message=html_,
+#                 fail_silently=False
+#             )
+#             return sent_mail
+#         return False
+
+
+#     class Meta:
+#         managed = True
+#         verbose_name = "Subscribe"
+#         verbose_name_plural = "Subscriptions"
+#         ordering = ["-created", "-modified"]
+
+
+

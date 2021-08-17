@@ -6,7 +6,7 @@ from django.db import transaction
 from django.db.models import fields
 from django.utils.translation import gettext_lazy as _
 
-from .models import EnrollmentPlan, NextOfKin, Profile, Subscribe, Testimonial
+from .models import NextOfKin, Profile, Testimonial  # EnrollmentPlan, Subscribe,
 
 User = get_user_model()
 
@@ -111,22 +111,22 @@ class KinForm(forms.ModelForm):
 
 
 
-class PlanForm(forms.ModelForm):
-    class Meta():
-        model = EnrollmentPlan
-        fields = [
-            'title', 
-            "percentage", 
-            "invest", 
-            'status', 
-            'duration'
-        ]
+# class PlanForm(forms.ModelForm):
+#     class Meta():
+#         model = EnrollmentPlan
+#         fields = [
+#             'title', 
+#             "percentage", 
+#             "invest", 
+#             'status', 
+#             'duration'
+#         ]
 
 
-class SubscribeForm(forms.ModelForm):
-    class Meta():
-        model = Subscribe
-        fields = ['bill']
+# class SubscribeForm(forms.ModelForm):
+#     class Meta():
+#         model = Subscribe
+#         fields = ['bill']
 
     # @transaction.atomic
     # def save(self):

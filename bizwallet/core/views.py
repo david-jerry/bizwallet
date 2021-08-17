@@ -92,7 +92,7 @@ def home(request, *args, **kwargs):
     except:
         pass
 
-    if not request.session.get("user_ip"):
+    if is_cached and not request.session.get("user_ip"):
         messages.info(
             request,
             _(

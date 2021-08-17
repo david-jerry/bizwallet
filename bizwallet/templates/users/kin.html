@@ -10,13 +10,9 @@ class="stretched page-transition"
 {% block content %}
 <h1>{% if request.user.fullname %}{{request.user.fullname}}{% else %}{{ user.username }}{% endif %}</h1>
 <h3>ADD YOUR NEXT OF KIN</h3>
-<form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'users:kin' %}">
+<form enctype="multipart/form-data" method="post" action="{% url 'users:kin' %}">
     {% csrf_token %}
     {{ form|crispy }}
-    <div class="control-group">
-    <div class="controls">
         <button type="submit" class="button btn btn-primary">Add Next of Kin</button>
-    </div>
-    </div>
 </form>
 {% endblock %}
