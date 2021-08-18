@@ -17,6 +17,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
 from tinymce.views import render_to_image_list
@@ -37,6 +38,7 @@ def compress_whitespace(s):
 
 
 # @cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
+@csrf_protect
 def home(request, *args, **kwargs):
     # get referrer linked to reffered using username
     username = str(kwargs.get("username"))
