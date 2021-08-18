@@ -342,12 +342,18 @@ CSP_SCRIPT_SRC = [
     "https://cdn.trackjs.com",
     "https://cdn.jsdelivr.net",
     "'self'",
+    "'unsafe-eval'",
     "https://code.jquery.com"
 ]
 CSP_STYLE_SRC = [
     "'self'",
+    "'unsafe-inline'",
     "https://stackpath.bootstrapcdn.com", 
     "https://bizwallet-bucket.s3.amazonaws.com"
+]
+CSP_STYLE_SRC_ATTR = [
+    "'self'",
+    "'unsafe-inline'",
 ]
 CSP_STYLE_SRC_ELEM = [
     "'self'",
