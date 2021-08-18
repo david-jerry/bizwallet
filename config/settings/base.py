@@ -339,8 +339,9 @@ CSP_DEFAULT_SRC = ["'self'"]
 CSP_SCRIPT_SRC = [
     "https://stackpath.bootstrapcdn.com",
     "https://bizwallet-bucket.s3.amazonaws.com",
-    "https://cdn.trackjs.com",
     "https://cdn.jsdelivr.net",
+    "https://maps.google.com",
+    "https://maps.googleapis.com",
     "'self'",
     "'unsafe-eval'",
     "https://code.jquery.com"
@@ -365,7 +366,9 @@ CSP_STYLE_SRC_ELEM = [
 CSP_SCRIPT_SRC_ELEM = [
     "'self'",
     "'unsafe-inline'",
-    "https://cdn.trackjs.com"
+    "https://cdn.trackjs.com",
+    "https://maps.google.com",
+    "https://maps.googleapis.com"
 ]
 CSP_FONT_SRC = [
     "'self'",
@@ -389,9 +392,14 @@ CSP_PREFETCH_SRC = [
 ]
 CSP_IMG_SRC = [
     "'self'",
-    "https://bizwallet-bucket.s3.amazonaws.com"
+    "https://bizwallet-bucket.s3.amazonaws.com",
 ]
-CSP_FRAME_SRC = ["https://docs.google.com", "'self'"]
+CSP_FRAME_SRC = [
+    "https://docs.google.com", 
+    "'self'", 
+    "https://maps.google.com",
+    "https://maps.googleapis.com",
+]
 CSP_INCLUDE_NONCE_IN = ["script-src"]
 CSP_REPORT_PERCENTAGE = 1
 CSP_REPORT_URI = ["https://www.bizwallet.org/report-uri", "https://sentry.io"]
