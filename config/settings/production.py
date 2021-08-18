@@ -44,7 +44,7 @@ CACHES = {
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
-SECURE_SSL_HOST = ".bizwallet.org"
+SECURE_SSL_HOST = True
 SECURE_SSL_REDIRECT = True #env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = True
@@ -54,8 +54,8 @@ CSRF_COOKIE_SAMESITE = "Strict"
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = True
 CSRF_USE_SESSIONS = True
-CSRF_COOKIE_DOMAIN = [",bizwallet.com", "0.0.0.0:8000"]
-CSRF_TRUSTED_ORIGINS = [",bizwallet.com", "0.0.0.0:8000"]
+CSRF_COOKIE_DOMAIN = [".bizwallet.com", "0.0.0.0:8000"]
+CSRF_TRUSTED_ORIGINS = [".bizwallet.com", "0.0.0.0:8000", '.heroku.com']
 # https://docs.djangoproject.com/en/dev/topics/security/#ssl-https
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-seconds
 # TODO: set this to 60 seconds first and then to 518400 once you prove the former works
