@@ -325,13 +325,14 @@ FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 1209600
+SESSION_COOKIE_DOMAIN = ".bizwallet.org"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
 CSRF_COOKIE_HTTPONLY = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
-X_FRAME_OPTIONS = "'ALLOW-FROM SAMEORIGIN https://www.bizwallet.org/ https://bizwallet-bucket.s3.amazonaws.com'"
+X_FRAME_OPTIONS = "SAMEORIGIN"
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
 
