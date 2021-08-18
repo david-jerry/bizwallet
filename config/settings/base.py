@@ -210,8 +210,8 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    "csp.middleware.CSPMiddleware",
-    "csp.contrib.rate_limiting.RateLimitedCSPMiddleware",
+    # "csp.middleware.CSPMiddleware",
+    # "csp.contrib.rate_limiting.RateLimitedCSPMiddleware",
 ]
 if DEBUG:
     MIDDLEWARE_CLASSES = MIDDLEWARE
@@ -286,7 +286,7 @@ TEMPLATES = [
                 "bizwallet.utils.context_processors.recent_posts",
                 "bizwallet.core.core_processors.all_services",
                 "bizwallet.core.core_processors.all_users",
-                'csp.context_processors.nonce',
+                # 'csp.context_processors.nonce',
                 "bizwallet.core.core_processors.all_field_users",
             ],
         },
@@ -335,75 +335,76 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
 
-CSP_DEFAULT_SRC = ["'self'"]
-CSP_SCRIPT_SRC = [
-    "https://stackpath.bootstrapcdn.com",
-    "https://bizwallet-bucket.s3.amazonaws.com",
-    "https://cdn.jsdelivr.net",
-    "https://maps.google.com",
-    "https://maps.googleapis.com",
-    "'self'",
-    "'unsafe-eval'",
-    "https://code.jquery.com"
-]
-CSP_STYLE_SRC = [
-    "'self'",
-    "'unsafe-inline'",
-    "https://stackpath.bootstrapcdn.com", 
-    "https://bizwallet-bucket.s3.amazonaws.com"
-]
-CSP_STYLE_SRC_ATTR = [
-    "'self'",
-    "'unsafe-inline'",
-]
-CSP_STYLE_SRC_ELEM = [
-    "'self'",
-    "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",
-    "https://cdnjs.cloudflare.com",
-    "'unsafe-inline'"
-]
-CSP_SCRIPT_SRC_ELEM = [
-    "'self'",
-    "'unsafe-inline'",
-    "https://cdn.trackjs.com",
-    "https://maps.google.com",
-    "https://maps.googleapis.com"
-]
-CSP_FONT_SRC = [
-    "'self'",
-    "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",
-    "https://cdnjs.cloudflare.com"
-]
-CSP_MEDIA_SRC = [
-    "'self'",
-    "https://bizwallet-bucket.s3.amazonaws.com"
-]
-CSP_PREFETCH_SRC = [
-    "'self'",
-    "https://stackpath.bootstrapcdn.com",
-    "https://cdn.jsdelivr.net",
-    "https://code.jquery.com",
-    "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",
-    "https://cdnjs.cloudflare.com",
-    "https://bizwallet-bucket.s3.amazonaws.com"
-]
-CSP_IMG_SRC = [
-    "'self'",
-    "https://bizwallet-bucket.s3.amazonaws.com",
-]
-CSP_FRAME_SRC = [
-    "https://docs.google.com", 
-    "'self'", 
-    "https://maps.google.com",
-    "https://maps.googleapis.com",
-]
-CSP_INCLUDE_NONCE_IN = ["script-src"]
-CSP_REPORT_PERCENTAGE = 1
-CSP_REPORT_URI = ["https://www.bizwallet.org/report-uri", "https://sentry.io"]
-CSP_REPORT_ONLY = True
+# CSP_DEFAULT_SRC = ["'self'"]
+# CSP_SCRIPT_SRC = [
+#     "https://stackpath.bootstrapcdn.com",
+#     "https://bizwallet-bucket.s3.amazonaws.com",
+#     "https://cdn.jsdelivr.net",
+#     "https://maps.google.com",
+#     "https://maps.googleapis.com",
+#     "'self'",
+#     "'unsafe-eval'",
+#     "https://code.jquery.com"
+# ]
+# CSP_STYLE_SRC = [
+#     "'self'",
+#     "'unsafe-inline'",
+#     "https://stackpath.bootstrapcdn.com", 
+#     "https://bizwallet-bucket.s3.amazonaws.com"
+# ]
+# CSP_STYLE_SRC_ATTR = [
+#     "'self'",
+#     "'unsafe-inline'",
+# ]
+# CSP_STYLE_SRC_ELEM = [
+#     "'self'",
+#     "https://fonts.googleapis.com",
+#     "https://fonts.gstatic.com",
+#     "https://cdnjs.cloudflare.com",
+#     "'unsafe-inline'"
+# ]
+# CSP_SCRIPT_SRC_ELEM = [
+#     "'self'",
+#     "'unsafe-inline'",
+#     "https://cdn.trackjs.com",
+#     "https://maps.google.com",
+#     "https://maps.googleapis.com"
+# ]
+# CSP_FONT_SRC = [
+#     "'self'",
+#     "https://fonts.googleapis.com",
+#     "https://fonts.gstatic.com",
+#     "https://cdnjs.cloudflare.com"
+# ]
+# CSP_MEDIA_SRC = [
+#     "'self'",
+#     "https://bizwallet-bucket.s3.amazonaws.com"
+# ]
+# CSP_PREFETCH_SRC = [
+#     "'self'",
+#     "https://stackpath.bootstrapcdn.com",
+#     "https://cdn.jsdelivr.net",
+#     "https://code.jquery.com",
+#     "https://fonts.googleapis.com",
+#     "https://fonts.gstatic.com",
+#     "https://cdnjs.cloudflare.com",
+#     "https://bizwallet-bucket.s3.amazonaws.com"
+# ]
+# CSP_IMG_SRC = [
+#     "'self'",
+#     "https://bizwallet-bucket.s3.amazonaws.com",
+#     "http://jet.geex-arts.com",
+# ]
+# CSP_FRAME_SRC = [
+#     "https://docs.google.com", 
+#     "'self'", 
+#     "https://maps.google.com",
+#     "https://maps.googleapis.com",
+# ]
+# CSP_INCLUDE_NONCE_IN = ["script-src"]
+# CSP_REPORT_PERCENTAGE = 1
+# CSP_REPORT_URI = ["https://www.bizwallet.org/report-uri", "https://sentry.io"]
+# CSP_REPORT_ONLY = True
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend

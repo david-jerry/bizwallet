@@ -52,7 +52,7 @@ CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_DOMAIN = ".bizwallet.com"
-CSRF_TRUSTED_ORIGINS = [".bizwallet.com", '.herokuapp.com']
+# CSRF_TRUSTED_ORIGINS = [".bizwallet.com", '.herokuapp.com']
 SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
