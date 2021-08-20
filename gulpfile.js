@@ -15,6 +15,7 @@ const imagemin = require('gulp-imagemin')
 const pixrem = require('pixrem')
 const plumber = require('gulp-plumber')
 const postcss = require('gulp-postcss')
+const fiber = require('fibers')
 const reload = browserSync.reload
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
@@ -59,7 +60,8 @@ function styles() {
     .pipe(sass({
       includePaths: [
         paths.sass
-      ]
+      ],
+      fiber: fiber
     }).on('error', sass.logError))
     .pipe(plumber()) // Checks for errors
     .pipe(postcss(processCss))
