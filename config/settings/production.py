@@ -16,7 +16,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["bizwallet.org"])
 # Whether to prepend the "www." subdomain to URLs that don't have it.
-PREPEND_WWW = True
+PREPEND_WWW = False
 
 # DATABASES
 # ------------------------------------------------------------------------------
