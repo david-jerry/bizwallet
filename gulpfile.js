@@ -18,6 +18,7 @@ const postcss = require('gulp-postcss')
 const reload = browserSync.reload
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
+sass.compiler = require('sass')
 const spawn = require('child_process').spawn
 const uglify = require('gulp-uglify-es').default
 
