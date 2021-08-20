@@ -18,8 +18,8 @@ const postcss = require('gulp-postcss')
 const fiber = require('fibers')
 const reload = browserSync.reload
 const rename = require('gulp-rename')
-const sass = require('gulp-sass')
-sass.compiler = require('sass')
+// const sass = require('gulp-sass')
+// sass.compiler = require('sass')
 const spawn = require('child_process').spawn
 const uglify = require('gulp-uglify-es').default
 
@@ -56,20 +56,20 @@ function styles() {
       cssnano({ preset: 'default' })   // minify result
   ]
 
-  return src(`${paths.sass}/project.scss`)
-    .pipe(sass({
-      includePaths: [
-        paths.sass
-      ],
-      fiber: fiber
-    }).on('error', sass.logError))
-    .pipe(plumber()) // Checks for errors
-    .pipe(postcss(processCss))
-    .pipe(dest(paths.css))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(postcss(minifyCss)) // Minifies the result
-    .pipe(dest(paths.css))
-}
+//   return src(`${paths.sass}/project.scss`)
+//     .pipe(sass({
+//       includePaths: [
+//         paths.sass
+//       ],
+//       fiber: fiber
+//     }).on('error', sass.logError))
+//     .pipe(plumber()) // Checks for errors
+//     .pipe(postcss(processCss))
+//     .pipe(dest(paths.css))
+//     .pipe(rename({ suffix: '.min' }))
+//     .pipe(postcss(minifyCss)) // Minifies the result
+//     .pipe(dest(paths.css))
+// }
 
 // Javascript minification
 function scripts() {
@@ -122,7 +122,7 @@ function initBrowserSync() {
 
 // Watch
 function watchPaths() {
-  watch(`${paths.sass}/*.scss`, styles)
+  // watch(`${paths.sass}/*.scss`, styles)
   watch(`${paths.templates}/**/*.html`).on("change", reload)
   watch([`${paths.js}/*.js`, `!${paths.js}/*.min.js`], scripts).on("change", reload)
 }
