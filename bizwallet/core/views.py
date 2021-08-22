@@ -36,39 +36,25 @@ devnull = open(os.devnull, "w")
 def compress_whitespace(s):
     return " ".join(s.split())
 
+def get_ip_address(request):
+    """ use requestobject to fetch client machine's IP Address """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')    ### Real IP address of client Machine
+    return ip  
 
-# @cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
+@cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
 @csrf_protect
 def home(request, *args, **kwargs):
     # get referrer linked to reffered using username
     username = str(kwargs.get("username"))
 
-    ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '105.112.98.89')
+    ip_address = get_ip_address(request)
     print(ip_address)
 
-    # if not settings.DEBUG:
-    #     print("returning FORWARDED_FOR")
-    #     ip = request.META.get('HTTP_X_FORWARDED_FOR')
-    #     try: 
-    #         return ip
-    #     except (KeyError, IndexError): 
-    #         pass 
-    # elif request.META.get('HTTP_X_REAL_IP'):
-    #     print("returning REAL_IP")
-    #     ip = request.META.get('HTTP_X_REAL_IP')
-    #     try: 
-    #         return ip
-    #     except (KeyError, IndexError): 
-    #         pass 
-    # else:
-    #     print("returning REMOTE_ADDR")
-    #     ip = request.META.get('REMOTE_ADDR')
-    #     try: 
-    #         return ip
-    #     except (KeyError, IndexError): 
-    #         pass 
-    # return str(ip)
-    
+   
     services = Services.objects.all().filter(active=True)
     testimonials = Testimonial.objects.filter(active=True).order_by("-created")[:5]
 
@@ -90,15 +76,17 @@ def home(request, *args, **kwargs):
             request.session["geodata"] = response.json()
 
         geodata = request.session["geodata"]
+        print(geodata)
         request.session["user_ip"] = geodata["ip"]
         request.session["country"] = geodata["country_name"]
+        print(request.session.get("country"))
         request.session["country_code"] = geodata["country_code"]
         request.session["region_name"] = geodata["region_name"]
         request.session["city"] = geodata["city"]
     except:
         pass
 
-    if is_cached in request.session and not request.session.get("user_ip"):
+    if not request.session.get("user_ip"):
         messages.info(
             request,
             _(

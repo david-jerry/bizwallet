@@ -125,48 +125,14 @@ def update_active(sender, created, instance, *args, **kwargs):
 
 # All auth signals
 
-@receiver(user_login_failed)
-def log_user_login_failed(sender, credentials, request, **kwargs):
-    print('user {} logged in failed through page {}'.format(credentials.get('username'), request.META.get('HTTP_REFERER')))
- 
- 
-@receiver(user_logged_out)
-def log_user_logout(sender, request, user, **kwargs):
-    print('user {} logged out through page {}'.format(user.username, request.META.get('HTTP_REFERER')))
-
-@receiver(user_logged_in)
-def login_user_ip(request, sender, user, **kwargs):
-    print("Login signal working fine")
-    if user:
-        # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        # if x_forwarded_for:
-        #     ip = x_forwarded_for.split(',')[0]
-        # else:
-        #     ip = request.META.get('REMOTE_ADDR')
-        # return ip
-        ip = request.ipinfo.ip
-        country = request.ipinfo.country_name
-        city = request.ipinfo.city
-        User.objects.filter(username=user.username).update(country=country, city=city)
-        LoginHistory.object.create(user=user, ip=ip, city=city, country=country)
 
 @receiver(user_signed_up)
 def user_signed_up_(request, user, **kwargs):
     if user:
-        # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        # if x_forwarded_for:
-        #     ip = x_forwarded_for.split(',')[0]
-        # else:
-        #     ip = request.META.get('REMOTE_ADDR')
-        # return ip
-        # ip = ip
-        country = request.ipinfo.country
-        city = request.ipinfo.city
-
-        user_ip = request.ipinfo.ip
-        user_country = request.ipinfo.country_name
-        user_country_code = country
-        user_city = city
+        user_ip = request.session.get("user_ip")
+        user_country = request.session.get("country")
+        user_country_code = request.session.get("country_code")
+        user_city = request.session.get("city")
         referrer_id = request.session.get("fieldworker_id")
         if referrer_id is not None:
             new_investor = user

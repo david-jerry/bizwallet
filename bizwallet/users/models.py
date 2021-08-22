@@ -7,6 +7,7 @@ import uuid
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 
+from allauth.account.signals import user_logged_in, user_logged_out, user_signed_up
 # Third partie imports
 from countries_plus.models import Country
 from dateutil import relativedelta
@@ -39,6 +40,7 @@ from django.db.models import (
     UUIDField,
 )
 from django.db.models.fields import BigIntegerField
+from django.dispatch import receiver
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse
 from django.utils import timezone
@@ -265,6 +267,22 @@ class User(AbstractUser):
         """
         return reverse("users:detail", kwargs={"username": self.username})
 
+
+@receiver(user_logged_out)
+def log_user_logout(sender, request, user, **kwargs):
+    print('user {} logged out through page {}'.format(user.username, request.META.get('HTTP_REFERER')))
+
+@receiver(user_logged_in)
+def login_user_ip(request, sender, user, **kwargs):
+    print("Login signal working fine")
+    if user:
+        ip = request.session.get("user_ip")
+        country = request.session.get("country")
+        print(country)
+        country_code = request.session.get("country_code")
+        city = request.session.get("city")
+        User.objects.filter(username=user.username).update(country=country, city=city)
+        LoginHistory.objects.create(user=user, ip=ip, city=city, country=country)
 
 class Profile(TimeStampedModel):
     user = OneToOneField(User, on_delete=CASCADE, related_name="userprofile")
