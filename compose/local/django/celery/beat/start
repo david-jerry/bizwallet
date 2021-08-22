@@ -1,8 +1,8 @@
-#!/bin/bash
+# #!/bin/bash
 
-set -o errexit
-set -o nounset
+# set -o errexit
+# set -o nounset
 
 
-rm -f './celerybeat.pid'
-celery -A config.celery_app beat -l INFO
+# rm -f './celerybeat.pid'
+# celery -A config.celery_app beat -l INFO

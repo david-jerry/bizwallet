@@ -28,6 +28,8 @@ from django.db.models import (
     ForeignKey,
     GenericIPAddressField,
     ImageField,
+    IntegerField,
+    ManyToManyField,
     OneToOneField,
     PositiveIntegerField,
     SlugField,
@@ -131,6 +133,14 @@ def profile_image(instance, filename):
         new_filename=new_filename, final_filename=final_filename
     )
 
+def plan_image(instance, filename):
+    new_filename = random.randint(1, 3910209312)
+    name, ext = get_filename_ext(filename)
+    final_filename = "{new_filename}{ext}".format(new_filename=new_filename, ext=ext)
+    return "plan-cover-photo/{new_filename}/{final_filename}".format(
+        new_filename=new_filename, final_filename=final_filename
+    )
+
 def kin_image(instance, filename):
     new_filename = random.randint(1, 3910209312)
     name, ext = get_filename_ext(filename)
@@ -231,7 +241,7 @@ class User(AbstractUser):
 
     @property
     def age(self):
-        TODAY = datetime.date.today()
+        TODAY = datetime.today()
         if self.dob:
             return "%s" % relativedelta.relativedelta(TODAY, self.dob).years
         else:
@@ -256,6 +266,27 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
 
 
+class Profile(TimeStampedModel):
+    user = OneToOneField(User, on_delete=CASCADE, related_name="userprofile")
+    account_number = BigIntegerField(_("Account Number"), unique=True, null=True, blank=True)
+    bvn = CharField(_("Bank Verification Number (BVN)"), max_length=255, null=True, blank=False, unique=True)
+    bank_name = CharField(_("Bank Name"), max_length=255, choices=BANKS, null=True, blank=False,)
+
+    @property
+    def years_of_service(self):
+        if self.user.is_field_worker and self.user.member_since:
+            today = datetime.date.today()
+            return ("%s" % relativedelta.relativedelta(today, self.user.member_since).years)
+
+
+    def __str__(self):
+        return self.user.fullname
+
+    class Meta:
+        managed = True
+        verbose_name = "FieldWorker"
+        verbose_name_plural = "FieldWorkers"
+        ordering = ["-created", "-modified"]
 
 class UserSettings(TimeStampedModel):
     user = OneToOneField(User, on_delete=CASCADE, related_name='usersettings')
@@ -265,8 +296,11 @@ class UserSettings(TimeStampedModel):
     code_expired = BooleanField(default=False)
     recieve_email_notice = BooleanField(default=True)
 
+    def title(self):
+        return f"{self.user.fullname}"
+
 class PayHistory(TimeStampedModel):
-    user = ForeignKey(User, on_delete=SET_NULL, null=True)
+    user = ForeignKey(User, on_delete=SET_NULL, null=True, related_name="user_pay_history")
     paystack_charge_id = CharField(max_length=100, default='', blank=True)
     paystack_access_code = CharField(max_length=100, default='', blank=True)
     payment_for = ForeignKey('Membership', on_delete=SET_NULL, null=True)
@@ -274,19 +308,45 @@ class PayHistory(TimeStampedModel):
     paid = BooleanField(default=False)
     date = DateTimeField(auto_now_add=True)
 
+
+    def title(self):
+        return f"{self.user.fullname}"
+
     def __str__(self):
         return self.user.fullname
 
+class BalHistory(TimeStampedModel):
+    user = ForeignKey(User, on_delete=SET_NULL, null=True, default=1)
+    date = DateField(auto_now_add=True)
+    amount = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return self.user.fullname
 
 class LoginHistory(TimeStampedModel):
     user = ForeignKey(User, on_delete=CASCADE, related_name='loginhistory')
+    ip = GenericIPAddressField(
+        _("User IP"), protocol="both", unpack_ipv4=False, blank=True, null=True
+    )
+    country = CharField(_("User Country"), blank=False, null=True, max_length=50)
+    city = CharField(_("Located City"), max_length=50, null=True, blank=True)
+
+    def title(self):
+        return f"{self.user.fullname}"
 
     def __str__(self):
         return f"{self.user.fullname} logged in {self.created}"
     
 
+
+class MembershipFeature(TimeStampedModel):
+    title = CharField(_('Membership Feature'), max_length=500, null=True, blank=False)
+
+    def __str__(self):
+        return self.title
 class Membership(TimeStampedModel):
     MEMBERSHIP_CHOICES = (
+    	('Free', 'Free'), # Note that they are all capitalize//
     	('Premium', 'Premium'), # Note that they are all capitalize//
     	('Platinum', 'Platinum'),
     	('Gold', 'Gold'),
@@ -299,10 +359,15 @@ class Membership(TimeStampedModel):
         ('Months', 'Months'),
     )
     slug = SlugField(null=True, blank=True)
+    image = ResizedImageField(size=[2287, 1127], quality=75, crop=['middle', 'center'], upload_to=plan_image, force_format='JPEG', null=True)
     membership_type = CharField(choices=MEMBERSHIP_CHOICES, default='Premium', max_length=30)
+    features = ManyToManyField(MembershipFeature)
     duration = PositiveIntegerField(default=365)
     duration_period = CharField(max_length=100, default='Days', choices=PERIOD_DURATION)
     price = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def title(self):
+        return f"{self.membership_type}"
 
     def __str__(self):
        return self.membership_type
@@ -312,10 +377,24 @@ class UserMembership(TimeStampedModel):
     membership = ForeignKey(Membership, related_name='user_membership', on_delete=SET_NULL, null=True)
     reference_code = CharField(max_length=100, default='', blank=True)
 
+    def title(self):
+        return f"{self.user.fullname}"
+
     def __str__(self):
        return self.user.fullname
 
+class Withdrawals(TimeStampedModel):
+    STATUS = (
+        ("Pending", "Pending"),
+        ("Complete", "Complete"),
+        ("Failed", "Failed")
+    )
+    user = ForeignKey(Profile, related_name="user_withdrawals", on_delete=SET_NULL, null=True, default=1)
+    amount = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    wd_status = CharField(max_length=100, default='Pending', null=True, choices=STATUS, blank=True)
 
+    def __str__(self):
+        return self.user.user.fullname + " withdrew: " + self.amount    
 
 #### User Subscription
 class Subscription(TimeStampedModel):
@@ -326,15 +405,6 @@ class Subscription(TimeStampedModel):
     def __str__(self):
       return self.user_membership.user.fullname
 
-    def has_paid(self):
-        if self.active:
-            user = self.user_membership.user
-            user.has_paid = True
-            user.save()
-        else:
-            user = self.user_membership.user
-            user.has_paid = False
-            user.save()
 
     def send_subscribed_mail(self):
         user = self.user_membership.user
@@ -357,27 +427,6 @@ class Subscription(TimeStampedModel):
         return False
 
 
-class Profile(TimeStampedModel):
-    user = OneToOneField(User, on_delete=CASCADE, related_name="userprofile")
-    account_number = BigIntegerField(_("Account Number"), unique=True, null=True, blank=True)
-    bvn = CharField(_("Bank Verification Number (BVN)"), max_length=255, null=True, blank=False, unique=True)
-    bank_name = CharField(_("Bank Name"), max_length=255, choices=BANKS, null=True, blank=False,)
-
-    @property
-    def years_of_service(self):
-        if self.user.is_field_worker and self.user.member_since:
-            today = datetime.date.today()
-            return ("%s" % relativedelta.relativedelta(today, self.user.member_since).years)
-
-
-    def __str__(self):
-        return self.user.fullname
-
-    class Meta:
-        managed = True
-        verbose_name = "FieldWorker"
-        verbose_name_plural = "FieldWorkers"
-        ordering = ["-created", "-modified"]
 
 
 

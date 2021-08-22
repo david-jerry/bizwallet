@@ -55,7 +55,7 @@
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
       <!-- Your stuff: Third-party javascript libraries go here -->
-      <script defer src="{% static 'js/iziToast.min.js' %}"></script>
+      <script async src="{% static 'js/iziToast.min.js' %}"></script>
       {% include 'snippets/js.html' %}
 
     {% endblock javascript %}
@@ -106,7 +106,7 @@
 
     {# izi message signals for django #}
     {% for message in messages %}
-      <script nonce="{{ nonce }}" type=text/javascript>
+      <script type=text/javascript>
         iziToast.settings({
           timeout: 9000,
           position: 'topRight',
@@ -134,7 +134,7 @@
 
   {# tiny mce settings configuration #}
   
-  <script nonce="{{ nonce }}">
+  <script>
     tinymce.init({
       selector: 'textarea',
       menubar: false,

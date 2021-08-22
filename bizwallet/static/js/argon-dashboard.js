@@ -1073,7 +1073,7 @@ var SalesChart = (function() {
             ticks: {
               callback: function(value) {
                 if (!(value % 10)) {
-                  return '$' + value + 'k';
+                  return '₦' + value + 'k';
                 }
               }
             }
@@ -1090,7 +1090,7 @@ var SalesChart = (function() {
                 content += '<span class="popover-body-label mr-auto">' + label + '</span>';
               }
 
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+              content += '<span class="popover-body-value">₦' + yLabel + 'k</span>';
               return content;
             }
           }
@@ -1100,7 +1100,7 @@ var SalesChart = (function() {
         labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Performance',
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+          data: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]
         }]
       }
     });

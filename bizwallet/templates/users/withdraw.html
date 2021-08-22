@@ -1,11 +1,7 @@
 {% extends "base_dashboard.html" %}
 {% load crispy_forms_tags static %}
 
-{% block title %}{{ user.username }}{% endblock %}
-
-{% block body_class %}
-class="stretched page-transition"
-{% endblock %}
+{% block title %}Withdraw from Wallet - {{block.supper}}{% endblock %}
 
 {% block header %}
 <!-- Header -->
@@ -16,11 +12,9 @@ class="stretched page-transition"
   <!-- Header container -->
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
-      <div class="col-lg-7 col-md-10">
+      <div class="col-lg-12 col-md-10">
         <h1 class="display-2 text-white">Hello {{request.user.fullname}}</h1>
-        <p class="text-white mt-0 mb-5">This is your profile page. You can see the basic informations you've attached
-          with your account here
-          and manage your projects or add a new next of kin</p>
+        <p class="text-white mt-0 mb-5">Withdraw from your wallet now</p>
         <a href="{% url 'users:kin' %}" class="btn btn-info">Add Next of Kin</a>
       </div>
     </div>
@@ -33,7 +27,7 @@ class="stretched page-transition"
 
 {% block content %}
 <div class="row">
-  <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+  <div class="col-xl-4 order-2 mb-5 mb-xl-0 mt-5 mt-xl-0">
     <div class="card card-profile shadow">
       <div class="row justify-content-center">
         <div class="col-lg-3 order-lg-2">
@@ -94,12 +88,12 @@ class="stretched page-transition"
 
   </div>
 
-  <div class="col-xl-8 order-xl-1">
+  <div class="col-xl-8 order-1 mb-5 mb-xl-0">
     <div class="car bg-secondary shadow">
       <div class="card-header bg-white border-0">
         <div class="row align-items-center">
           <div class="col-8">
-            <h3>{{request.user.fullname}}</h3>
+            <h3>Withdraw from wallet</h3>
           </div>
           <div class="4 text-right">
             <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Update Password</a>
@@ -109,9 +103,9 @@ class="stretched page-transition"
       <div class="card-body">
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{% url 'users:update' %}">
           {% csrf_token %}
-          <h6 class="heading-small text-muted mb-4">User information</h6>
+          <h6 class="heading-small text-muted mb-4">Withdraw Form</h6>
           {{ form|crispy }}
-          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary">Withdraw Funds</button>
         </form>
       </div>
     </div>

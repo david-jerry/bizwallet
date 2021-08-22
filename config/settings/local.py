@@ -10,6 +10,8 @@ SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     default="hUqr3CqoE1J43WVTlV1WUcecH1CcRScTOkX1lUrAkfeo6Mx6JKrILm1cElD9cMrj",
 )
+PAYSTACK_SECRET_KEY = "sk_test_04fac8d97392127d3d573bf7154ca6a1ea726602"
+IPINFO_TOKEN = "72241fe35d93ef"
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
@@ -63,6 +65,6 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 # ------------------------------------------------------------------------------
 
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
-CELERY_TASK_EAGER_PROPAGATES = True
+# CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------

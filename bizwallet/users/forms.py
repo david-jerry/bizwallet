@@ -6,7 +6,12 @@ from django.db import transaction
 from django.db.models import fields
 from django.utils.translation import gettext_lazy as _
 
-from .models import NextOfKin, Profile, Testimonial  # EnrollmentPlan, Subscribe,
+from .models import (  # EnrollmentPlan, Subscribe,
+    NextOfKin,
+    Profile,
+    Testimonial,
+    Withdrawals,
+)
 
 User = get_user_model()
 
@@ -134,3 +139,10 @@ class KinForm(forms.ModelForm):
     #     sub.user = self.request.user
     #     sub.save()
     #     return sub
+
+class WithdrawalForm(forms.ModelForm):
+    class Meta:
+        model = Withdrawals
+        fields = [
+            "amount",
+        ]

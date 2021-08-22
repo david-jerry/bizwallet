@@ -1,7 +1,7 @@
 import logging
 
 import sentry_sdk
-from sentry_sdk.integrations.celery import CeleryIntegration
+# from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
@@ -9,6 +9,13 @@ from sentry_sdk.integrations.redis import RedisIntegration
 from .base import *  # noqa
 from .base import env
 
+PAYSTACK_SECRET_KEY = env(
+    "PAYSTACK_SECRET_KEY",
+    default="sk_test_04fac8d97392127d3d573bf7154ca6a1ea726602",
+)
+IPINFO_TOKEN = env(
+    "IP_TOKEN"
+)
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -245,7 +252,7 @@ sentry_logging = LoggingIntegration(
 integrations = [
     sentry_logging,
     DjangoIntegration(),
-    CeleryIntegration(),
+    # CeleryIntegration(),
     RedisIntegration(),
 ]
 sentry_sdk.init(

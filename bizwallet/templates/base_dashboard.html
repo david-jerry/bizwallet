@@ -54,7 +54,7 @@
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
       <!-- Your stuff: Third-party javascript libraries go here -->
-      <script defer src="{% static 'js/iziToast.min.js' %}"></script>
+      <script async src="{% static 'js/iziToast.min.js' %}"></script>
       {% include 'snippets/dash_js.html' %}
 
     {% endblock javascript %}
@@ -88,7 +88,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{% if request.user.photo %}{% else %}{% static 'images/team-1-800x800.jpg' %}{% endif %}">
+                    <img alt="Image placeholder" src="{% if request.user.photo %}{% else %}{% static 'images/user.png' %}{% endif %}">
                   </span>
                   <div class="media-body ml-2 d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{% if request.user.is_authenticated %}{{request.user.fullname}}{% endif %}</span>
@@ -104,10 +104,6 @@
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="{% url 'account_change_password' %}" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
                 <a href="./examples/profile.html" class="dropdown-item">
                   <i class="ni ni-calendar-grid-58"></i>
                   <span>Activity</span>
@@ -117,6 +113,10 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a href="{% url 'account_change_password' %}" class="dropdown-item">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>Settings</span>
+                </a>
                 <a href="{% url 'account_logout' %}" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
@@ -142,9 +142,11 @@
         </div>
       </nav>
       
+      {% block header %}
       {% if request.user.is_authenticated and not request.path == '/accounts/email/' and not request.path == '/accounts/logout/' and not request.path == '/accounts/password/change/' %}
       {% include "snippets/dash_header.html" %}
       {% endif %}
+      {% endblock %}
 
       <div class="container-fluid mt-7">
         {% block content %}
@@ -162,7 +164,7 @@
 
     {# izi message signals for django #}
     {% for message in messages %}
-      <script nonce="{{ nonce }}" type=text/javascript>
+      <script type=text/javascript>
         iziToast.settings({
           timeout: 9000,
           position: 'topRight',
@@ -190,7 +192,7 @@
 
   {# tiny mce settings configuration #}
   
-  <script nonce="{{ nonce }}">
+  <script>
     tinymce.init({
       selector: 'textarea',
       menubar: false,

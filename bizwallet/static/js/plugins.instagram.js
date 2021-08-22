@@ -9,7 +9,7 @@ window.SEMICOLON_instagramPhotosInit = function( $instagramPhotosEl ){
 	$instagramPhotosEl.each(function() {
 		let element		= $(this),
 			elLimit		= element.attr('data-count') || 12,
-			elLoader	= element.attr('data-loader') || 'include/instagram/instagram.php',
+			elLoader	= element.attr('data-loader') || 'static/include/instagram/instagram.php',
 			elFetch		= element.attr('data-fetch-message') || 'Fetching Photos from Instagram...';
 
 		if( Number( elLimit ) > 12 ) {

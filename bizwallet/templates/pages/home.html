@@ -75,7 +75,7 @@
 </div>
 
 
-
+{% if not reqeust.user.has_paid %}
 <div class="section bg-transparent" style="padding: 80px 0">
     <div class="container">
         <div class="heading-block border-bottom-0 mb-0">
@@ -107,7 +107,7 @@
                               <li class="list-group-item ps-0 text-black-50"><i class="icon-line-check pe-3 color"></i> <del>Membership upgrade after 3 months & top up.</del></li>
                             </ul>
 
-                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+                            <a href="{% url 'users:subscribe' %}?sub_plan=Premium" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
 
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                                 <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
                               </ul>
 
-                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+                            <a href="{% url 'users:subscribe' %}?sub_plan=Platinum" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
 
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                 <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦500, 000</li>
                             </ul>
 
-                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+                            <a href="{% url 'users:subscribe' %}?sub_plan=Gold" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
 
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                                 <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦1,000,000</li>
                             </ul>
 
-                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+                            <a href="{% url 'users:subscribe' %}?sub_plan=VIP" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
 
                         </div>
                     </div>
@@ -198,7 +198,293 @@
                                 <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦5,000,000</li>
                             </ul>
 
-                            <a href="demo-coworking-single.html" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+                            <a href="{% url 'users:subscribe' %}?sub_plan=VVIP" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-11 mt-5 offset-md-1" data-animate="shakeX">
+                <h3>Terms &amp; Conditions</h3>
+                <ul class="ps-4 mb-0">
+                    <li class="mb-1">You are not permitted to use our services when you are under <b class="color">18 Years of age</b>.</li>
+                    <li class="mb-1"> <b class="color">Co-Operative Membership Fee</b> is compulsary to benefit from our other plans.</li>
+                    <li class="mb-1">All plan signups are for 365 days.</li>
+                    <li class="mb-1">The services of Biz-wallet could be used if only you agree to form a binding contract with Biz-wallet cooperative limited and must not be bankrupt.</li>
+                    <li class="mb-1">You can only upgrade when you have equivalent amount for that plan in your wallet and has passed 3 months in any previous plan subscribed to.</li>
+                    <li class="mb-1">Biz-wallet will from time to time ensure that the website is available and bug free.</li>
+                    <li class="mb-1">You must <a class="color" href=""><b>own an account</b></a> with us to be able to select from one of our plans.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+<div class="section p-0 mb-0 testimonials clearfix">
+    <div class="container" style="padding: 120px 0">
+        <div class="heading-block border-bottom-0 center">
+            <div class="before-heading">What our Members Say</div>
+            <h2 class="nott fw-semibold">Testimonials</h2>
+            <p class="mb-0 mt-1"><span class="fw-semibold">Excellent, Service</span> from all <span class="fw-semibold">2,118</span> reviews. </p>
+        </div>
+
+        <div id="testimonials-carousel" class="owl-carousel carousel-widget testimonial testimonial-full bg-transparent border-0 shadow-none p-0 mx-auto text-start clearfix" data-animate-in="fadeIn" data-animate-out="fadeOut" data-margin="24" data-nav="false" data-pagi="true" data-items="1" style="max-width: 740px">
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                    </div>
+                    <p>Collaboratively enhance intermandated innovation via cutting-edge core competencies. Professionally extend covalent e-markets and mission-critical communities. Dramatically communicate revolutionary web services for interactive synergy. Synergistically.</p>
+                    <div class="testi-meta mt-4">
+                        Steve Jobs
+                        <span class="ls0">Apple Inc.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star-half2"></i>
+                    </div>
+                    <p>Intrinsicly synergize excellent content whereas user friendly action items. Rapidiously transition multimedia based information after top-line alignments. Authoritatively integrate accurate outsourcing vis-a-vis principle-centered systems energistically</p>
+                    <div class="testi-meta mt-4">
+                        Collis Ta'eed
+                        <span class="ls0">Envato Inc.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="testi-content">
+                    <div class="testi-stars mb-4">
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                        <i class="icon-star3"></i>
+                    </div>
+                    <p>Compellingly engage multimedia based niche markets via value-added manufactured products. Competently formulate goal-oriented content for installed base users. Uniquely leverage other's granular ROI without 24/365 collaboration and idea-sharing.</p>
+                    <div class="testi-meta mt-4">
+                        John Doe
+                        <span class="ls0">XYZ Inc.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="section bg-transparent clearfix" style="padding: 80px 0">
+    <div class="container">
+        <div class="heading-block border-bottom-0 center">
+            <div class="before-heading">See What's Up in Latest</div>
+            <h2 class="nott fw-semibold">News &amp; Events</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="price-carousel" class="owl-carousel carousel-widget" data-margin="30" data-nav="false" data-pagi="true" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3">
+                        {% for post in recent_posts %}
+                        <div class="price-list shadow-sm card border-0 rounded">
+                            {% if post.url %}
+                            <div class="position-relative">
+                                <a href="{{post.url}}" class="entry-link" target="_blank">
+                                    External Link
+                                    <span>- {{post.url}}</span>
+                                </a>
+                            </div>
+                            {% elif post.videos %}
+                            <div class="position-relative">
+                                <iframe src="{{post.videos.url}}" width="500" height="281" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            </div>
+                            {% elif post.image_set %}
+                            <div class="position-relative">
+                                <div class="portfolio-single-image masonry-thumbs grid-container grid-4" data-big="3" data-lightbox="gallery">
+                                    {% for image in post.image_set.all %}
+                                    <a class="grid-item" href="{{image.image.url}}" data-lightbox="gallery-item"><img data-src="{{image.image.url}}" class="lazy" alt="Image"></a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if not post.url %}
+                            <div class="card-body">
+                                <div class="price-title pb-3">{{post.title|title}}</div>
+                                <p class="list-group list-group-flush mb-4">{{post.content|safe|truncatewords:35}}</p>
+                                <a href="{{post.get_absolute_url}}" class="button button-rounded button-large w-100 m-0 center fw-medium">Read More</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% empty %}
+                        <div class="slide">
+                            <div class="grid-inner">
+                                <div class="entry-image">
+                                    <a href="{% url 'home' %}" class="entry-link">
+                                        BIZWALLET.ORG
+                                        <span>- No Post Yet</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section mb-0 pb-0 bg-theme-light clearfix" style="padding-top: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-1">
+                <div class="before-heading">Don't Hesitate to Reach out to Us</div>
+                    <h2 class="nott fw-semibold display-4">Want to Talk?</h2>
+                <h4 class="fw-light mb-4">Call us at <a href="tel:+(61)8-234-532-45">+(61)8-234-532-45</a></h4>
+                <a href="{% url 'contact' %}" class="button button-rounded button-xlarge m-0 nott fw-semibold ls0 px-5">Mail Us</a>
+            </div>
+        </div>
+    </div>
+    <img src="{% static 'demos/coworking/images/footer-bg.jpg' %}" alt="Footer Image" class="footer-img">
+</div>
+
+<!-- <div class="section bg-transparent" style="padding: 80px 0">
+    <div class="container">
+        <div class="heading-block border-bottom-0 mb-0">
+            <div class="before-heading">Select your Plan</div>
+            <h2 class="nott fw-semibold mb-0">Membership</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="price-carousel" class="owl-carousel carousel-widget" data-margin="30" data-nav="false" data-pagi="true" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3">
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/membership.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Premium Membership</h3>
+                                <p class="card-text mb-0">Start here</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦50,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                              <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 20% After 365 Days</li>
+                              <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                              <li class="list-group-item ps-0 text-black-50"><i class="icon-line-check pe-3 color"></i> <del>Membership upgrade after 3 months & top up.</del></li>
+                            </ul>
+
+                            <a href="{% url 'users:subscribe' %}?sub_plan=premium" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/premium.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Platinum Membership</h3>
+                                <p class="card-text mb-0">Economical and Flexible</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦100,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 25% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                              </ul>
+
+                            <a href="{% url 'users:subscribe' %}?sub_plan=platinum" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/gold.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">Gold Membership</h3>
+                            <p class="card-text mb-0">Fulfill your dream</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦250,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 30% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦500, 000</li>
+                            </ul>
+
+                            <a href="{% url 'users:subscribe' %}?sub_plan=gold" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/vip.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">VIP Membership</h3>
+                            <p class="card-text mb-0">Its all Yours!</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦500,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 40% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦1,000,000</li>
+                            </ul>
+
+                            <a href="{% url 'users:subscribe' %}?sub_plan=vip" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
+
+                        </div>
+                    </div>
+
+                    <div class="price-list shadow-sm card border-0 rounded">
+                        <div class="position-relative">
+                            <img data-src="{% static 'images/services/vvip.jpg' %}" alt="Featured image 1" class="card-img-top rounded-top lazy">
+                            <div class="card-img-overlay dark d-flex justify-content-center flex-column p-0 center">
+                                <h3 class="card-title mb-0 text-white">VVIP Membership</h3>
+                            <p class="card-text mb-0">No limits!</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="price-title pb-3">₦1,000,000<small>/ Year</small></div>
+
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% After 365 Days</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> 50% given to members to purchase (properties, vehicles, oversea vacation, medical trip, oversea studies, marriage, farming etc.)</li>
+                                <li class="list-group-item ps-0"><i class="icon-line-check pe-3 color"></i> Loan Request upto ₦5,000,000</li>
+                            </ul>
+
+                            <a href="{% url 'users:subscribe' %}?sub_plan=vvip" class="button button-rounded button-large w-100 m-0 center fw-medium">Book Now</a>
 
                         </div>
                     </div>
@@ -361,6 +647,6 @@
     </div>
     <img src="{% static 'demos/coworking/images/footer-bg.jpg' %}" alt="Footer Image" class="footer-img">
 </div>
-
+ -->
 
 {% endblock %}

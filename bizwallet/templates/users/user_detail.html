@@ -11,26 +11,26 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-xl-8 mb-5 mb-xl-0">
+  <div class="col-xl-12 mb-5 mb-xl-0">
     <div class="card bg-gradient-default shadow">
       <div class="card-header bg-transparent">
         <div class="row align-items-center">
           <div class="col">
             <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-            <h2 class="text-white mb-0">Sales value</h2>
+            <h2 class="text-white mb-0">Annual Balance Growth Chart</h2>
           </div>
           <div class="col">
             <ul class="nav nav-pills justify-content-end">
-              <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="₦" data-suffix="k">
+              <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[{% for p in c_bal %}{{p.amount|truncatechars:2}},{% endfor %}]}]}}' data-prefix="₦" data-suffix="k">
                 <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                  <span class="d-none d-md-block">Month</span>
-                  <span class="d-md-none">M</span>
+                  <span class="d-none d-md-block">{{c_year}}</span>
+                  <span class="d-md-none">{{c_syear}}</span>
                 </a>
               </li>
-              <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="₦" data-suffix="k">
+              <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[{% for p in p_bal %}{{p.amount|truncatechars:2}},{% endfor %}]}]}}' data-prefix="₦" data-suffix="k">
                 <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                  <span class="d-none d-md-block">Week</span>
-                  <span class="d-md-none">W</span>
+                  <span class="d-none d-md-block">{{p_year}}</span>
+                  <span class="d-md-none">{{p_syear}}</span>
                 </a>
               </li>
             </ul>
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-4">
+  <!-- <div class="col-xl-4">
     <div class="card shadow">
       <div class="card-header bg-transparent">
         <div class="row align-items-center">
@@ -56,14 +56,14 @@
           </div>
         </div>
       </div>
-      <div class="card-body">
+      <div class="card-body"> -->
         <!-- Chart -->
-        <div class="chart">
+        <!-- <div class="chart">
           <canvas id="chart-orders" class="chart-canvas"></canvas>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 
@@ -71,12 +71,12 @@
 
 
 <div class="row mt-5">
-  <div class="col-xl-8 mb-5 mb-xl-0">
+  <div class="col-xl-4 mb-5 mb-xl-0">
     <div class="card shadow">
       <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h3 class="mb-0">Page visits</h3>
+            <h3 class="mb-0">Login History</h3>
           </div>
           <div class="col text-right">
             <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -88,94 +88,48 @@
         <table class="table align-items-center table-flush">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Page name</th>
-              <th scope="col">Visitors</th>
-              <th scope="col">Unique users</th>
-              <th scope="col">Bounce rate</th>
+              <th scope="col">Ip Address</th>
+              <th scope="col">Location</th>
+              <th scope="col">Time</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {% for l in l_his %}
+            <tr class="text-danger">
               <th scope="row">
-                /argon/
+                {{l.ip}}
               </th>
               <td>
-                4,569
+                {{l.city}} {{l.country}}
               </td>
               <td>
-                340
-              </td>
-              <td>
-                <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                {{l.created}}
               </td>
             </tr>
-            <tr>
+            {% empty %}
+            <tr class="text-warning">
               <th scope="row">
-                /argon/index.html
+                172.20.0.1 
               </th>
               <td>
-                3,985
+                Nigeria 
               </td>
               <td>
-                319
-              </td>
-              <td>
-                <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
+                yesterday
               </td>
             </tr>
-            <tr>
-              <th scope="row">
-                /argon/charts.html
-              </th>
-              <td>
-                3,513
-              </td>
-              <td>
-                294
-              </td>
-              <td>
-                <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                /argon/tables.html
-              </th>
-              <td>
-                2,050
-              </td>
-              <td>
-                147
-              </td>
-              <td>
-                <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                /argon/profile.html
-              </th>
-              <td>
-                1,795
-              </td>
-              <td>
-                190
-              </td>
-              <td>
-                <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  <div class="col-xl-4">
+  <div class="col-xl-8">
     <div class="card shadow">
       <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h3 class="mb-0">Social traffic</h3>
+            <h3 class="mb-0">Payment History</h3>
           </div>
           <div class="col text-right">
             <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -187,102 +141,51 @@
         <table class="table align-items-center table-flush">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Referral</th>
-              <th scope="col">Visitors</th>
-              <th scope="col"></th>
+              <th scope="col">Subscription Plan</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Transaction ID</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
+            {% for p in p_his %}
             <tr>
               <th scope="row">
-                Facebook
+                {{p.payment_for}}
               </th>
               <td>
-                1,480
+                {{p.amount}}
               </td>
               <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">60%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                    </div>
-                  </div>
-                </div>
+                {{p.paystack_charge_id}}
+              </td>
+              <td>
+                {{p.paid}}
+              </td>
+              <td>
+                {{p.date}}
               </td>
             </tr>
+            {% empty %}
             <tr>
               <th scope="row">
-                Facebook
+                Premium
               </th>
               <td>
-                5,480
+                60,000
               </td>
               <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">70%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-                    </div>
-                  </div>
-                </div>
+                PAY_REF-9678540384
+              </td>
+              <td>
+                PAID
+              </td>
+              <td>
+                12-07-2021
               </td>
             </tr>
-            <tr>
-              <th scope="row">
-                Google
-              </th>
-              <td>
-                4,807
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">80%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                Instagram
-              </th>
-              <td>
-                3,678
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">75%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
-                twitter
-              </th>
-              <td>
-                2,645
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <span class="mr-2">30%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -296,6 +199,85 @@
 <script>
   jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
     jQuery( '.flexslider .slide' ).resize();
+
+    'use strict';
+
+    //
+    // Sales chart
+    //
+    
+    var SalesChart = (function() {
+    
+      // Variables
+    
+      var $chart = $('#chart-sales');
+    
+    
+      // Methods
+    
+      function init($chart) {
+    
+        var salesChart = new Chart($chart, {
+          type: 'line',
+          options: {
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  lineWidth: 1,
+                  color: Charts.colors.gray[900],
+                  zeroLineColor: Charts.colors.gray[900]
+                },
+                ticks: {
+                  callback: function(value) {
+                    if (!(value % 10)) {
+                      return '₦' + value + 'k';
+                    }
+                  }
+                }
+              }]
+            },
+            tooltips: {
+              callbacks: {
+                label: function(item, data) {
+                  var label = data.datasets[item.datasetIndex].label || '';
+                  var yLabel = item.yLabel;
+                  var content = '';
+    
+                  if (data.datasets.length > 1) {
+                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                  }
+    
+                  content += '<span class="popover-body-value">₦' + yLabel + 'k</span>';
+                  return content;
+                }
+              }
+            }
+          },
+          data: {
+            labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+              label: 'Performance',
+              data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+            }]
+          }
+        });
+    
+        // Save to jQuery object
+    
+        $chart.data('chart', salesChart);
+    
+      };
+    
+    
+      // Events
+    
+      if ($chart.length) {
+        init($chart);
+      }
+    
+    })();
+    
   });
+
 </script>
 {% endblock %}

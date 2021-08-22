@@ -167,8 +167,10 @@ var SEMICOLON = SEMICOLON || {};
 				disableAJAX = true;
 			}
 
+			// FUNCTION SETTING FOR DJANGO INCLUDING
+			// ADD URI FUNCTION FOR PLUGINS IN DJANGO
 			if( /^(f|ht)tps?:\/\//i.test( window.decodeURIComponent( settings.file ) ) ) {
-				file = settings.file;
+				file = "static/" + settings.file;
 			} else {
 				file = jsPath + settings.file;
 			}

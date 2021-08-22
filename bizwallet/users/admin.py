@@ -12,20 +12,28 @@ from bizwallet.users.forms import (  # PlanForm,; SubscribeForm,
     UserCreationForm,
 )
 from bizwallet.users.models import (  # Subscribe, EnrollmentPlan
+    BalHistory,
     LoginHistory,
     Membership,
+    MembershipFeature,
     NextOfKin,
+    PayHistory,
     Profile,
     Subscription,
     Testimonial,
     UserMembership,
+    Withdrawals,
 )
 from bizwallet.utils.export_as_csv import ExportCsvMixin
 
 User = get_user_model()
 
+admin.site.register(Withdrawals)
+admin.site.register(BalHistory)
+admin.site.register(MembershipFeature)
 admin.site.register(UserMembership)
 admin.site.register(LoginHistory)
+admin.site.register(PayHistory)
 
 class ProfileAdmin(admin.StackedInline):
     form = ProfileForm
@@ -127,6 +135,7 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
         "balance",
         "has_paid",
         "accept_terms",
+        "has_paid",
         "is_field_worker",
         "is_active",
         "is_staff",

@@ -27,7 +27,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="{% if request.user.image %}{{object.image.url}}{% else %}{% static 'images/team-1-800x800.jpg' %}{% endif %}">
+                <img alt="Image placeholder" src="{% if request.user.image %}{{object.image.url}}{% else %}{% static 'images/user.png' %}{% endif %}">
               </span>
             </div>
           </a>
@@ -40,10 +40,6 @@
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </a>
-            <a href="{% url 'account_change_password' %}" class="dropdown-item">
-              <i class="ni ni-settings-gear-65"></i>
-              <span>Settings</span>
-            </a>
             <a href="./examples/profile.html" class="dropdown-item">
               <i class="ni ni-calendar-grid-58"></i>
               <span>Activity</span>
@@ -53,6 +49,10 @@
               <span>Support</span>
             </a>
             <div class="dropdown-divider"></div>
+            <a href="{% url 'account_change_password' %}" class="dropdown-item">
+              <i class="ni ni-settings-gear-65"></i>
+              <span>Settings</span>
+            </a>
             <a href="{% url 'account_logout' %}" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
@@ -99,28 +99,38 @@
             </a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link " href="./examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Activities
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'contact' %}">
-              <i class="ni ni-pin-3 text-orange"></i> Support
-            </a>
-          </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link " href="{% url 'users:update' %}">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
+              <i class="ni ni-single-02 text-warning"></i> User profile
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="{% url 'users:kin' %}">
-              <i class="ni ni-single-02 text-yellow"></i> Next of Kin
+              <i class="ni ni-single-02 text-warning"></i> Next of Kin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'users:withdraw' %}" class="nav-link">
+              <i class="ni ni-credit-card text-danger"></i> Withdraw Funds
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'users:withdraw' %}" class="nav-link">
+              <i class="ni ni-credit-card text-success"></i> Top-Up Wallet
             </a>
           </li>
           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link " href="./examples/icons.html">
+              <i class="ni ni-calendar-grid-58 text-yello"></i> Activities
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'contact' %}">
+              <i class="ni ni-support-16 text-orange"></i> Support
+            </a>
+          </li>
           {% if object == request.user.is_superuser or object == request.user.is_staff %}
           <li class="nav-item">
             <a class="nav-link " href="{% url 'admin:index' %}">
@@ -149,7 +159,7 @@
             {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-              <i class="ni ni-palette"></i> Notification Setting
+              <i class="ni ni-bell-55"></i> Notification Setting
             </a>
           </li>
         </ul>
