@@ -216,6 +216,7 @@ MIDDLEWARE = [
 if DEBUG:
     MIDDLEWARE_CLASSES = MIDDLEWARE
 
+# CSRF_COOKIE_DOMAIN = ["https://www.bizwallet.org/", "https://bizwallet.org/", "0.0.0.0:8000"]
 
 IPINFO_SETTINGS = {
     'cache_options': {

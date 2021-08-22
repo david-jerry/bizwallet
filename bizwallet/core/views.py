@@ -73,17 +73,21 @@ def home(request, *args, **kwargs):
     testimonials = Testimonial.objects.filter(active=True).order_by("-created")[:5]
 
     try:
-        is_cached = "geodata" in request.session
-        # get user ip and get information of the user
-        if not is_cached:
-            response = requests.get(f"https://reallyfreegeoip.org/json/{ip_address}")
-            print(response)
-            request.session["geodata"] = response.json()
-
         user = User.objects.get(username=username)
         if user.is_field_worker:
             request.session["fieldworker_id"] = user.id
             user_ip = request.session["fieldworker_id"]
+    except:
+        pass
+
+
+
+    try:
+        is_cached = "geodata" in request.session
+        # get user ip and get information of the user
+        if not is_cached:
+            response = requests.get(f"https://reallyfreegeoip.org/json/{ip_address}")
+            request.session["geodata"] = response.json()
 
         geodata = request.session["geodata"]
         request.session["user_ip"] = geodata["ip"]
@@ -94,7 +98,7 @@ def home(request, *args, **kwargs):
     except:
         pass
 
-    if is_cached and not request.session.get("user_ip"):
+    if is_cached in request.session and not request.session.get("user_ip"):
         messages.info(
             request,
             _(

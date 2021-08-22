@@ -58,7 +58,6 @@ SESSION_COOKIE_SECURE = True
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
-CSRF_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.org"]
 # CSRF_TRUSTED_ORIGINS = [".bizwallet.com", '.herokuapp.com']
 SECURE_REFERRER_POLICY = "same-origin"
 
