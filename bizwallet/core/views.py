@@ -45,7 +45,7 @@ def get_ip_address(request):
         ip = request.META.get('REMOTE_ADDR')    ### Real IP address of client Machine
     return ip  
 
-@cache_page(60 * 60 * 24)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
+@cache_page(60 * 10)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
 @csrf_protect
 def home(request, *args, **kwargs):
     # get referrer linked to reffered using username

@@ -40,6 +40,7 @@ from django.db.models import (
     UUIDField,
 )
 from django.db.models.fields import BigIntegerField
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse
@@ -217,6 +218,7 @@ class User(AbstractUser):
     is_field_worker = BooleanField(_("Are you a field worker"), default=True)
     accept_terms = BooleanField(_("Accept our terms"), default=False)
     has_paid = BooleanField(_("Paid Initial Membership Fee"), default=False)
+    has_testified = BooleanField(_("User has testified"), default=False)
 
     
     # Referral fields
@@ -495,6 +497,10 @@ class Testimonial(TimeStampedModel):
 
 
 
+@receiver(post_save, sender=Testimonial)
+def user_testified(sender, created, instance, *args, **kwargs):
+    if instance.active:
+        User.objects.filter(username=instance.user.username).update(has_testified=True)
 
 
 

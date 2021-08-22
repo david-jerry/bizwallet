@@ -229,10 +229,11 @@
         <div class="heading-block border-bottom-0 center">
             <div class="before-heading">What our Members Say</div>
             <h2 class="nott fw-semibold">Testimonials</h2>
-            <p class="mb-0 mt-1"><span class="fw-semibold">Excellent, Service</span> from all <span class="fw-semibold">2,118</span> reviews. </p>
+            <p class="mb-0 mt-1"><span class="fw-semibold">Excellent, Service</span> from all <span class="fw-semibold">{{testimonials.count}}</span> reviews. </p>
         </div>
 
         <div id="testimonials-carousel" class="owl-carousel carousel-widget testimonial testimonial-full bg-transparent border-0 shadow-none p-0 mx-auto text-start clearfix" data-animate-in="fadeIn" data-animate-out="fadeOut" data-margin="24" data-nav="false" data-pagi="true" data-items="1" style="max-width: 740px">
+            {% for test in testimonials %}
             <div class="slide">
                 <div class="testi-content">
                     <div class="testi-stars mb-4">
@@ -242,44 +243,51 @@
                         <i class="icon-star3"></i>
                         <i class="icon-star3"></i>
                     </div>
-                    <p>Collaboratively enhance intermandated innovation via cutting-edge core competencies. Professionally extend covalent e-markets and mission-critical communities. Dramatically communicate revolutionary web services for interactive synergy. Synergistically.</p>
+                    <p>{{test.testimony|safe}}.</p>
                     <div class="testi-meta mt-4">
-                        Steve Jobs
-                        <span class="ls0">Apple Inc.</span>
+                        {{test.user.fullname}}
+                        <span class="ls0">{{test.user.company}}</span>
                     </div>
                 </div>
             </div>
+            {% if not request.user.has_testified and forloop.last or not request.user.is_authenticated %}
             <div class="slide">
-                <div class="testi-content">
-                    <div class="testi-stars mb-4">
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star-half2"></i>
-                    </div>
-                    <p>Intrinsicly synergize excellent content whereas user friendly action items. Rapidiously transition multimedia based information after top-line alignments. Authoritatively integrate accurate outsourcing vis-a-vis principle-centered systems energistically</p>
-                    <div class="testi-meta mt-4">
-                        Collis Ta'eed
-                        <span class="ls0">Envato Inc.</span>
+                <div class="testi-content px-3">
+                    <div class="container">
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'home' %}" method="POST">
+                            <p>Please leave a review for others.</p>
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-primary" type="submit">{% trans "Submit" %}</button>
+                        </form>
+                        {% else %}
+                        <p>You must be logged in to leave a review</p>
+                        <a href="{% url 'account_login' %}" class="btn btn-primary">Login</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% empty %}
             <div class="slide">
-                <div class="testi-content">
-                    <div class="testi-stars mb-4">
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                        <i class="icon-star3"></i>
-                    </div>
-                    <p>Compellingly engage multimedia based niche markets via value-added manufactured products. Competently formulate goal-oriented content for installed base users. Uniquely leverage other's granular ROI without 24/365 collaboration and idea-sharing.</p>
-                    <div class="testi-meta mt-4">
-                        John Doe
-                        <span class="ls0">XYZ Inc.</span>
+                <div class="testi-content px-3">
+                    <div class="container">
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'home' %}" method="POST">
+                            <p>Please leave a review for others.</p>
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-primary" type="submit">{% trans "Submit" %}</button>
+                        </form>
+                        {% else %}
+                        <p>You must be logged in to leave a review</p>
+                        <a href="{% url 'account_login' %}" class="btn btn-primary">Login</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 

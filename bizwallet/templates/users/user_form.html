@@ -3,10 +3,6 @@
 
 {% block title %}{{ user.username }}{% endblock %}
 
-{% block body_class %}
-class="stretched page-transition"
-{% endblock %}
-
 {% block header %}
 <!-- Header -->
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
@@ -101,7 +97,7 @@ class="stretched page-transition"
           <div class="col-8">
             <h3>{{request.user.fullname}}</h3>
           </div>
-          <div class="4 text-right">
+          <div class="col-4 text-right">
             <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Update Password</a>
           </div>
         </div>

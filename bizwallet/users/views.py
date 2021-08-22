@@ -22,6 +22,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.urls.base import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -298,7 +299,13 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+# @login_required
+# @csrf_protect
+# def topup(request):
+#     if request.P
+
 @login_required
+@csrf_protect
 def subscribe(request):
     plan = request.GET.get("sub_plan")
     fetch_membership = Membership.objects.filter(membership_type=plan).exists()
@@ -348,7 +355,7 @@ def subscribe(request):
     return HttpResponseRedirect(link)
     return render(request, "users/subscribe.html")
 
-
+@csrf_protect
 def call_back_url(request):
     reference = request.GET.get("reference")
     # We need to fetch the reference from PAYMENT
