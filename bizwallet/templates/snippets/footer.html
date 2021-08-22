@@ -1,4 +1,7 @@
 {% load static i18n %}
+{% load flatpages %}
+{% get_flatpages as flatpages %}
+
 {% url 'home' as home_url %}
 {% url 'ref_home' as home_url %}
 {% url 'about' as about_url %}
@@ -177,7 +180,7 @@
 					<div class="row">
 						<div class="col-12">
 							<p class="mb-2 text-white-50">Copyrights &copy; 2020 All Rights Reserved by Canvas Inc.</p>
-							<div class="copyright-links text-white-50"><a href="#" class="text-white-50">Terms of Use</a> / <a href="#" class="text-white-50">Privacy Policy</a></div>
+							<div class="copyright-links text-white-50">{% for page in flatpages %}<a href="/flatpage{{ page.url }}" class="text-white-50">{{page.title}}</a> {% if not forloop.last %}/{% endif %}{% endfor %}</div>
 						</div>
 					</div>
 
