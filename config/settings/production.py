@@ -21,7 +21,7 @@ IPINFO_TOKEN = env(
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["bizwallet.org"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[".bizwallet.org"])
 # Whether to prepend the "www." subdomain to URLs that don't have it.
 PREPEND_WWW = False
 
@@ -55,10 +55,13 @@ SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_SSL_HOST = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER=True
+SESSION_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_DOMAIN = [".bizwallet.org"]
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
-CSRF_TRUSTED_ORIGINS = [".bizwallet.org"]
+CSRF_TRUSTED_ORIGINS = [".bizwallet.org", ".apps.techydra.ltd"]
 SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure

@@ -3,26 +3,29 @@
 
 {% block title %}{{flatpage.title}} - {{block.super|upper}}{% endblock title %}
 
-{% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay School fees, plan towards investing in agriculture and many more.{% endblock %}
+{% block desc %}Bizwallet is a very stable & secure online platform that assist it's members develope discipline for
+saving and investing in assets whilist earning little or enough. These members can acquire property, Auto/Vehicle, Pay
+School fees, plan towards investing in agriculture and many more.{% endblock %}
 
 {% block kw %}bizwallet, bizwallet group, bizwallet limited, co-operative company{% endblock %}
 
 {% block header %}
 <!-- Header -->
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 600px; background-image: url({% static 'images/profile-cover.jpg' %}); background-size: cover; background-position: center top;">
-  <!-- Mask -->
-  <span class="mask bg-gradient-default opacity-8"></span>
-  <!-- Header container -->
-  <div class="container-fluid d-flex align-items-center">
-    <div class="row">
-      <div class="col-lg-7 col-md-10">
-        <h1 class="display-2 text-white">Bizwallet {{flatpage.title}}</h1>
-        <p class="text-white mt-0 mb-5">Gain full insight into how we operate and what we use your information to do in our {{flatpage.title}}</p>
-        <a href="{% url 'users:detail' request.user.username %}" class="btn btn-info">Open Dashboard</a>
-      </div>
+    style="min-height: 600px; background-image: url({% static 'images/profile-cover.jpg' %}); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+                <h1 class="display-2 text-white">Bizwallet {{flatpage.title}}</h1>
+                <p class="text-white mt-0 mb-5">Gain full insight into how we operate and what we use your information
+                    to do in our {{flatpage.title}}</p>
+                <a href="{% url 'users:detail' request.user.username %}" class="btn btn-info">Open Dashboard</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Page content -->
 {% endblock header %}
@@ -30,17 +33,14 @@
 {% block content %}
 <div class="col-xl-12">
     <div class="car bg-secondary shadow">
-      <div class="card-header bg-white border-0">
-        <div class="row align-items-center">
-          <div class="col-12">
-            <h3>{{flatpage.title}}</h3>
-          </div>
+        <div class="card-header bg-white border-0">
+            <div class="align-items-center">
+                <h3>{{flatpage.title}}</h3>
+            </div>
         </div>
-      </div>
-      <div class="card-body">
-        {{flatpage.content|safe}}
-      </div>
+        <div class="card-body">
+            {{flatpage.content|safe}}
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}

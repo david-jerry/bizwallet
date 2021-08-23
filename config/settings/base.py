@@ -311,11 +311,11 @@ TEMPLATES = [
 DECIMAL_SEPARATOR = "."
 
 # Boolean that sets whether to add thousand separator when formatting numbers
-USE_THOUSAND_SEPARATOR = False
+USE_THOUSAND_SEPARATOR = True
 
 # Number of digits that will be together, when splitting them by
 # THOUSAND_SEPARATOR. 0 means no grouping, 3 means splitting by thousands...
-NUMBER_GROUPING = 0
+NUMBER_GROUPING = 3
 
 # Thousand separator symbol
 THOUSAND_SEPARATOR = ","
@@ -346,8 +346,8 @@ CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "SAMEORIGIN"
-USE_X_FORWARDED_HOST = False
-USE_X_FORWARDED_PORT = False
+# USE_X_FORWARDED_HOST = True
+# USE_X_FORWARDED_PORT = False
 
 # CSP_DEFAULT_SRC = ["'self'"]
 # CSP_SCRIPT_SRC = [
