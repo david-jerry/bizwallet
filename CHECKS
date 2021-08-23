@@ -1,5 +1,5 @@
-WAIT=30
-TIMEOUT=30
-ATTEMPTS=10
+WAIT=3
+TIMEOUT=10
+ATTEMPTS=1
 
-https://www.bizwallet.org       bizwallet
+# https://www.bizwallet.org       bizwallet
