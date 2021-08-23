@@ -4,6 +4,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Settings local file ignored
+local.py
+settings/local.py
+
 # C extensions
 *.so
 
