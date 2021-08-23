@@ -57,11 +57,11 @@ SECURE_SSL_HOST = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "Strict"
-SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd"]
+# SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd"]
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
-CSRF_TRUSTED_ORIGINS = [".bizwallet.org", "bizwallet.apps.techydra.ltd"]
+# CSRF_TRUSTED_ORIGINS = [".bizwallet.org", "bizwallet.apps.techydra.ltd"]
 SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
