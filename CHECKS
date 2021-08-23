@@ -2,4 +2,4 @@ WAIT=30
 TIMEOUT=30
 ATTEMPTS=10
 
-/               bizwallet
+https://www.bizwallet.org       bizwallet
