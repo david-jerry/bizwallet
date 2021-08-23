@@ -346,7 +346,7 @@ CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "SAMEORIGIN"
-# USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_HOST = True
 # USE_X_FORWARDED_PORT = False
 
 # CSP_DEFAULT_SRC = ["'self'"]

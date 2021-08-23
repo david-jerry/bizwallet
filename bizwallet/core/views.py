@@ -38,11 +38,11 @@ def compress_whitespace(s):
 
 def get_ip_address(request):
     """ use requestobject to fetch client machine's IP Address """
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', None)
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
-        ip = request.META.get('REMOTE_ADDR')    ### Real IP address of client Machine
+        ip = request.META.get('REMOTE_ADDR', None)    ### Real IP address of client Machine
     return ip  
 
 @cache_page(60 * 10)  # cached in 1 second.. for 15 minutes (60 sec x 15mins)
