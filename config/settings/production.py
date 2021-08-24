@@ -13,16 +13,16 @@ PAYSTACK_SECRET_KEY = env(
     "PAYSTACK_SECRET_KEY",
     default="sk_test_04fac8d97392127d3d573bf7154ca6a1ea726602",
 )
-# IPINFO_TOKEN = env(
-#     "IP_TOKEN"
-# )
+IPINFO_TOKEN = env(
+    "IP_TOKEN"
+)
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["www.bizwallet.org", "bizwallet.apps.techydra.ltd"])
-ALLOWED_HOSTS = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd", "bizwallet.org"]
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["www.bizwallet.org", "bizwallet.apps.techydra.ltd"])
+# ALLOWED_HOSTS = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd", "bizwallet.org"]
 # Whether to prepend the "www." subdomain to URLs that don't have it.
 PREPEND_WWW = False
 
@@ -55,14 +55,13 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_SSL_HOST = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
-# SESSION_COOKIE_SECURE = True
-# SESSION_COOKIE_SAMESITE = "Strict"
-# SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd"]
+SESSION_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
-# CSRF_TRUSTED_ORIGINS = [".bizwallet.org", "bizwallet.apps.techydra.ltd"]
-# SECURE_REFERRER_POLICY = "same-origin"
+CSRF_TRUSTED_ORIGINS = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
+SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = True
