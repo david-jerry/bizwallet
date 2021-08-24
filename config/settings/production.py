@@ -175,7 +175,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 #     "IGNORE_UNSUPPORTED_FEATURES": True,
 # }
 EMAIL_TIMEOUT=518400
-EMAIL_HOST=env("EMAIL_HOST", default="premium202.web-hosting.com")
+EMAIL_HOST=env("EMAIL_HOST")
 EMAIL_USE_SSL = True
 EMAIL_PORT=465
 EMAIL_HOST_USER=env("EMAIL_HOST_USER", default='user@mail.org')
