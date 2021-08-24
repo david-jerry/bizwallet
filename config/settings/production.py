@@ -55,7 +55,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_SSL_HOST = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_SAMESITE = "Strict"
 # SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.apps.techydra.ltd"]
 CORS_REPLACE_HTTPS_REFERER = True
