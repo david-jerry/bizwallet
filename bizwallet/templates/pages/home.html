@@ -250,11 +250,11 @@
                     </div>
                 </div>
             </div>
-            {% if not request.user.has_testified and forloop.last or not request.user.is_authenticated %}
+            {% if forloop.last or not request.user.is_authenticated or %}
             <div class="slide">
                 <div class="testi-content px-3">
                     <div class="container">
-                        {% if request.user.is_authenticated %}
+                        {% if not request.user.has_testified and request.user.is_authenticated %}
                         <form action="{% url 'home' %}" method="POST">
                             <p>Please leave a review for others.</p>
                             {% csrf_token %}

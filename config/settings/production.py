@@ -153,10 +153,10 @@ EMAIL_SUBJECT_PREFIX = env(
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
-ADMIN_URL = env("DJANGO_ADMIN_URL", default="dashboard/")
-ADMIN_DOC_URL = env("DJANGO_ADMIN_DOC_URL", default="dashboard/doc/")
+ADMIN_URL = env("DJANGO_ADMIN_URL")
+ADMIN_DOC_URL = env("DJANGO_ADMIN_DOC_URL")
 ADMIN_FILEBROWSER_URL = env(
-    "DJANGO_ADMIN_FILEBROWSER_URL", default="dashboard/filebrowser/"
+    "DJANGO_ADMIN_FILEBROWSER_URL"
 )
 
 # Anymail
