@@ -3,5 +3,13 @@
         "dokku": {
             "predeploy": "python manage.py compress --force"
         }
+    },
+    "formation": {
+        "web": {
+            "quantity":1
+        },
+        "worker": {
+            "quantity": 2
+        }
     }
 }
