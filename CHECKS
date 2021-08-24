@@ -1,5 +1,5 @@
 WAIT=3
-TIMEOUT=3
+TIMEOUT=20
 ATTEMPTS=1
 
 https://www.bizwallet.org       bizwallet
