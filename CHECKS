@@ -2,4 +2,4 @@ WAIT=3
 TIMEOUT=5
 ATTEMPTS=1
 
-/       bizwallet
+#/       bizwallet
