@@ -211,21 +211,21 @@ MIDDLEWARE = [
 
     # "csp.middleware.CSPMiddleware",
     # "csp.contrib.rate_limiting.RateLimitedCSPMiddleware",
-    'ipinfo_django.middleware.IPinfo',
+    # 'ipinfo_django.middleware.IPinfo',
 ]
 if DEBUG:
     MIDDLEWARE_CLASSES = MIDDLEWARE
 
 # CSRF_COOKIE_DOMAIN = ["https://www.bizwallet.org/", "https://bizwallet.org/", "0.0.0.0:8000"]
 
-IPINFO_SETTINGS = {
-    'cache_options': {
-        'ttl':30,
-        'maxsize': 128
-    },
-    #'countries_file': 'custom_countries.json'
-}
-IPINFO_FILTER = lambda request: request.scheme == 'http'
+# IPINFO_SETTINGS = {
+#     'cache_options': {
+#         'ttl':30,
+#         'maxsize': 128
+#     },
+#     #'countries_file': 'custom_countries.json'
+# }
+# IPINFO_FILTER = lambda request: request.scheme == 'http'
 
 
 # STATIC

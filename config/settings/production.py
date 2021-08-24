@@ -13,9 +13,9 @@ PAYSTACK_SECRET_KEY = env(
     "PAYSTACK_SECRET_KEY",
     default="sk_test_04fac8d97392127d3d573bf7154ca6a1ea726602",
 )
-IPINFO_TOKEN = env(
-    "IP_TOKEN"
-)
+# IPINFO_TOKEN = env(
+#     "IP_TOKEN"
+# )
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key

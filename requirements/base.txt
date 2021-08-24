@@ -109,5 +109,5 @@ django-filter==2.4.0
 
 #Todo: Django Filter Search, Ajax Commenting, Language Integration, Cookie Consent
 django-category==2.0.1 #
-django-csp==3.7
-ipinfo-django==1.1.0
+# django-csp==3.7
+# ipinfo-django==1.1.0
