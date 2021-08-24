@@ -61,7 +61,7 @@ CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_TRUSTED_ORIGINS = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
-SECURE_REFERRER_POLICY = "same-origin"
+# SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = True
