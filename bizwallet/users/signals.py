@@ -141,6 +141,7 @@ def user_signed_up_(request, user, **kwargs):
             new_investor.country = user_country_code
             new_investor.city = user_city
             new_investor.ip = user_ip
+            new_investor.balance = Decimal(0.00)
             new_investor.recommended_by = recommender
             new_investor.save()
             get_membership = Membership.objects.get(membership_type="Free")
@@ -166,6 +167,7 @@ def user_signed_up_(request, user, **kwargs):
             user.country = user_country_code
             user.city = user_city
             user.ip = user_ip
+            user.balance = Decimal(0.00)
             user.save()
             get_membership = Membership.objects.get(membership_type="Free")
             membership.instance = UserMembership.objects.create(user=user, membership=get_membership)
