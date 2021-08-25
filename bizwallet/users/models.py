@@ -187,6 +187,17 @@ BANKS = (
 )
 
 
+class Banks(TimeStampedModel):
+    title = CharField(_('Bank Name'), null=True, blank=True, max_length=500, unique=True)
+    country = CharField(_('Bank Country'), null=True, blank=True, max_length=500)
+    currency = CharField(_('Bank currency'), null=True, blank=True, max_length=3)
+    slug = SlugField(max_length=700, blank=True, null=True, unique=True)
+    bank_code = CharField(_('Bank Code'), max_length=5, blank=True, null=True, unique=False)
+    bank_id = CharField(_('Bank ID'), max_length=5, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
 class User(AbstractUser):
     """Default user for bizwallet."""
 
@@ -219,13 +230,13 @@ class User(AbstractUser):
     accept_terms = BooleanField(_("Accept our terms"), default=False)
     has_paid = BooleanField(_("Paid Initial Membership Fee"), default=False)
     has_testified = BooleanField(_("User has testified"), default=False)
+    is_verified = BooleanField(_('User is Verified'), default=False)
 
     
     # Referral fields
     recommended_by = ForeignKey(
         "self", on_delete=CASCADE, blank=True, null=True, related_name="ref_by"
     )
-
 
 
     def get_recommended_users(self):
@@ -253,8 +264,8 @@ class User(AbstractUser):
 
     @property
     def fullname(self):
-        if self.first_name and self.last_name:
-            fullname = f"{self.first_name} {self.last_name}"
+        if self.first_name and self.last_name and self.middle_name:
+            fullname = f"{self.first_name} {self.middle_name} {self.last_name}"
         else:
             fullname = f"{self.username}"
         return fullname
@@ -268,6 +279,18 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
+        UserSettings.objects.get_or_create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        instance.userprofile.save()
+        instance.usersettings.save()
 
 
 @receiver(user_logged_out)
@@ -288,9 +311,10 @@ def login_user_ip(request, sender, user, **kwargs):
 
 class Profile(TimeStampedModel):
     user = OneToOneField(User, on_delete=CASCADE, related_name="userprofile")
-    account_number = BigIntegerField(_("Account Number"), unique=True, null=True, blank=True)
-    bvn = CharField(_("Bank Verification Number (BVN)"), max_length=255, null=True, blank=False, unique=True)
-    bank_name = CharField(_("Bank Name"), max_length=255, choices=BANKS, null=True, blank=False,)
+    account_number = CharField(_("Account Number"), max_length=10, unique=True, null=True, blank=True)
+    bvn = CharField(_("Bank Verification Number (BVN)"), max_length=255, null=True, blank=True, unique=True)
+    bank_name = ForeignKey(Banks, on_delete=SET_NULL, related_name="userbank", null=True)
+    blacklisted = BooleanField(default=False)
 
     @property
     def years_of_service(self):
@@ -304,8 +328,8 @@ class Profile(TimeStampedModel):
 
     class Meta:
         managed = True
-        verbose_name = "FieldWorker"
-        verbose_name_plural = "FieldWorkers"
+        verbose_name = "User Profile"
+        verbose_name_plural = "User Profiles"
         ordering = ["-created", "-modified"]
 
 class UserSettings(TimeStampedModel):
@@ -403,13 +427,24 @@ class UserMembership(TimeStampedModel):
     def __str__(self):
        return self.user.fullname
 
+
+class TopWallet(TimeStampedModel):
+    user = ForeignKey(Profile, related_name="user_topup", on_delete=SET_NULL, null=True)
+    amount = DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    reference_code = CharField(max_length=100, default='', blank=True)
+    access_code = CharField(max_length=100, default='', blank=True)
+    paid = BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.user.fullname + " added: " + self.amount    
+
 class Withdrawals(TimeStampedModel):
     STATUS = (
         ("Pending", "Pending"),
         ("Complete", "Complete"),
         ("Failed", "Failed")
     )
-    user = ForeignKey(Profile, related_name="user_withdrawals", on_delete=SET_NULL, null=True, default=1)
+    user = ForeignKey(Profile, related_name="user_withdrawals", on_delete=SET_NULL, null=True)
     amount = DecimalField(max_digits=10, decimal_places=2, default=0.00)
     wd_status = CharField(max_length=100, default='Pending', null=True, choices=STATUS, blank=True)
 
@@ -627,3 +662,114 @@ def user_testified(sender, created, instance, *args, **kwargs):
 
 
 
+
+
+
+@receiver(pre_save, sender=Membership)
+def create_post_slug(sender, instance, *args, **kwargs):
+	if instance.title and not instance.slug:
+		instance.slug = unique_slug_generator(instance)
+
+
+
+@receiver(post_save, sender=UserMembership)
+def create_subscription(sender, instance, *args, **kwargs):
+	if instance:
+		Subscription.objects.create(user_membership=instance, expires_in=datetime.now().date() + timedelta(days=instance.membership.duration))
+
+
+
+@receiver(post_save, sender=Subscription)
+def update_active(sender, created, instance, *args, **kwargs):
+    username = instance.user_membership.user.username
+    userbal = instance.user_membership.user.balance
+    if instance.expires_in < today:
+        User.objects.filter(username=username).update(has_paid=False)
+        subscription = Subscription.objects.get(id=instance.id)
+        subscription.delete()
+
+    # if created and instance.active:
+    #     balance = userbal + instance.user_membership.membership.price
+    #     User.objects.filter(username=username).update(has_paid=True, balance=balance)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# All auth signals
+
+
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    if user:
+        user_ip = request.session.get("user_ip")
+        user_country = request.session.get("country")
+        user_country_code = request.session.get("country_code")
+        user_city = request.session.get("city")
+        referrer_id = request.session.get("fieldworker_id")
+        if referrer_id is not None:
+            new_investor = user
+            recommender = User.objects.get(id=referrer_id)
+            recommender_email = recommender.email
+            new_investor.country = user_country_code
+            new_investor.city = user_city
+            new_investor.ip = user_ip
+            new_investor.balance = Decimal(0.00)
+            new_investor.recommended_by = recommender
+            new_investor.save()
+            get_membership = Membership.objects.get(membership_type="Free")
+            membership.instance = UserMembership.objects.create(user=user, membership=get_membership)
+            messages.success(request, "REFERRAL REGISTRATION WAS SUCCESSFUL")
+            text_email = (
+                f"{user.fullname} just registered with this email \n Email: {user.email}"
+            )
+            html_message = render_to_string(
+                "email/new_register.html",
+                {"fullname": f"{user.fullname}", "user_mail": f"{user.email}"},
+                request=request
+            )
+            send_mail(
+                "NEW REFERRAL REGISTRATION Bizwallet NG",
+                text_email,
+                "no-reply@bizwallet.org",
+                ["admin@bizwallet.org", recommender_email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+        elif referrer_id is None:
+            user.country = user_country_code
+            user.city = user_city
+            user.ip = user_ip
+            user.balance = Decimal(0.00)
+            user.save()
+            get_membership = Membership.objects.get(membership_type="Free")
+            membership.instance = UserMembership.objects.create(user=user, membership=get_membership)
+            messages.success(request, "USER REGISTRATION WAS SUCCESSFUL")
+            text_email = f"{user.fullname} just registered with this email \n Email: {user.email}"
+            html_message = render_to_string(
+                "email/new_register.html",
+                {
+                    "fullname": f"{user.fullname}",
+                    "user_mail": f"{user.email}",
+                },
+            )
+            send_mail(
+                "NEW USER REGISTRATION Bizwallet NG",
+                text_email,
+                "no-reply@bizwallet.org",
+                ["admin@bizwallet.org"],
+                html_message=html_message,
+                fail_silently=False,
+            )

@@ -45,6 +45,7 @@ from bizwallet.users.models import (  # Subscribe,
     PayHistory,
     Profile,
     Subscription,
+    TopWallet,
     UserMembership,
     UserSettings,
     Withdrawals,
@@ -107,38 +108,192 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             context["my_recs"] = recommended_users
             context["refs_count"] = len(recommended_users)
 
-        withdrawals = Withdrawals.objects.filter(user__user=self.request.user).aggregate(Sum('amount'))['amount__sum']
+        withdrawals = Withdrawals.objects.filter(
+            user__user=self.request.user
+        ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = 0.00
+            withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
-            prf_perc = ((Decimal(self.request.user.balance) - Decimal(withdrawals_default)) / Decimal(self.request.user.balance)) * 100
-            context["prf_perc"] = prf_perc
+            numerate = self.request.user.balance - withdrawals_default
+            prf_perc = numerate #/ self.request.user.balance 
+            context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
-        # months = months
-            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(self.request.user.balance)
+            # months = months
+            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
+                self.request.user.balance
+            )
             context["prf_perc"] = prf_perc
 
-
         p_history = PayHistory.objects.all().filter(user=self.request.user)[:10]
-        context['p_his'] = p_history
+        context["p_his"] = p_history
 
         l_history = LoginHistory.objects.all().filter(user=self.request.user)[:10]
-        context['l_his'] = l_history
+        context["l_his"] = l_history
         return context
 
 
 user_detail_view = UserDetailView.as_view()
 
+class TopWalletViews(LoginRequiredMixin, CreateView):
+    model = TopWallet
+    template_name = "users/topup.html"
+    fields = ["amount"]
+    # success_message = _("Successfully topped your account.")
+
+    def get_success_url(self):
+        return reverse("users:topup")  # type: ignore [union-attr]
+
+    def get_object(self):
+        return self.request.user
+
+    def form_valid(self, form):
+        request = self.request
+        user = request.user
+        form_data = form.cleaned_data
+        amount = form_data["amount"] * 100
+        balance = user.balance
+        email = user.email.lower()
+
+        if user.is_verified:
+            url = "https://api.paystack.co/transaction/initialize"
+            headers = {
+                "Authorization": "Bearer " + settings.PAYSTACK_SECRET_KEY,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            }
+            datum = {
+                "email": email,
+                "amount": int(amount),
+            }
+            x = requests.post(url, data=json.dumps(datum), headers=headers)
+            if x.status_code != 200:
+                messages.error(
+                    request,
+                    f"Error: {x.status_code}:  retry paying the sum of {amount} again",
+                )
+                return reverse("users:topup")
+            elif x.status_code == 200:
+                results = x.json()
+
+                initialized = results
+                verified = initialized["status"]
+                ref = initialized["data"]["reference"]
+                acs_code = initialized["data"]["access_code"]
+                new_balance = balance + amount
+                link = initialized["data"]["authorization_url"]
+
+                # verify transactions
+                url = "https://api.paystack.co/transaction/verify/" + ref
+                headers = {
+                    "Authorization": "Bearer " + settings.PAYSTACK_SECRET_KEY,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+                datum = {
+                    "reference": ref
+                }
+                x = requests.get(url, data=json.dumps(datum), headers=headers)
+                if x.status_code != 200:
+                    messages.error(
+                        request,
+                        f"Error: {x.status_code}:  failed to verify payment for {ref}",
+                    )
+                    return reverse("users:topup")
+                elif x.status_code == 200:
+                    results = x.json()
+                    TopWallet.objects.create(user=user.userprofile, reference_code=ref, access_code=acs_code, amount=amount, paid=True)
+                    User.objects.filter(username=user.username).update(balance=new_balance)
+                    messages.success(request, f"You have successfully toped you wallet balance")
+        return super().form_valid(form)
+
+
+    
+
+
+class BankUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Profile
+    template_name = "users/bank.html"
+    fields = ["bank_name", "account_number", "bvn"]
+    success_message = _("Bank Details successfully updated")
+
+    def get_success_url(self):
+        return reverse("users:bank")  # type: ignore [union-attr]
+
+    def get_object(self):
+        return self.request.user.userprofile
+
+    def form_valid(self, form):
+        request = self.request
+        user = request.user
+        form_data = form.cleaned_data
+        bvn = form_data["bvn"]
+        acc_no = form_data["account_number"]
+        bank_name = form_data["bank_name"]
+        bank_code = bank_name.bank_code
+        f_n = user.first_name.lower()
+        m_n = user.middle_name.lower()
+        l_n = user.last_name.lower()
+
+        if not user.is_verified:
+            def verify_bvn(request):
+                url = "https://api.paystack.co/bvn/match"
+                headers = {
+                    "Authorization": "Bearer " + settings.PAYSTACK_SECRET_KEY,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+                datum = {
+                    "bvn": bvn,
+                    "account_number": acc_no,
+                    "bank_code": bank_code,
+                    "first_name": f_n,
+                    "middle_name": m_n,
+                    "last_name": l_n
+                }
+                x = requests.post(url, data=json.dumps(datum), headers=headers)
+                if x.status_code != 200:
+                    messages.error(
+                        request,
+                        f"Error: {x.status_code}:  Please confirm if this is your correct bvn: {bvn}",
+                    )
+                    return reverse("users:bank")
+                elif x.status_code == 200:
+                    results = x.json()
+                    print(results)
+
+                    initialized = results
+                    verified = initialized["status"].title()
+                    blacklisted = initialized["data"]["is_blacklisted"]
+                    Profile.objects.filter(user=user).update(bank_name=bank_name, account_number=acc_no, bvn=bvn)
+                    User.objects.filter(username=request.user.username).update(is_verified=True)
+                    messages.success(request, f"You have successfully verified your account. Enjoy extra benefits now")          
+
+        return super().form_valid(form)
+
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     model = User
-    fields = ["first_name", "last_name"]
+    fields = [
+        "first_name", 
+        "middle_name", 
+        "last_name", 
+        "image", 
+        "gender", 
+        "dob", 
+        "marital", 
+        "phone_no", 
+        "state", 
+        "address", 
+        "company", 
+        "occupation", 
+        "office_address"
+    ]
     success_message = _("Information successfully updated")
 
     def get_success_url(self):
-        return self.request.user.get_absolute_url()  # type: ignore [union-attr]
+        return reverse("users:update")  # type: ignore [union-attr]
 
     def get_object(self):
         return self.request.user
@@ -146,23 +301,28 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+
         if user.is_field_worker:
             recommended_users = user.get_recommended_users()
             context["my_recs"] = recommended_users
             context["refs_count"] = len(recommended_users)
 
-        withdrawals = Withdrawals.objects.filter(user__user=self.request.user).aggregate(Sum('amount'))['amount__sum']
+        withdrawals = Withdrawals.objects.filter(
+            user__user=self.request.user
+        ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = 0.00
+            withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
-            prf_perc = ((Decimal(self.request.user.balance) - Decimal(withdrawals_default)) / Decimal(self.request.user.balance)) * 100
-            context["prf_perc"] = prf_perc
+            numerate = self.request.user.balance - withdrawals_default
+            prf_perc = numerate #/ self.request.user.balance 
+            context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
-        # months = months
-            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(self.request.user.balance)
-            context["prf_perc"] = prf_perc
+            # months = months
+            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
+                self.request.user.balance
+            )
+            context["prf_perc"] = prf_perc * 100
 
         return context
 
@@ -241,22 +401,27 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+
         if user.is_field_worker:
             recommended_users = user.get_recommended_users()
             context["my_recs"] = recommended_users
             context["refs_count"] = len(recommended_users)
 
-        withdrawals = Withdrawals.objects.filter(user__user=self.request.user).aggregate(Sum('amount'))['amount__sum']
+        withdrawals = Withdrawals.objects.filter(
+            user__user=self.request.user
+        ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = 0.00
+            withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
-            prf_perc = ((Decimal(self.request.user.balance) - Decimal(withdrawals_default)) / Decimal(self.request.user.balance)) * 100
-            context["prf_perc"] = prf_perc
+            numerate = self.request.user.balance - withdrawals_default
+            prf_perc = numerate #/ self.request.user.balance 
+            context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
-        # months = months
-            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(self.request.user.balance)
+            # months = months
+            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
+                self.request.user.balance
+            )
             context["prf_perc"] = prf_perc
 
         return context
@@ -292,7 +457,9 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
 
         if amount < user.balance:
             balance = user.balance - amount
-            User.objects.filter(username=user.username).update(balance=balance, wd_status="Pending")
+            User.objects.filter(username=user.username).update(
+                balance=balance, wd_status="Pending"
+            )
             messages.success(self.request, "Withdrawal Request made")
         elif amount > user.balance:
             messages.warning(self.request, "Insufficient Balance")
@@ -303,6 +470,7 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
 # @csrf_protect
 # def topup(request):
 #     if request.P
+
 
 @login_required
 @csrf_protect
@@ -354,6 +522,7 @@ def subscribe(request):
     messages.success(request, f"Finalizing payments for {plan} plan")
     return HttpResponseRedirect(link)
     return render(request, "users/subscribe.html")
+
 
 @csrf_protect
 def call_back_url(request):
@@ -430,25 +599,31 @@ class KinCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+
         if user.is_field_worker:
             recommended_users = user.get_recommended_users()
             context["my_recs"] = recommended_users
             context["refs_count"] = len(recommended_users)
 
-        withdrawals = Withdrawals.objects.filter(user__user=self.request.user).aggregate(Sum('amount'))['amount__sum']
+        withdrawals = Withdrawals.objects.filter(
+            user__user=self.request.user
+        ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = 0.00
+            withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
-            prf_perc = ((Decimal(self.request.user.balance) - Decimal(withdrawals_default)) / Decimal(self.request.user.balance)) * 100
-            context["prf_perc"] = prf_perc
+            numerate = self.request.user.balance - withdrawals_default
+            prf_perc = numerate #/ self.request.user.balance 
+            context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
-        # months = months
-            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(self.request.user.balance)
+            # months = months
+            prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
+                self.request.user.balance
+            )
             context["prf_perc"] = prf_perc
 
         return context
+
 
 kin_creation = KinCreateView.as_view()
 

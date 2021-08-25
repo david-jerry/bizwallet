@@ -146,3 +146,5 @@ class WithdrawalForm(forms.ModelForm):
         fields = [
             "amount",
         ]
+
+

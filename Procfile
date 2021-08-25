@@ -1,4 +1,4 @@
-release: python manage.py migrate --noinput
+release: python manage.py migrate --noinput; python manage.py banks
 web: gunicorn config.wsgi:application
 worker: celery worker --app=config.celery_app --loglevel=info
 beat: celery beat --app=config.celery_app --loglevel=info

@@ -110,16 +110,18 @@
               <i class="ni ni-single-02 text-warning"></i> Next of Kin
             </a>
           </li>
+          {% if request.user.is_verified %}
           <li class="nav-item">
             <a href="{% url 'users:withdraw' %}" class="nav-link">
               <i class="ni ni-credit-card text-danger"></i> Withdraw Funds
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'users:withdraw' %}" class="nav-link">
+            <a href="{% url 'users:topup' %}" class="nav-link">
               <i class="ni ni-credit-card text-success"></i> Top-Up Wallet
             </a>
           </li>
+          {% endif %}
           {% endif %}
           <li class="nav-item">
             <a class="nav-link " href="./examples/icons.html">

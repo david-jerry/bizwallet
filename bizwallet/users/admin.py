@@ -35,13 +35,14 @@ admin.site.register(UserMembership)
 admin.site.register(LoginHistory)
 admin.site.register(PayHistory)
 
+
 class ProfileAdmin(admin.StackedInline):
     form = ProfileForm
     model = Profile
 
-    def __init__(self, parent_model, admin_site):
-        self.fk_name = getattr(self.model, 'fk_name', None)
-        super().__init__(parent_model, admin_site)
+    # def __init__(self, parent_model, admin_site):
+    #     self.fk_name = getattr(self.model, 'fk_name', None)
+    #     super().__init__(parent_model, admin_site)
 
 
 # class SubcribeAdmin(admin.StackedInline):
@@ -78,14 +79,6 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
             },
         ),
         (
-            _("Subscription info"),
-            {
-                "fields": (
-                    "plan",
-                )
-            },
-        ),
-        (
             _("Career info"),
             {
                 "fields": (
@@ -105,6 +98,7 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
                     "has_paid",
                     "accept_terms",
                     "is_field_worker",
+                    "is_verified",
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -124,6 +118,7 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
         "balance",
         "has_paid",
         "accept_terms",
+        "is_verified",
         "is_field_worker",
         "is_active",
         "is_staff",
@@ -136,6 +131,7 @@ class UserAdmin(auth_admin.UserAdmin, ExportCsvMixin):
         "has_paid",
         "accept_terms",
         "has_paid",
+        "is_verified",
         "is_field_worker",
         "is_active",
         "is_staff",
