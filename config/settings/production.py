@@ -138,7 +138,7 @@ TEMPLATES[-1]["OPTIONS"]["loaders"] = [  # type: ignore[index] # noqa F405
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL", default="Bizwallet NG <noreply@bizwallet.org>"
+    "DJANGO_DEFAULT_FROM_EMAIL", default="Bizwallet NG <no-reply@bizwallet.org>"
 )
 # Email address that error messages come from.
 # Todo: add server email to bizwallet domain

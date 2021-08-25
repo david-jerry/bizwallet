@@ -157,7 +157,7 @@ def user_signed_up_(request, user, **kwargs):
             send_mail(
                 "NEW REFERRAL REGISTRATION Bizwallet NG",
                 text_email,
-                "noreply@bizwallet.org",
+                "no-reply@bizwallet.org",
                 ["admin@bizwallet.org", recommender_email],
                 html_message=html_message,
                 fail_silently=False,
@@ -181,7 +181,7 @@ def user_signed_up_(request, user, **kwargs):
             send_mail(
                 "NEW USER REGISTRATION Bizwallet NG",
                 text_email,
-                "noreply@bizwallet.org",
+                "no-reply@bizwallet.org",
                 ["admin@bizwallet.org"],
                 html_message=html_message,
                 fail_silently=False,

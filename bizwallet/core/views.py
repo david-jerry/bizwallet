@@ -103,7 +103,7 @@ def home(request, *args, **kwargs):
             form.save()
             return HttpResponseRedirect(reverse('home'))
             messages.success(request, "Your review has been submitted successfuly")
-            send_mail("New Testimonial Submitted", "Some Just submitted a new testimonial", "noreply@bizwallet.org", ['info@bizwallet.org'], fail_silently=False)
+            send_mail("New Testimonial Submitted", "Some Just submitted a new testimonial", "no-reply@bizwallet.org", ['info@bizwallet.org'], fail_silently=False)
     else:
         form = TestimonyForm()
 
