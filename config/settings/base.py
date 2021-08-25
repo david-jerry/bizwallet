@@ -432,12 +432,12 @@ EMAIL_TIMEOUT = 500
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "dashboard/"
-ADMIN_DOC_URL = "dashboard/doc/"
-ADMIN_FILEBROWSER_URL = "dashboard/filebrowser/"
+ADMIN_URL = "admin/"
+ADMIN_DOC_URL = "admin/doc/"
+ADMIN_FILEBROWSER_URL = "admin/filebrowser/"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Jeremiah David""", "jeremiahedavid@bizwallet.org")]
+ADMINS = [("""Jeremiah David""", "jeremiahedavid@bizwallet.org", """BizAdmin""", "admin@bizwallet.org")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
