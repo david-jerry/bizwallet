@@ -53,15 +53,12 @@ CACHES = {
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
-SECURE_SSL_HOST = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = "Strict"
-SESSION_COOKIE_DOMAIN = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
-CSRF_COOKIE_SAMESITE = "Strict"
-CSRF_TRUSTED_ORIGINS = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
+# CSRF_COOKIE_SAMESITE = "Strict"
+# CSRF_TRUSTED_ORIGINS = ["www.bizwallet.org", "bizwallet.org", "bizwallet-bucket.s3.amazonaws.com",  "bizwallet.apps.techydra.ltd"]
 # SECURE_REFERRER_POLICY = "same-origin"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
@@ -80,6 +77,7 @@ SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
     "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True
 )
+SECURE_FRAME_DENY=True
 
 # STORAGES
 # ------------------------------------------------------------------------------
@@ -143,7 +141,7 @@ DEFAULT_FROM_EMAIL = env(
 # Email address that error messages come from.
 # Todo: add server email to bizwallet domain
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
-SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default='server@bizwallet.org')
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env(
     "DJANGO_EMAIL_SUBJECT_PREFIX",
