@@ -112,13 +112,13 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             user__user=self.request.user
         ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = Decimal(0.00)
-            context["withdrwals"] = withdrawals_default
-            numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate / self.request.user.balance 
-            context["prf_perc"] = prf_perc * 100
+            # withdrawals_default = Decimal(0.00)
+            # context["withdrwals"] = withdrawals_default
+            # numerate = self.request.user.balance - withdrawals_default
+            # prf_perc = numerate / self.request.user.balance 
+            context["prf_perc"] = 1 * 100
         else:
-            context["withdrwals"] = withdrawals
+            context["withdrawals"] = withdrawals
             # months = months
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
@@ -251,39 +251,42 @@ class BankUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         l_n = user.last_name.lower()
 
         if not user.is_verified:
-            def verify_bvn(request):
-                url = "https://api.paystack.co/bvn/match"
-                headers = {
-                    "Authorization": "Bearer " + settings.PAYSTACK_SECRET_KEY,
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                }
-                datum = {
-                    "bvn": bvn,
-                    "account_number": acc_no,
-                    "bank_code": bank_code,
-                    "first_name": f_n,
-                    "middle_name": m_n,
-                    "last_name": l_n
-                }
-                x = requests.post(url, data=json.dumps(datum), headers=headers)
-                if x.status_code != 200:
-                    messages.error(
-                        request,
-                        f"Error: {x.status_code}:  Please confirm if this is your correct bvn: {bvn}",
-                    )
-                    return reverse("users:bank")
-                elif x.status_code == 200:
-                    results = x.json()
-                    print(results)
+            url = "https://api.paystack.co/bvn/match"
+            headers = {
+                "Authorization": "Bearer " + settings.PAYSTACK_SECRET_KEY,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            }
+            datum = {
+                "bvn": bvn,
+                "account_number": acc_no,
+                "bank_code": bank_code,
+                "first_name": f_n,
+                "middle_name": m_n,
+                "last_name": l_n
+            }
+            x = requests.post(url, data=json.dumps(datum), headers=headers)
+            if x.status_code != 200:
+                messages.error(
+                    request,
+                    f"Error: {x.status_code}:  Please confirm if this is your correct bvn: {bvn}",
+                )
+                return reverse("users:bank")
+            elif x.status_code == 200:
+                results = x.json()
+                print(results)
 
-                    initialized = results
-                    verified = initialized["status"].title()
-                    blacklisted = initialized["data"]["is_blacklisted"]
+                initialized = results
+                verified = initialized["status"]
+                print(verified)
+                blacklisted = initialized["data"]["is_blacklisted"]
+                print(blacklisted)
+                if not blacklisted == "true":
                     Profile.objects.filter(user=user).update(bank_name=bank_name, account_number=acc_no, bvn=bvn)
-                    User.objects.filter(username=request.user.username).update(is_verified=True)
+                    User.objects.filter(username=user.username).update(is_verified=True)
                     messages.success(request, f"You have successfully verified your account. Enjoy extra benefits now")          
-
+                else:
+                    messages.error(request, f"You account is blacklisted, please contact your financial institution for clarity.")          
         return super().form_valid(form)
 
 
@@ -326,13 +329,13 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
             user__user=self.request.user
         ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = Decimal(0.00)
-            context["withdrwals"] = withdrawals_default
-            numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate / self.request.user.balance 
-            context["prf_perc"] = prf_perc * 100
+            # withdrawals_default = Decimal(0.00)
+            # context["withdrwals"] = withdrawals_default
+            # numerate = self.request.user.balance - withdrawals_default
+            # prf_perc = numerate / self.request.user.balance 
+            context["prf_perc"] = 1 * 100
         else:
-            context["withdrwals"] = withdrawals
+            context["withdrawals"] = withdrawals
             # months = months
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
@@ -426,13 +429,13 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
             user__user=self.request.user
         ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = Decimal(0.00)
-            context["withdrwals"] = withdrawals_default
-            numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate / self.request.user.balance 
-            context["prf_perc"] = prf_perc * 100
+            # withdrawals_default = Decimal(0.00)
+            # context["withdrwals"] = withdrawals_default
+            # numerate = self.request.user.balance - withdrawals_default
+            # prf_perc = numerate / self.request.user.balance 
+            context["prf_perc"] = 1 * 100
         else:
-            context["withdrwals"] = withdrawals
+            context["withdrawals"] = withdrawals
             # months = months
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
@@ -624,13 +627,13 @@ class KinCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             user__user=self.request.user
         ).aggregate(Sum("amount"))["amount__sum"]
         if not withdrawals:
-            withdrawals_default = Decimal(0.00)
-            context["withdrwals"] = withdrawals_default
-            numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate / self.request.user.balance 
-            context["prf_perc"] = prf_perc * 100
+            # withdrawals_default = Decimal(0.00)
+            # context["withdrwals"] = withdrawals_default
+            # numerate = self.request.user.balance - withdrawals_default
+            # prf_perc = numerate / self.request.user.balance 
+            context["prf_perc"] = 1 * 100
         else:
-            context["withdrwals"] = withdrawals
+            context["withdrawals"] = withdrawals
             # months = months
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
