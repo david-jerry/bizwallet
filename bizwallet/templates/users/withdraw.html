@@ -44,7 +44,7 @@
         {% if request.user.is_verified %}
         <div class="d-flex justify-content-between"  style="margin-bottom: 3.5rem;">
           <a href="{% url 'users:topup' %}" class="btn btn-sm btn-info mr-4">Top Up Wallet</a>
-            <a href="{% url 'users:withdraw' %}" class="btn btn-sm btn-default float-right">Withdraw</a>
+          <a href="{% url 'users:withdraw' %}" class="btn btn-sm btn-default float-right">Withdraw from wallet</a>
         </div>
         {% endif %}
       </div>
