@@ -232,6 +232,11 @@ class User(AbstractUser):
     has_testified = BooleanField(_("User has testified"), default=False)
     is_verified = BooleanField(_('User is Verified'), default=False)
 
+
+    # notification permission
+    send_newsletter = BooleanField(_("Allow Newsletter Emailing"), default=True)
+    send_transaction = BooleanField(_("Allow Transaction Emailing"), default=True)
+    send_subscription = BooleanField(_("Allow Email Subscription"), default=True)
     
     # Referral fields
     recommended_by = ForeignKey(
