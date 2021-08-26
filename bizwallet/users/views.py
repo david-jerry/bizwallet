@@ -115,7 +115,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
             numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate #/ self.request.user.balance 
+            prf_perc = numerate / self.request.user.balance 
             context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
@@ -123,7 +123,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
             )
-            context["prf_perc"] = prf_perc
+            context["prf_perc"] = prf_perc * 100
 
         p_history = PayHistory.objects.all().filter(user=self.request.user)[:10]
         context["p_his"] = p_history
@@ -314,7 +314,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
             withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
             numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate #/ self.request.user.balance 
+            prf_perc = numerate / self.request.user.balance 
             context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
@@ -414,7 +414,7 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
             withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
             numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate #/ self.request.user.balance 
+            prf_perc = numerate / self.request.user.balance 
             context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
@@ -422,7 +422,7 @@ class WithdrawalView(LoginRequiredMixin, CreateView):
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
             )
-            context["prf_perc"] = prf_perc
+            context["prf_perc"] = prf_perc * 100
 
         return context
 
@@ -612,7 +612,7 @@ class KinCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             withdrawals_default = Decimal(0.00)
             context["withdrwals"] = withdrawals_default
             numerate = self.request.user.balance - withdrawals_default
-            prf_perc = numerate #/ self.request.user.balance 
+            prf_perc = numerate / self.request.user.balance 
             context["prf_perc"] = prf_perc * 100
         else:
             context["withdrwals"] = withdrawals
@@ -620,7 +620,7 @@ class KinCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             prf_perc = (Sum(self.request.user.balance) - withdrawals) / Sum(
                 self.request.user.balance
             )
-            context["prf_perc"] = prf_perc
+            context["prf_perc"] = prf_perc * 100
 
         return context
 
