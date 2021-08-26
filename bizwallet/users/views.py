@@ -226,6 +226,21 @@ class NotificationView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return self.request.user
 
 
+class UpdatePhotoView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    template_name = "users/photo.html"
+    fields = [
+        "image"
+    ]
+    success_message = _("You have successfully updated your display photo.")
+
+    def get_success_url(self):
+        return reverse("users:detail", kwargs={"username": self.request.user.username})
+
+    def get_object(self):
+        return self.request.user
+
+
 class BankUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Profile
     template_name = "users/bank.html"

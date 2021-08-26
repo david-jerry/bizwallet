@@ -36,7 +36,7 @@ class="stretched page-transition"
       <div class="row justify-content-center">
         <div class="col-lg-3 order-lg-2">
           <div class="card-profile-image">
-            <a href="#">
+            <a href="{% url 'users:photo' %}">
               <img
                 src="{% if request.user.image %}{{request.user.image.url}}{% else %}{% static 'images/user.png' %}{% endif %}"
                 class="rounded-circle">
@@ -46,8 +46,8 @@ class="stretched page-transition"
       </div>
       <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
         {% if request.user.is_verified %}
-        <div class="d-flex justify-content-between">
-            <a href="{% url 'users:topup' %}" class="btn btn-sm btn-info mr-4">Top Up Wallet</a>
+        <div class="d-flex justify-content-between"  style="margin-bottom: 3.5rem;">
+          <a href="{% url 'users:topup' %}" class="btn btn-sm btn-info mr-4">Top Up Wallet</a>
             <a href="{% url 'users:withdraw' %}" class="btn btn-sm btn-default float-right">Withdraw</a>
         </div>
         {% endif %}
