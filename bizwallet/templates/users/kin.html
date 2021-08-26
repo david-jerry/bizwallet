@@ -40,10 +40,12 @@
                 </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                {% if request.user.is_verified %}
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-sm btn-info mr-4">Top Up Wallet</a>
+                    <a href="{% url 'users:topup' %}" class="btn btn-sm btn-info mr-4">Top Up Wallet</a>
                     <a href="{% url 'users:withdraw' %}" class="btn btn-sm btn-default float-right">Withdraw</a>
                 </div>
+                {% endif %}
             </div>
             <div class="card-body pt-0 pt-md-4">
                 <div class="text-center mt-md-5">
@@ -80,8 +82,9 @@
                         </div>
                     </div>
 
-
+                    {% if not request.user.is_verified %}
                     <a href="{% url 'users:bank' %}" class="btn btn-primary btn-sm">Update Bank Details</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
