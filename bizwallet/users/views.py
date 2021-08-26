@@ -214,7 +214,7 @@ class NotificationView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "users/notification.html"
     fields = [
         "send_newsletter",
-        "send_transaction".
+        "send_transaction",
         "send_subscription"
     ]
     success_message = _("You have successfully updated your notifications settings.")
