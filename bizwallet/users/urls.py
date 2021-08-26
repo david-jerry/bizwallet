@@ -2,6 +2,7 @@ from django.urls import path, re_path
 
 from bizwallet.users.views import (  # subscribe_view,
     BankUpdateView,
+    NotificationView,
     TopWalletViews,
     WithdrawalView,
     call_back_url,
@@ -21,6 +22,7 @@ urlpatterns = [
     path("~top-up/", view=TopWalletViews.as_view(), name="topup"),
     path("~withdraw/", view=WithdrawalView.as_view(), name="withdraw"),
     path("~subscribe/", view=subscribe, name="subscribe"),
+    path("~notification/", view=NotificationView.as_view(), name="notif"),
     re_path("~payment/$", view=call_back_url, name="payment"),
     path("<str:username>/", view=user_detail_view, name="detail"),
 ]
