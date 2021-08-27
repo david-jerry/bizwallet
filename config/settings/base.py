@@ -57,7 +57,7 @@ LANGUAGE_COOKIE_SAMESITE = True
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 2
+SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
