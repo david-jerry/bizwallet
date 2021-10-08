@@ -192,7 +192,8 @@ class Banks(TimeStampedModel):
     country = CharField(_('Bank Country'), null=True, blank=True, max_length=500)
     currency = CharField(_('Bank currency'), null=True, blank=True, max_length=3)
     slug = SlugField(max_length=700, blank=True, null=True, unique=True)
-    bank_code = CharField(_('Bank Code'), max_length=5, blank=True, null=True, unique=False)
+    bank_code = CharField(_('Bank Code'), max_length=5, blank=True, null=True)
+    bank_lcode = CharField(_('Bank Long Code'), max_length=20, blank=True, null=True)
     bank_id = CharField(_('Bank ID'), max_length=5, blank=True, null=True)
 
     def __str__(self):
